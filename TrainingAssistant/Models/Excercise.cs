@@ -38,6 +38,5 @@ namespace Asystent_Treningowy.Models
         [Required]
         public TypeEnum Type { get; set; }
         public List<ExerciseMuscle> ExerciseMuscle { get; set; }
-        public List<TrainingExcercise> TrainingExcercises { get; set; }
     }
 }

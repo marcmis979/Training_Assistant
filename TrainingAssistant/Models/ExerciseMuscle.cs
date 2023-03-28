@@ -11,9 +11,9 @@ namespace TrainingAssistant.Models
         public int IdExercise { get; set; }
         public int IdMusclePart { get; set; }
         [ForeignKey(nameof(IdExercise))]
-        public Excercise Excercise { get; set; }
+        public Excercise excercise { get; set; }
         [ForeignKey(nameof(IdMusclePart))]
-        public MusclePart MusclePart { get; set; }
+        public MusclePart musclePart { get; set; }
     }
 
 }

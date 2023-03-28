@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace Asystent_Treningowy.Models
 {
     [Table("TrainingPlan")]
-    public class TrainingPlan
+    internal class TrainingPlan
     {
         [Key]
         public int IdPlan { get; set; }
         [Required, RegularExpression("[a-zA-Z]+")]
         public string Name { get; set; }
         [ForeignKey(nameof(Training))]
-        public List<Training> Trainings { get;set; }
+        public Training[] Trainings { get; set; }
 
     }
 }
