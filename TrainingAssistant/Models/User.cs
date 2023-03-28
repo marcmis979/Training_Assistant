@@ -19,7 +19,7 @@ public enum SexEnum
 namespace Asystent_Treningowy.Models
 {
     [Table("User")]
-    internal class User
+    public class User
     {
         [Key]
         public int IdUser { get; set; }
@@ -43,5 +43,6 @@ namespace Asystent_Treningowy.Models
         public string Password { get; set; }
         [Required,EmailAddress]
         public string Mail { get; set; }
+        public virtual TrainingPlan TrainingPlan { get; set; }
     }
 }

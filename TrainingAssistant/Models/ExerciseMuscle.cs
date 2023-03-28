@@ -7,12 +7,11 @@ namespace TrainingAssistant.Models
     [Table("ExerciseMuscle")]
     public class ExerciseMuscle
     {
-
+        [ForeignKey("Excercise")]
         public int IdExercise { get; set; }
+        [ForeignKey("MusclePart")]
         public int IdMusclePart { get; set; }
-        [ForeignKey(nameof(IdExercise))]
         public Excercise excercise { get; set; }
-        [ForeignKey(nameof(IdMusclePart))]
         public MusclePart musclePart { get; set; }
     }
 
