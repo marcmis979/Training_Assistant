@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TraingAssistantDAL.Models
 {
-    public class ExerciseMusclePart
+    public class TrainingExercise
     {
-        public int ExerciseId { get; set; }
-        public int MusclePartId { get; set; }
+        public int TrainingId;
+        public int ExerciseId;
+        public Training Training { get; set; }
         public Exercise Exercise { get; set; }
-        public MusclePart MusclePart { get; set; }
     }
 }

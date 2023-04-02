@@ -22,5 +22,6 @@ namespace TraingAssistantDAL.Models
         public int Time { get; set; }
         public TypeEnum Type { get; set; }
         public List<ExerciseMusclePart> ExercisesMuscleParts { get; set; }
+        public List<TrainingExercise> TrainingExercises { get; set; }
     }
 }
