@@ -7,13 +7,12 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public interface ITrainingRepository : IDisposable
+    public interface ITrainingRepository
     {
         IEnumerable<Training> GetTrainings();
         Training GetTrainingById(int id);
         void InsertTraining(Training training);
         void DeleteTraining(int id);
         void UpdateTraining(Training training);
-        void Save();
     }
 }

@@ -9,64 +9,40 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public class ExerciseRepository : IExerciseRepository, IDisposable
+    public class ExerciseRepository : IExerciseRepository
     {
-        private TrainingAssistantContext context;
+        private readonly TrainingAssistantContext _context;
 
         public ExerciseRepository(TrainingAssistantContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public IEnumerable<Exercise> GetExercises()
         {
-            return context.Exercises.ToList();
+            return _context.Exercises.ToList();
         }
 
         public Exercise GetExerciseById(int id)
         {
-            return context.Exercises.Find(id);
+            var exercise = _context.Exercises.Find(id);
+            return exercise;
         }
 
         public void InsertExercise(Exercise exercise)
         {
-            context.Exercises.Add(exercise);
+            _context.Exercises.Add(exercise);
         }
 
         public void DeleteExercise(int id)
         {
-            Exercise exercise = context.Exercises.Find(id);
-            context.Exercises.Remove(exercise);
+            Exercise exercise = _context.Exercises.Find(id);
+            _context.Exercises.Remove(exercise);
         }
 
         public void UpdateExercise(Exercise exercise)
         {
-            context.Entry(exercise).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            _context.Entry(exercise).State = EntityState.Modified;
         }
     }
 }

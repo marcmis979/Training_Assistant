@@ -13,11 +13,11 @@ namespace TraingAssistantDAL.DataAccess
     public class TrainingAssistantContext : DbContext
     {
         //Conection string 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public TrainingAssistantContext(DbContextOptions<TrainingAssistantContext>options):base(options) 
         {
-            optionsBuilder
-                    .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+
         }
+        
         //Setting database entities
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<MusclePart> MuscleParts { get; set; }
@@ -140,10 +140,6 @@ namespace TraingAssistantDAL.DataAccess
                 new TrainingPlanTraing { TrainingPlanId = 2, TrainingId = 3 },
                 new TrainingPlanTraing { TrainingPlanId = 3, TrainingId = 3 }
             );
-
-
-
-
         }
     }
 }

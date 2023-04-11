@@ -14,6 +14,5 @@ namespace TraingAssistantDAL.Repositories
         void InsertExercise(Exercise exercise);
         void DeleteExercise(int id);
         void UpdateExercise(Exercise exercise);
-        void Save();
     }
 }

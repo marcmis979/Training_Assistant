@@ -9,7 +9,7 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public class TrainingRepository : ITrainingRepository, IDisposable
+    public class TrainingRepository : ITrainingRepository
     {
         private TrainingAssistantContext context;
 
@@ -42,31 +42,6 @@ namespace TraingAssistantDAL.Repositories
         public void UpdateTraining(Training training)
         {
             context.Entry(training).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

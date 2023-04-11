@@ -7,13 +7,12 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository
     {
         IEnumerable<User> GetUsers();
         User GetUserById(int id);
         void InsertUser(User user);
         void DeleteUser(int id);
         void UpdateStudent(User user);
-        void Save();
     }
 }

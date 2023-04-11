@@ -8,79 +8,48 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
-        private TrainingAssistantContext context = new TrainingAssistantContext();
-        private GenericRepository<User> userRepository;
-        private GenericRepository<TrainingPlan> trainingPlanRepository;
-        private GenericRepository<Training> trainingRepository;
-        private GenericRepository<MusclePart> musclePartRepository;
-        private GenericRepository<Exercise> exerciseRepository;
+         TrainingAssistantContext context;
+        
 
-
-        public GenericRepository<User> UserRepository
+        public UnitOfWork(TrainingAssistantContext trainingAssistantContext,IUserRepository userRepository, ITrainingPlanRepository trainingPlanRepository,ITrainingRepository trainingRepository ,IMusclePartRepository musclePartRepository,IExerciseRepository exerciseRepository)
         {
-            get
-            {
-
-                if (this.userRepository == null)
-                {
-                    this.userRepository = new GenericRepository<User>(context);
-                }
-                return userRepository;
-            }
+            this.context= trainingAssistantContext;
+            this.UserRepository = userRepository;
+            this.TrainingPlanRepository = trainingPlanRepository;
+            this.TrainingRepository = trainingRepository;
+            this.MusclePartRepository= musclePartRepository;
+            this.ExerciseRepository = new ExerciseRepository(context);
+        }
+        public IUserRepository UserRepository
+        {
+            get;
+            private set;
         }
 
-        public GenericRepository<TrainingPlan> TrainingPlanRepository
+        public ITrainingPlanRepository TrainingPlanRepository
         {
-            get
-            {
-
-                if (this.trainingPlanRepository == null)
-                {
-                    this.trainingPlanRepository = new GenericRepository<TrainingPlan>(context);
-                }
-                return trainingPlanRepository;
-            }
+            get;
+            private set;
         }
 
-        public GenericRepository<Training> TrainingRepository
+        public ITrainingRepository TrainingRepository
         {
-            get
-            {
-
-                if (this.trainingRepository == null)
-                {
-                    this.trainingRepository = new GenericRepository<Training>(context);
-                }
-                return trainingRepository;
-            }
+            get;
+            private set;
         }
 
-        public GenericRepository<MusclePart> MusclePartRepository
+        public IMusclePartRepository MusclePartRepository
         {
-            get
-            {
-
-                if (this.musclePartRepository == null)
-                {
-                    this.musclePartRepository = new GenericRepository<MusclePart>(context);
-                }
-                return musclePartRepository;
-            }
+            get;
+            private set;
         }
 
-        public GenericRepository<Exercise> ExerciseRepository
+        public IExerciseRepository ExerciseRepository
         {
-            get
-            {
-
-                if (this.exerciseRepository == null)
-                {
-                    this.exerciseRepository = new GenericRepository<Exercise>(context);
-                }
-                return exerciseRepository;
-            }
+            get;
+            private set;
         }
 
         public void Save()
@@ -88,24 +57,13 @@ namespace TraingAssistantDAL.Repositories
             context.SaveChanges();
         }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
+     
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            context.Dispose();
+            
         }
+
     }
 }

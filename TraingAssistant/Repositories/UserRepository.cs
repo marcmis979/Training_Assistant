@@ -7,14 +7,9 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public class UserRepository : IUserRepository, IDisposable
+    public class UserRepository : IUserRepository
     {
         public void DeleteUser(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
         {
             throw new NotImplementedException();
         }
@@ -33,12 +28,6 @@ namespace TraingAssistantDAL.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateStudent(User user)
         {
             throw new NotImplementedException();

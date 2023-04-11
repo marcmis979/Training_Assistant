@@ -7,13 +7,12 @@ using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
-    public interface IMusclePartRepository : IDisposable
+    public interface IMusclePartRepository
     {
         IEnumerable<MusclePart> GetMuscleParts();
         MusclePart GetMusclePartById(int id);
         void InsertMusclePart(MusclePart musclePart);
         void DeleteMusclePart(int id);
         void UpdateMusclePart(MusclePart musclePart);
-        void Save();
     }
 }
