@@ -1,36 +1,48 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraingAssistantDAL.DataAccess;
 using TraingAssistantDAL.Models;
 
 namespace TraingAssistantDAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public void DeleteUser(int id)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly TrainingAssistantContext _context;
 
-        public User GetUserById(int id)
+        public UserRepository(TrainingAssistantContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public IEnumerable<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
+        }
+
+        public User GetUserById(int id)
+        {
+            var user = _context.Users.Find(id);
+            return user;
         }
 
         public void InsertUser(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(user);
         }
-        public void UpdateStudent(User user)
+
+        public void DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            User user = _context.Users.Find(id);
+            _context.Users.Remove(user);
+        }
+
+        public void UpdateUser(User user)
+        {
+            _context.Entry(user).State = EntityState.Modified;
         }
     }
 }

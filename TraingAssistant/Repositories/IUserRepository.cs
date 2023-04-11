@@ -13,6 +13,6 @@ namespace TraingAssistantDAL.Repositories
         User GetUserById(int id);
         void InsertUser(User user);
         void DeleteUser(int id);
-        void UpdateStudent(User user);
+        void UpdateUser(User user);
     }
 }
