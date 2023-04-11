@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TraingAssistantDAL.Models.User>;
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imie</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

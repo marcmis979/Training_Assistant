@@ -5,32 +5,32 @@ using TraingAssistantDAL.Repositories;
 
 namespace TrainingAssistantUI.Controllers
 {
-    public class ExerciseController : Controller
+    public class TrainingController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ExerciseController(IUnitOfWork unitOfWork)
+        public TrainingController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
-        // GET: ExerciseController
+        // GET: TrainingController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: ExerciseController/Details/5
+        // GET: TrainingController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ExerciseController/Create
+        // GET: TrainingController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ExerciseController/Create
+        // POST: TrainingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -45,13 +45,13 @@ namespace TrainingAssistantUI.Controllers
             }
         }
 
-        // GET: ExerciseController/Edit/5
+        // GET: TrainingController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ExerciseController/Edit/5
+        // POST: TrainingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -66,13 +66,13 @@ namespace TrainingAssistantUI.Controllers
             }
         }
 
-        // GET: ExerciseController/Delete/5
+        // GET: TrainingController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ExerciseController/Delete/5
+        // POST: TrainingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -86,10 +86,10 @@ namespace TrainingAssistantUI.Controllers
                 return View();
             }
         }
-        public ActionResult<Exercise> GetExercises()
+        public ActionResult<Training> GetTrainings()
         {
-            var exercise = _unitOfWork.ExerciseRepository.GetExercises();
-            return View("getExercises",exercise);
+            var trainings = _unitOfWork.TrainingRepository.GetTrainings();
+            return View("getTrainings", trainings);
         }
     }
 }

@@ -4,6 +4,9 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a href="@Url.Action("GetExerciseById","Exercise",new {id=1})">test</a>
+    <a href="@Url.Action("GetExercises","Exercise")">Exercises</a></br>
+    <a href="@Url.Action("GetMuscleParts","MusclePart")">Muscle Parts</a></br>
+    <a href="@Url.Action("GetTrainings","Training")">Training</a></br>
+    <a href="@Url.Action("GetTrainingPlans","TrainingPlan")">Training Plan</a></br>
+    <a href="@Url.Action("GetUsers","User")">Users</a></br>
 </div>

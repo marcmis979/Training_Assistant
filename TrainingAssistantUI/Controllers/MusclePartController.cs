@@ -5,32 +5,32 @@ using TraingAssistantDAL.Repositories;
 
 namespace TrainingAssistantUI.Controllers
 {
-    public class ExerciseController : Controller
+    public class MusclePartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ExerciseController(IUnitOfWork unitOfWork)
+        public MusclePartController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
-        // GET: ExerciseController
+        // GET: MusclePartController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: ExerciseController/Details/5
+        // GET: MusclePartController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ExerciseController/Create
+        // GET: MusclePartController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ExerciseController/Create
+        // POST: MusclePartController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -45,13 +45,13 @@ namespace TrainingAssistantUI.Controllers
             }
         }
 
-        // GET: ExerciseController/Edit/5
+        // GET: MusclePartController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ExerciseController/Edit/5
+        // POST: MusclePartController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -66,13 +66,13 @@ namespace TrainingAssistantUI.Controllers
             }
         }
 
-        // GET: ExerciseController/Delete/5
+        // GET: MusclePartController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ExerciseController/Delete/5
+        // POST: MusclePartController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -86,10 +86,10 @@ namespace TrainingAssistantUI.Controllers
                 return View();
             }
         }
-        public ActionResult<Exercise> GetExercises()
+        public ActionResult<MusclePart> GetMuscleParts()
         {
-            var exercise = _unitOfWork.ExerciseRepository.GetExercises();
-            return View("getExercises",exercise);
+            var muscleParts = _unitOfWork.MusclePartRepository.GetMuscleParts();
+            return View("getMuscleParts", muscleParts);
         }
     }
 }

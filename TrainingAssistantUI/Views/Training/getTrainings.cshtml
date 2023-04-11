@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TraingAssistantDAL.Models.Training>;
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Dni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var training in Model)
+        {
+            <tr>
+                <td>@training.Id</td>
+                <td>@training.Name</td>
+                <td>@training.Days</td>
+            </tr>
+        }
+    </tbody>
+</table>

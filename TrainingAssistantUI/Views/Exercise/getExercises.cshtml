@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TraingAssistantDAL.Models.Exercise>;
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Spalone kalorie</th>
+            <th>Typ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exercise in Model)
+        {
+            <tr>
+                <td>@exercise.Id</td>
+                <td>@exercise.Name</td>
+                <td>@exercise.BurnedKcal</td>
+                <td>@exercise.Type</td>
+            </tr>
+        }
+    </tbody>
+</table>

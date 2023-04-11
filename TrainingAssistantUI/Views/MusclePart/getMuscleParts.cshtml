@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TraingAssistantDAL.Models.MusclePart>;
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var musclePart in Model)
+        {
+            <tr>
+                <td>@musclePart.Id</td>
+                <td>@musclePart.Name</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
