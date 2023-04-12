@@ -15,12 +15,12 @@ namespace TraingAssistantDAL.Repositories
 
         public UnitOfWork(TrainingAssistantContext trainingAssistantContext,IUserRepository userRepository, ITrainingPlanRepository trainingPlanRepository,ITrainingRepository trainingRepository ,IMusclePartRepository musclePartRepository,IExerciseRepository exerciseRepository)
         {
-            this.context= trainingAssistantContext;
+            this.context = trainingAssistantContext;
             this.UserRepository = userRepository;
             this.TrainingPlanRepository = trainingPlanRepository;
             this.TrainingRepository = trainingRepository;
             this.MusclePartRepository= musclePartRepository;
-            this.ExerciseRepository = new ExerciseRepository(context);
+            this.ExerciseRepository = exerciseRepository;
         }
         public IUserRepository UserRepository
         {
