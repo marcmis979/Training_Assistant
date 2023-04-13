@@ -10,34 +10,34 @@ namespace TrainingAssistantBLL.BusinessLogic
 {
     internal class TrainingPlanBs : ITrainingPlanBs
     {
-        private TrainingPlanRepository trainingPlanRepository;
+        private IUnitOfWork unitOfWork;
 
-        public TrainingPlanBs(TrainingPlanRepository trainingPlanRepository)
+        public TrainingPlanBs(IUnitOfWork unitOfWork)
         {
-            this.trainingPlanRepository = trainingPlanRepository;
+            this.unitOfWork = unitOfWork;
         }
         public IEnumerable<TrainingPlan> GetTrainingPlans()
         {
-            return trainingPlanRepository.GetTrainingPlans();
+            return unitOfWork.TrainingPlanRepository.GetTrainingPlans();
         }
 
         public TrainingPlan GetTrainingPlanById(int id)
         {
-            return trainingPlanRepository.GetTrainingPlanById(id);
+            return unitOfWork.TrainingPlanRepository.GetTrainingPlanById(id);
         }
 
         public void InsertTrainingPlan(TrainingPlan trainingPlan)
         {
-            trainingPlanRepository.InsertTrainingPlan(trainingPlan);
+            unitOfWork.TrainingPlanRepository.InsertTrainingPlan(trainingPlan);
         }
 
         public void UpdateTrainingPlan(TrainingPlan trainingPlan)
         {
-            trainingPlanRepository.UpdateTrainingPlan(trainingPlan);
+            unitOfWork.TrainingPlanRepository.UpdateTrainingPlan(trainingPlan);
         }
         public void DeleteTrainingPlan(int id)
         {
-            trainingPlanRepository.DeleteTrainingPlan(id);
+            unitOfWork.TrainingPlanRepository.DeleteTrainingPlan(id);
         }
 
     }

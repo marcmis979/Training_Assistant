@@ -10,35 +10,35 @@ namespace TrainingAssistantBLL.BusinessLogic
 {
     public class ExerciseBs : IExerciseBs
     {
-        private ExerciseRepository exerciseRepository;
+        private IUnitOfWork unitOfWork;
 
-        public ExerciseBs(ExerciseRepository exerciseRepository)
+        public ExerciseBs(IUnitOfWork unitOfWork)
         {
-            this.exerciseRepository = exerciseRepository;
+            this.unitOfWork = unitOfWork;
         }
         
         public IEnumerable<Exercise> GetExercises()
         {
-            return exerciseRepository.GetExercises();
+            return unitOfWork.ExerciseRepository.GetExercises();
         }
 
         public Exercise GetExerciseById(int id)
         {
-            return exerciseRepository.GetExerciseById(id);
+            return unitOfWork.ExerciseRepository.GetExerciseById(id);
         }
 
         public void InsertExercise(Exercise exercise)
         {
-            exerciseRepository.InsertExercise(exercise);
+            unitOfWork.ExerciseRepository.InsertExercise(exercise);
         }
 
         public void UpdateExercise(Exercise exercise)
         {
-            exerciseRepository.UpdateExercise(exercise);
+            unitOfWork.ExerciseRepository.UpdateExercise(exercise);
         }
         public void DeleteExercise(int id)
         {
-            exerciseRepository.DeleteExercise(id);
+            unitOfWork.ExerciseRepository.DeleteExercise(id);
         }
     }
 }

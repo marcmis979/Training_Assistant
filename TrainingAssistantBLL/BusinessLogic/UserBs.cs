@@ -8,36 +8,36 @@ using TraingAssistantDAL.Repositories;
 
 namespace TrainingAssistantBLL.BusinessLogic
 {
-    internal class UserBs : IUserBs
+    public class UserBs : IUserBs
     {
-        private UserRepository userRepository;
+        private IUnitOfWork unitOfWork;
 
-        UserBs(UserRepository userRepository)
+        UserBs(IUnitOfWork unitOfWork)
         {
-            this.userRepository = userRepository;
+            this.unitOfWork = unitOfWork;
         }
         public IEnumerable<User> GetUsers()
         {
-            return userRepository.GetUsers();
+            return unitOfWork.UserRepository.GetUsers();
         }
 
         public User GetUserById(int id)
         {
-            return userRepository.GetUserById(id);
+            return unitOfWork.UserRepository.GetUserById(id);
         }
 
         public void InsertUser(User user)
         {
-            userRepository.InsertUser(user);
+            unitOfWork.UserRepository.InsertUser(user);
         }
 
         public void UpdateUser(User user)
         {
-            userRepository.UpdateUser(user);
+            unitOfWork.UserRepository.UpdateUser(user);
         }
         public void DeleteUser(int id)
         {
-            userRepository.DeleteUser(id);
+            unitOfWork.UserRepository.DeleteUser(id);
         }
 
     }

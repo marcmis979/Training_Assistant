@@ -8,37 +8,37 @@ using TraingAssistantDAL.Repositories;
 
 namespace TrainingAssistantBLL.BusinessLogic
 {
-    internal class MusclePartBs : IMusclePartBs
+    public class MusclePartBs : IMusclePartBs
     {
-        private MusclePartRepository musclePartRepository;
+        private IUnitOfWork unitOfWork;
 
-        public MusclePartBs(MusclePartRepository musclePartRepository)
+        public MusclePartBs(IUnitOfWork unitOfWork)
         {
-            this.musclePartRepository = musclePartRepository;
+            this.unitOfWork = unitOfWork;
         }
         public IEnumerable<MusclePart> GetMuscleParts()
         {
-            return musclePartRepository.GetMuscleParts();
+            return unitOfWork.MusclePartRepository.GetMuscleParts();
         }
 
         public MusclePart GetMusclePartById(int id)
         {
-            return musclePartRepository.GetMusclePartById(id);
+            return unitOfWork.MusclePartRepository.GetMusclePartById(id);
         }
 
         public void InsertMusclePart(MusclePart musclePart)
         {
-            musclePartRepository.InsertMusclePart(musclePart);
+            unitOfWork.MusclePartRepository.InsertMusclePart(musclePart);
         }
 
         public void UpdateMusclePart(MusclePart musclePart)
         {
-            musclePartRepository.UpdateMusclePart(musclePart);
+            unitOfWork.MusclePartRepository.UpdateMusclePart(musclePart);
         }
 
         public void DeleteMusclePart(int id)
         {
-            musclePartRepository.DeleteMusclePart(id);
+            unitOfWork.MusclePartRepository.DeleteMusclePart(id);
         }
     }
 }
