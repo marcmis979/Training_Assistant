@@ -40,5 +40,15 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             unitOfWork.TrainingRepository.DeleteTraining(id);
         }
+        public double summaryCallories(int id)
+        {
+            double sum = 0.0;
+            Training training = GetTrainingById(id);
+            foreach (TrainingExercise trainingExercise in training.TrainingExercises)
+            {
+                sum += trainingExercise.Exercise.BurnedKcal;
+            }
+            return sum;
+        }
     }
 }
