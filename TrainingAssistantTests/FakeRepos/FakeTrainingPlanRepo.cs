@@ -19,7 +19,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public TrainingPlan GetTrainingPlanById(int id)
         {
-            return _trainingPlans[id];
+            return _trainingPlans.FirstOrDefault(x => x.Id == id);
         }
 
         public void InsertTrainingPlan(TrainingPlan trainingPlan)
@@ -29,7 +29,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public void DeleteTrainingPlan(int id)
         {
-            _trainingPlans.Remove(_trainingPlans[id]);
+            _trainingPlans.Remove(_trainingPlans.FirstOrDefault(x => x.Id == id));
         }
 
         public void UpdateTrainingPlan(TrainingPlan training)

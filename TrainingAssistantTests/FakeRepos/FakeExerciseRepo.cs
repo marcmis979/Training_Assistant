@@ -18,7 +18,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public Exercise GetExerciseById(int id)
         {
-            return _exercises[id];
+            return _exercises.FirstOrDefault(x => x.Id == id);
         }
 
         public void InsertExercise(Exercise training)
@@ -28,7 +28,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public void DeleteExercise(int id)
         {
-            _exercises.Remove(_exercises[id]);
+            _exercises.Remove(_exercises.FirstOrDefault(x => x.Id == id));
         }
 
         public void UpdateExercise(Exercise exercise)

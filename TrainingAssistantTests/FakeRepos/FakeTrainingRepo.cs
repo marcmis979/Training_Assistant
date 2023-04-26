@@ -28,7 +28,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public void DeleteTraining(int id)
         {
-            _trainings.Remove(_trainings[id]);
+            _trainings.Remove(_trainings.FirstOrDefault(x => x.Id == id));
         }
 
         public void UpdateTraining(Training training)

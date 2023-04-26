@@ -18,7 +18,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public User GetUserById(int id)
         {
-            return _users[id];
+            return _users.FirstOrDefault(x => x.Id == id);
         }
 
         public void InsertUser(User training)
@@ -28,7 +28,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public void DeleteUser(int id)
         {
-            _users.Remove(_users[id]);
+            _users.Remove(_users.FirstOrDefault(x => x.Id == id););
         }
 
         public void UpdateUser(User training)

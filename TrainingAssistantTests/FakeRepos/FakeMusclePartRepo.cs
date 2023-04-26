@@ -18,7 +18,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public MusclePart GetMusclePartById(int id)
         {
-            return _trainings[id];
+            return _trainings.FirstOrDefault(x => x.Id == id); ;
         }
 
         public void InsertMusclePart(MusclePart training)
@@ -28,7 +28,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public void DeleteMusclePart(int id)
         {
-            _trainings.Remove(_trainings[id]);
+            _trainings.Remove(_trainings.FirstOrDefault(x => x.Id == id));
         }
 
         public void UpdateMusclePart(MusclePart musclePart)
