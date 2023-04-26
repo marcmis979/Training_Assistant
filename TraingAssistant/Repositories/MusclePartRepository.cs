@@ -43,6 +43,14 @@ namespace TraingAssistantDAL.Repositories
         {
             context.Entry(musclePart).State = EntityState.Modified;
         }
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+        public void Dispose()
+        {
+            context.Dispose();
+        }
 
     }
 }

@@ -8,7 +8,7 @@ using TraingAssistantDAL.Repositories;
 
 namespace TrainingAssistantBLL.BusinessLogic
 {
-    internal class TrainingBs : ITrainingBs
+    public class TrainingBs : ITrainingBs
     {
         private IUnitOfWork unitOfWork;
 

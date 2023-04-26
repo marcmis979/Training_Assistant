@@ -14,5 +14,7 @@ namespace TraingAssistantDAL.Repositories
         void InsertMusclePart(MusclePart musclePart);
         void DeleteMusclePart(int id);
         void UpdateMusclePart(MusclePart musclePart);
+        public void Save();
+        public void Dispose();
     }
 }

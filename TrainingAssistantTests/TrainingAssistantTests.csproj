@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TraingAssistant\TraingAssistantDAL.csproj" />
+    <ProjectReference Include="..\TrainingAssistantBLL\TrainingAssistantBLL.csproj" />
+  </ItemGroup>
+
 </Project>

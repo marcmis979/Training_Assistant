@@ -44,5 +44,13 @@ namespace TraingAssistantDAL.Repositories
         {
             _context.Entry(user).State = EntityState.Modified;
         }
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
     }
 }

@@ -10,12 +10,10 @@ namespace TraingAssistantDAL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-         TrainingAssistantContext context;
         
 
-        public UnitOfWork(TrainingAssistantContext trainingAssistantContext,IUserRepository userRepository, ITrainingPlanRepository trainingPlanRepository,ITrainingRepository trainingRepository ,IMusclePartRepository musclePartRepository,IExerciseRepository exerciseRepository)
+        public UnitOfWork(IUserRepository userRepository, ITrainingPlanRepository trainingPlanRepository,ITrainingRepository trainingRepository ,IMusclePartRepository musclePartRepository,IExerciseRepository exerciseRepository)
         {
-            this.context = trainingAssistantContext;
             this.UserRepository = userRepository;
             this.TrainingPlanRepository = trainingPlanRepository;
             this.TrainingRepository = trainingRepository;
@@ -54,15 +52,20 @@ namespace TraingAssistantDAL.Repositories
 
         public void Save()
         {
-            context.SaveChanges();
+            UserRepository.Save();
+            TrainingRepository.Save();
+            TrainingPlanRepository.Save();
+            ExerciseRepository.Save();
+            MusclePartRepository.Save();
         }
-
-     
 
         public void Dispose()
         {
-            context.Dispose();
-            
+            UserRepository.Dispose();
+            TrainingRepository.Dispose();
+            TrainingPlanRepository.Dispose();
+            ExerciseRepository.Dispose();
+            MusclePartRepository.Dispose();
         }
 
     }

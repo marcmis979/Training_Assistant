@@ -14,5 +14,7 @@ namespace TraingAssistantDAL.Repositories
         void InsertTrainingPlan(TrainingPlan trainingPlan);
         void DeleteTrainingPlan(int id);
         void UpdateTrainingPlan(TrainingPlan trainingPlan);
+        public void Save();
+        public void Dispose();
     }
 }

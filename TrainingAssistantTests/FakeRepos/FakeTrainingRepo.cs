@@ -1,16 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TraingAssistantDAL.DataAccess;
 using TraingAssistantDAL.Models;
 using TraingAssistantDAL.Repositories;
 
-namespace TrainingAssistantTests
+namespace TrainingAssistantTests.FakeRepos
 {
-    public class FakeTrainingBs : ITrainingRepository
+    public class FakeTrainingRepo :ITrainingRepository
     {
         private List<Training> _trainings = new List<Training>();
         public IEnumerable<Training> GetTrainings()
@@ -18,9 +16,9 @@ namespace TrainingAssistantTests
             return _trainings;
         }
 
-        public Training GetTrainingById(int id)
+        public Training? GetTrainingById(int id)
         {
-            return _trainings[id];
+            return _trainings.FirstOrDefault(x => x.Id == id);
         }
 
         public void InsertTraining(Training training)
