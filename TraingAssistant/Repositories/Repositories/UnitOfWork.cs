@@ -5,20 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.DataAccess;
 using TraingAssistantDAL.Models;
+using TraingAssistantDAL.Repositories.Implementation;
 
-namespace TraingAssistantDAL.Repositories
+namespace TraingAssistantDAL.Repositories.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        
 
-        public UnitOfWork(IUserRepository userRepository, ITrainingPlanRepository trainingPlanRepository,ITrainingRepository trainingRepository ,IMusclePartRepository musclePartRepository,IExerciseRepository exerciseRepository)
+
+        public UnitOfWork(IUserRepository userRepository, ITrainingPlanRepository trainingPlanRepository, ITrainingRepository trainingRepository, IMusclePartRepository musclePartRepository, IExerciseRepository exerciseRepository)
         {
-            this.UserRepository = userRepository;
-            this.TrainingPlanRepository = trainingPlanRepository;
-            this.TrainingRepository = trainingRepository;
-            this.MusclePartRepository= musclePartRepository;
-            this.ExerciseRepository = exerciseRepository;
+            UserRepository = userRepository;
+            TrainingPlanRepository = trainingPlanRepository;
+            TrainingRepository = trainingRepository;
+            MusclePartRepository = musclePartRepository;
+            ExerciseRepository = exerciseRepository;
         }
         public IUserRepository UserRepository
         {

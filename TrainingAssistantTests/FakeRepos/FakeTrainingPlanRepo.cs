@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.Models;
-using TraingAssistantDAL.Repositories;
+using TraingAssistantDAL.Repositories.Implementation;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantTests.FakeRepos

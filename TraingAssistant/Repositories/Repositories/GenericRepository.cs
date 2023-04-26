@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.DataAccess;
 
-namespace TraingAssistantDAL.Repositories
+namespace TraingAssistantDAL.Repositories.Repositories
 {
     public class GenericRepository<TEntity> where TEntity : class
     {
@@ -17,7 +17,7 @@ namespace TraingAssistantDAL.Repositories
         public GenericRepository(TrainingAssistantContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            dbSet = context.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get(

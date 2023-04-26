@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.Models;
-using TraingAssistantDAL.Repositories;
+using TraingAssistantDAL.Repositories.Implementation;
 
 namespace TrainingAssistantBLL.BusinessLogic
 {
@@ -40,7 +40,7 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             unitOfWork.TrainingRepository.DeleteTraining(id);
         }
-        public double summaryCallories(int id)
+        public double summaryCalories(int id)
         {
             double sum = 0.0;
             Training training = GetTrainingById(id);

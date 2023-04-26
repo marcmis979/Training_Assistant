@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TraingAssistantDAL.DataAccess;
-using TraingAssistantDAL.Repositories;
+using TraingAssistantDAL.Repositories.Implementation;
+using TraingAssistantDAL.Repositories.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

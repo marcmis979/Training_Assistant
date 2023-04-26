@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.DataAccess;
 using TraingAssistantDAL.Models;
-using TraingAssistantDAL.Repositories;
+using TraingAssistantDAL.Repositories.Implementation;
 
 namespace TrainingAssistantTests
 {

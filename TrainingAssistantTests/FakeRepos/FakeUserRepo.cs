@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.Models;
-using TraingAssistantDAL.Repositories;
+using TraingAssistantDAL.Repositories.Implementation;
 
 namespace TrainingAssistantTests.FakeRepos
 {
@@ -28,7 +28,7 @@ namespace TrainingAssistantTests.FakeRepos
 
         public void DeleteUser(int id)
         {
-            _users.Remove(_users.FirstOrDefault(x => x.Id == id););
+            _users.Remove(_users.FirstOrDefault(x => x.Id == id));
         }
 
         public void UpdateUser(User training)

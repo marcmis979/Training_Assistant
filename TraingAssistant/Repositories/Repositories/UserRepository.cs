@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.DataAccess;
 using TraingAssistantDAL.Models;
+using TraingAssistantDAL.Repositories.Implementation;
 
-namespace TraingAssistantDAL.Repositories
+namespace TraingAssistantDAL.Repositories.Repositories
 {
     public class UserRepository : IUserRepository
     {

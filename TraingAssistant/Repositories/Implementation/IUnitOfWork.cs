@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraingAssistantDAL.Models;
 
-namespace TraingAssistantDAL.Repositories
+namespace TraingAssistantDAL.Repositories.Implementation
 {
     public interface IUnitOfWork : IDisposable
     {
