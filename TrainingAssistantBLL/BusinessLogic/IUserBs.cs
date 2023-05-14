@@ -14,5 +14,6 @@ namespace TrainingAssistantBLL.BusinessLogic
         public void InsertUser(User user);
         public void UpdateUser(User user);
         public void DeleteUser(int id);
+        public double getUserBMI(int id);
     }
 }

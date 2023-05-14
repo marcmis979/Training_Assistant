@@ -40,5 +40,9 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             unitOfWork.ExerciseRepository.DeleteExercise(id);
         }
+        public double burnedPerHour(int id)
+        {
+            return 3600 / GetExerciseById(id).Time * GetExerciseById(id).BurnedKcal;
+        }
     }
 }

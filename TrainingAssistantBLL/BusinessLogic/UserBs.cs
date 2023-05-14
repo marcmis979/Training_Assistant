@@ -39,6 +39,11 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             unitOfWork.UserRepository.DeleteUser(id);
         }
+        public double getUserBMI(int id)
+        {
+            double heightInMeters = GetUserById(id).Height / 100;
+            return GetUserById(id).Weight / (heightInMeters * heightInMeters);
+        }
 
     }
 }

@@ -14,5 +14,6 @@ namespace TrainingAssistantBLL.BusinessLogic
         public void InsertExercise(Exercise exercise);
         public void UpdateExercise(Exercise exercise);
         public void DeleteExercise(int id);
+        public double burnedPerHour(int id);
     }
 }
