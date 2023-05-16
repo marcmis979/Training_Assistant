@@ -28,4 +28,6 @@ namespace TrainingAssistantTests.ControllersTests
             Assert.Equal(12000.0, viewResult.ViewData["KcalPerHour"]);
         }
     }
+
+    
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantBOL.Controllers
@@ -84,6 +85,12 @@ namespace TrainingAssistantBOL.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult summaryCalories(int id)
+        {
+            ViewBag.SummaryCalories = training.summaryCalories(id);
+            return View();
         }
     }
 }
