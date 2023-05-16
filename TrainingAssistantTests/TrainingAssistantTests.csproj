@@ -27,6 +27,8 @@
   <ItemGroup>
     <ProjectReference Include="..\TraingAssistant\TraingAssistantDAL.csproj" />
     <ProjectReference Include="..\TrainingAssistantBLL\TrainingAssistantBLL.csproj" />
+    <ProjectReference Include="..\TrainingAssistantBOL\TrainingAssistantBOL.csproj" />
+    <ProjectReference Include="..\TrainingAssistantWebAPI\TrainingAssistantWebAPI.csproj" />
   </ItemGroup>
 
 </Project>

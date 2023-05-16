@@ -64,6 +64,11 @@ namespace TrainingAssistantBOL.Controllers
                 return View();
             }
         }
+        public IActionResult burnedPerHour(int id)
+        {
+            ViewBag.KcalPerHour = exercise.burnedPerHour(id);
+            return View();
+        }
 
         // GET: ExerciseController/Delete/5
         public ActionResult Delete(int id)
@@ -85,5 +90,6 @@ namespace TrainingAssistantBOL.Controllers
                 return View();
             }
         }
+
     }
 }

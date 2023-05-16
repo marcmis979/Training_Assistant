@@ -65,7 +65,7 @@ namespace TrainingAssistantTests
 
             var unitOfWork = new UnitOfWork(userRepo, trainingPlanRepo, trainingRepo, musclePartRepo, exerciseRepo);
             var trainingsBLL = new TrainingBs(unitOfWork);
-            Assert.Equal(250, trainingsBLL.summaryCalories(training1.Id));
+            Assert.Equal(250, actual: trainingsBLL.summaryCalories(training1.Id));
         }
     }
 }
