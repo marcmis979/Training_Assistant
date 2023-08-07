@@ -91,9 +91,9 @@ namespace TraingAssistantDAL.DataAccess
 
             //Adding data to entities
             modelBuilder.Entity<Exercise>().HasData(
-                new Exercise { Id = 1, Name = "Bench press"},
-                new Exercise { Id = 2, Name = "Squat"},
-                new Exercise { Id = 3, Name = "Deadlift"}
+                new Exercise { Id = 1, Name = "Bench press", BurnedKcal = 10, Time = 5 },
+                new Exercise { Id = 2, Name = "Squat", BurnedKcal = 20, Time = 10 },
+                new Exercise { Id = 3, Name = "Deadlift", BurnedKcal = 30, Time = 15 }
             );
             modelBuilder.Entity<MusclePart>().HasData(
                 new MusclePart { Id = 1, Name = "Chest" },

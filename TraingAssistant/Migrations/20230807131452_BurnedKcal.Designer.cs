@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraingAssistantDAL.DataAccess;
 
@@ -10,9 +11,11 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    partial class TrainingAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20230807131452_BurnedKcal")]
+    partial class BurnedKcal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace TraingAssistantDAL.Migrations
                             Id = 1,
                             BurnedKcal = 10.0,
                             Name = "Bench press",
-                            Time = 5,
+                            Time = 0,
                             Type = 0
                         },
                         new
@@ -60,7 +63,7 @@ namespace TraingAssistantDAL.Migrations
                             Id = 2,
                             BurnedKcal = 20.0,
                             Name = "Squat",
-                            Time = 10,
+                            Time = 0,
                             Type = 0
                         },
                         new
@@ -68,7 +71,7 @@ namespace TraingAssistantDAL.Migrations
                             Id = 3,
                             BurnedKcal = 30.0,
                             Name = "Deadlift",
-                            Time = 15,
+                            Time = 0,
                             Type = 0
                         });
                 });

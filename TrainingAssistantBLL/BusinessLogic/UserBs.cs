@@ -12,7 +12,7 @@ namespace TrainingAssistantBLL.BusinessLogic
     {
         private IUnitOfWork unitOfWork;
 
-        UserBs(IUnitOfWork unitOfWork)
+        public UserBs(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
