@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraingAssistantDAL.DataAccess;
 
@@ -10,9 +11,11 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    partial class TrainingAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20230813204533_anotherMigration2")]
+    partial class anotherMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

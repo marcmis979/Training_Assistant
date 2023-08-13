@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraingAssistantDAL.DataAccess;
 
@@ -10,9 +11,11 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    partial class TrainingAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20230813201426_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -362,42 +365,42 @@ namespace TraingAssistantDAL.Migrations
                             Id = 1,
                             Age = 22,
                             Email = "xDD",
-                            Height = 183,
+                            Height = 0,
                             Name = "Rafał",
                             Password = "xyz",
                             Sex = false,
                             Surname = "Hońca",
                             TargetWeight = 0.0,
                             Tempo = 0.0,
-                            Weight = 65.0
+                            Weight = 0.0
                         },
                         new
                         {
                             Id = 2,
                             Age = 22,
                             Email = "xDD",
-                            Height = 160,
+                            Height = 0,
                             Name = "Marcin",
                             Password = "xyz",
                             Sex = true,
                             Surname = "Misiuna",
                             TargetWeight = 0.0,
                             Tempo = 0.0,
-                            Weight = 100.0
+                            Weight = 0.0
                         },
                         new
                         {
                             Id = 3,
                             Age = 33,
                             Email = "xDD",
-                            Height = 170,
+                            Height = 0,
                             Name = "Mateusz",
                             Password = "xyz",
                             Sex = false,
                             Surname = "Bachowski",
                             TargetWeight = 0.0,
                             Tempo = 0.0,
-                            Weight = 45.0
+                            Weight = 0.0
                         });
                 });
 

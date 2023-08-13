@@ -41,7 +41,7 @@ namespace TrainingAssistantBLL.BusinessLogic
         }
         public double getUserBMI(int id)
         {
-            double heightInMeters = GetUserById(id).Height / 100;
+            double heightInMeters = GetUserById(id).Height / 100.0;
             return GetUserById(id).Weight / (heightInMeters * heightInMeters);
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraingAssistantDAL.DataAccess;
 
@@ -10,9 +11,11 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    partial class TrainingAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20230813204132_anotherMigration")]
+    partial class anotherMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -369,7 +372,7 @@ namespace TraingAssistantDAL.Migrations
                             Surname = "Hońca",
                             TargetWeight = 0.0,
                             Tempo = 0.0,
-                            Weight = 65.0
+                            Weight = 0.0
                         },
                         new
                         {
@@ -383,7 +386,7 @@ namespace TraingAssistantDAL.Migrations
                             Surname = "Misiuna",
                             TargetWeight = 0.0,
                             Tempo = 0.0,
-                            Weight = 100.0
+                            Weight = 0.0
                         },
                         new
                         {
@@ -397,7 +400,7 @@ namespace TraingAssistantDAL.Migrations
                             Surname = "Bachowski",
                             TargetWeight = 0.0,
                             Tempo = 0.0,
-                            Weight = 45.0
+                            Weight = 0.0
                         });
                 });
 

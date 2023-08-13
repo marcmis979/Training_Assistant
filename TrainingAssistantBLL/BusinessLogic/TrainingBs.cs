@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraingAssistantDAL.DataAccess;
 using TraingAssistantDAL.Models;
 using TraingAssistantDAL.Repositories.Implementation;
 
@@ -43,12 +44,20 @@ namespace TrainingAssistantBLL.BusinessLogic
         public double summaryCalories(int id)
         {
             double sum = 0.0;
-            Training training = GetTrainingById(id);
-            foreach (TrainingExercise trainingExercise in training.TrainingExercises)
+
+            Training training = unitOfWork.TrainingRepository.GetTrainingById(id);
+
+            if (training != null)
             {
-                sum += trainingExercise.Exercise.BurnedKcal;
+                foreach (TrainingExercise trainingExercise in training.TrainingExercises)
+                {
+                    sum += trainingExercise.Exercise.BurnedKcal;
+                }
             }
+
             return sum;
         }
+
+
     }
 }

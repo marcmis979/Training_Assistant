@@ -26,7 +26,10 @@ namespace TraingAssistantDAL.Repositories.Repositories
 
         public Training GetTrainingById(int id)
         {
-            return context.Trainings.Find(id);
+            return context.Trainings
+                   .Include(t => t.TrainingExercises)
+                       .ThenInclude(te => te.Exercise)
+                   .FirstOrDefault(t => t.Id == id);
         }
 
         public void InsertTraining(Training training)

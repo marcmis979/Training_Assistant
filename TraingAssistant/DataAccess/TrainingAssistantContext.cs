@@ -112,10 +112,10 @@ namespace TraingAssistantDAL.DataAccess
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Rafał", Surname="Hońca",Sex=false, Age=22, Email="xDD", Password="xyz" },
-                new User { Id = 2, Name = "Marcin", Surname = "Misiuna", Sex = true, Age = 22, Email = "xDD", Password = "xyz" },
-                new User { Id = 3, Name = "Mateusz" ,Surname="Bachowski", Sex = false, Age = 33, Email = "xDD", Password = "xyz" }
-            );
+                new User { Id = 1, Name = "Rafał", Surname = "Hońca", Sex = false, Age = 22, Email = "xDD", Password = "xyz", Height = 183, Weight = 65 },
+                new User { Id = 2, Name = "Marcin", Surname = "Misiuna", Sex = true, Age = 22, Email = "xDD", Password = "xyz", Height = 160, Weight = 100 },
+                new User { Id = 3, Name = "Mateusz", Surname = "Bachowski", Sex = false, Age = 33, Email = "xDD", Password = "xyz", Height = 170, Weight = 45 }
+            ); ; ;
 
             modelBuilder.Entity<ExerciseMusclePart>().HasData(
                 new ExerciseMusclePart { ExerciseId = 1, MusclePartId = 1 },
