@@ -11,7 +11,7 @@ namespace TraingAssistantDAL.Models
         public int Id { get; set; }
         public String Name { get; set; }
         public int Days { get; set; }
-        public List<TrainingExercise> TrainingExercises { get; set; }
-        public List<TrainingPlanTraing> TrainingPlanTraings { get; set; }
+        public List<TrainingExercise>? TrainingExercises { get; set; }
+        public List<TrainingPlanTraing>? TrainingPlanTraings { get; set; }
     }
 }

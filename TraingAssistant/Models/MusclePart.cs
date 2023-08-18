@@ -15,7 +15,7 @@ namespace TraingAssistantDAL.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<ExerciseMusclePart> ExercisesMuscleParts { get; set; }
+        public List<ExerciseMusclePart>? ExercisesMuscleParts { get; set; }
 
     }
 }

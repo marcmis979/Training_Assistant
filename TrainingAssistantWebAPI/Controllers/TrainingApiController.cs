@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantWebAPI.Controllers
@@ -17,5 +18,22 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return training.summaryCalories(id);
         }
+        [HttpGet("getTraining/{id}")]
+        public Training getTraining(int id)
+        {
+            return training.GetTrainingById(id);
+        }
+        [HttpPost("addTraining")]
+        public void addTraining(Training tr)
+        {
+            training.InsertTraining(tr);
+        }
+        [HttpPut("updateTraining")]
+        public void updateTraining(Training tr)
+        {
+            training.UpdateTraining(tr);
+        }
+
+
     }
 }

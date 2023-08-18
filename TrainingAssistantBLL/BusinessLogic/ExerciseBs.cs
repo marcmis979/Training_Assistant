@@ -42,7 +42,7 @@ namespace TrainingAssistantBLL.BusinessLogic
         }
         public double burnedPerHour(int id)
         {
-            return 3600 / GetExerciseById(id).Time * GetExerciseById(id).BurnedKcal;
+            return 3600 / unitOfWork.ExerciseRepository.GetExerciseById(id).Time * unitOfWork.ExerciseRepository.GetExerciseById(id).BurnedKcal;
         }
     }
 }
