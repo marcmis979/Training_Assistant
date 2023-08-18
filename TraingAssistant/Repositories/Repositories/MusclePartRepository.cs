@@ -32,6 +32,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         public void InsertMusclePart(MusclePart musclePart)
         {
             context.MuscleParts.Add(musclePart);
+            context.SaveChanges();
         }
 
         public void DeleteMusclePart(int id)
@@ -40,9 +41,16 @@ namespace TraingAssistantDAL.Repositories.Repositories
             context.MuscleParts.Remove(musclePart);
         }
 
-        public void UpdateMusclePart(MusclePart musclePart)
+        public void UpdateMusclePart(MusclePart updatedMusclePart)
         {
-            context.Entry(musclePart).State = EntityState.Modified;
+            var existingMusclePart = context.MuscleParts.Find(updatedMusclePart.Id);
+
+            if (existingMusclePart != null)
+            {
+                existingMusclePart.Name = updatedMusclePart.Name;
+
+                context.SaveChanges();
+            }
         }
         public void Save()
         {

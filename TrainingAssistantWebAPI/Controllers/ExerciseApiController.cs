@@ -24,14 +24,46 @@ namespace TrainingAssistantWebAPI.Controllers
             return exercise.GetExerciseById(id);
         }
         [HttpPost("addExercise")]
-        public void addExercise(Exercise ex)
+        public IActionResult addExercise([FromBody] Exercise ex)
         {
+            if (ex == null)
+            {
+                return BadRequest("Invalid exercise data");
+            }
             exercise.InsertExercise(ex);
+
+            return CreatedAtAction("GetExercise", new { id = ex.Id },ex);
         }
-        [HttpPut("updateExercise")]
-        public void updateExercise(Exercise ex)
+        [HttpPut("updateExercise/{id}")]
+        public IActionResult UpdateExercise(int id, [FromBody] Exercise updatedExercise)
         {
-            exercise.UpdateExercise(ex);
+            if (updatedExercise == null || updatedExercise.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingExercise = exercise.GetExerciseById(id);
+            if (existingExercise == null)
+            {
+                return NotFound();
+            }
+
+            exercise.UpdateExercise(updatedExercise);
+
+            return NoContent();
+        }
+        [HttpDelete("deleteExercise/{id}")]
+        public IActionResult DeleteExercise(int id)
+        {
+            var existingExercise = exercise.GetExerciseById(id);
+            if (existingExercise == null)
+            {
+                return NotFound();
+            }
+
+            exercise.DeleteExercise(id);
+
+            return NoContent();
         }
 
     }

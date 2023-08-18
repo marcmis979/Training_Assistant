@@ -19,14 +19,34 @@ namespace TrainingAssistantWebAPI.Controllers
             return musclePart.GetMusclePartById(id);
         }
         [HttpPost("addMusclePart")]
-        public void addExercise(MusclePart mp)
+        public IActionResult AddMusclePart([FromBody] MusclePart mp)
         {
+            if (mp == null)
+            {
+                return BadRequest("Invalid muscle part data");
+            }
+
             musclePart.InsertMusclePart(mp);
+
+            return CreatedAtAction("GetMusclePart", new { id = mp.Id }, mp);
         }
-        [HttpPut("updateMusclePart")]
-        public void updateMusclePart(MusclePart mp)
+        [HttpPut("updateMusclePart/{id}")]
+        public IActionResult UpdateMusclePart(int id, [FromBody] MusclePart updatedMusclePart)
         {
-            musclePart.UpdateMusclePart(mp);
+            if (updatedMusclePart == null || updatedMusclePart.Id != id)
+            {
+                return BadRequest("Invalid muscle part data");
+            }
+
+            var existingMusclePart = musclePart.GetMusclePartById(id);
+            if (existingMusclePart == null)
+            {
+                return NotFound();
+            }
+
+            musclePart.UpdateMusclePart(updatedMusclePart);
+
+            return NoContent();
         }
     }
 }

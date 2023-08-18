@@ -33,6 +33,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         public void InsertUser(User user)
         {
             _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public void DeleteUser(int id)
@@ -41,9 +42,16 @@ namespace TraingAssistantDAL.Repositories.Repositories
             _context.Users.Remove(user);
         }
 
-        public void UpdateUser(User user)
+        public void UpdateUser(User updatedUser)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            var existingUser = _context.Users.Find(updatedUser.Id);
+
+            if (existingUser != null)
+            {
+                existingUser.Name = updatedUser.Name;
+
+                _context.SaveChanges();
+            }
         }
         public void Save()
         {

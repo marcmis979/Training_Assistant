@@ -35,6 +35,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         public void InsertTraining(Training training)
         {
             context.Trainings.Add(training);
+            context.SaveChanges();
         }
 
         public void DeleteTraining(int id)
@@ -43,9 +44,16 @@ namespace TraingAssistantDAL.Repositories.Repositories
             context.Trainings.Remove(training);
         }
 
-        public void UpdateTraining(Training training)
+        public void UpdateTraining(Training updatedTraining)
         {
-            context.Entry(training).State = EntityState.Modified;
+            var existingTraining = context.Trainings.Find(updatedTraining.Id);
+
+            if (existingTraining != null)
+            {
+                existingTraining.Name = updatedTraining.Name;
+
+                context.SaveChanges();
+            }
         }
         public void Save()
         {

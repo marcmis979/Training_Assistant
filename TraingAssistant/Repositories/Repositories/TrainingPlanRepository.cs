@@ -32,6 +32,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         public void InsertTrainingPlan(TrainingPlan trainingPlan)
         {
             context.TrainingPlans.Add(trainingPlan);
+            context.SaveChanges();
         }
 
         public void DeleteTrainingPlan(int id)
@@ -40,9 +41,16 @@ namespace TraingAssistantDAL.Repositories.Repositories
             context.TrainingPlans.Remove(trainingPlan);
         }
 
-        public void UpdateTrainingPlan(TrainingPlan trainingPlan)
+        public void UpdateTrainingPlan(TrainingPlan updatedTrainingPlan)
         {
-            context.Entry(trainingPlan).State = EntityState.Modified;
+            var existingTrainingPlan = context.TrainingPlans.Find(updatedTrainingPlan.Id);
+
+            if (existingTrainingPlan != null)
+            {
+                existingTrainingPlan.Name = updatedTrainingPlan.Name;
+
+                context.SaveChanges();
+            }
         }
         public void Save()
         {

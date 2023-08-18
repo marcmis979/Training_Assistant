@@ -13,20 +13,40 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             this.trainingPlan = trainingPlan;
         }
-        [HttpGet("getTraining/{id}")]
+        [HttpGet("getTrainingPlan/{id}")]
         public TrainingPlan getTrainingPlan(int id)
         {
             return trainingPlan.GetTrainingPlanById(id);
         }
-        [HttpPost("addTraining")]
-        public void addTraining(TrainingPlan tr)
+        [HttpPost("addTrainingPlan")]
+        public IActionResult AddTrainingPlan([FromBody] TrainingPlan tr)
         {
+            if (tr == null)
+            {
+                return BadRequest("Invalid training plan data");
+            }
+
             trainingPlan.InsertTrainingPlan(tr);
+
+            return CreatedAtAction("GetTrainingPlan", new { id = tr.Id }, tr);
         }
-        [HttpPut("updateTraining")]
-        public void updateTraining(TrainingPlan tr)
+        [HttpPut("updateTrainingPlan/{id}")]
+        public IActionResult UpdateTrainingPlan(int id, [FromBody] TrainingPlan updatedTrainingPlan)
         {
-            trainingPlan.UpdateTrainingPlan(tr);
+            if (updatedTrainingPlan == null || updatedTrainingPlan.Id != id)
+            {
+                return BadRequest("Invalid training plan data");
+            }
+
+            var existingTrainingPlan = trainingPlan.GetTrainingPlanById(id);
+            if (existingTrainingPlan == null)
+            {
+                return NotFound();
+            }
+
+            trainingPlan.UpdateTrainingPlan(updatedTrainingPlan);
+
+            return NoContent();
         }
     }
 }

@@ -24,14 +24,34 @@ namespace TrainingAssistantWebAPI.Controllers
             return training.GetTrainingById(id);
         }
         [HttpPost("addTraining")]
-        public void addTraining(Training tr)
+        public IActionResult AddTraining([FromBody] Training tr)
         {
+            if (tr == null)
+            {
+                return BadRequest("Invalid training data");
+            }
+
             training.InsertTraining(tr);
+
+            return CreatedAtAction("GetTraining", new { id = tr.Id }, tr);
         }
-        [HttpPut("updateTraining")]
-        public void updateTraining(Training tr)
+        [HttpPut("updateTraining/{id}")]
+        public IActionResult UpdateTraining(int id, [FromBody] Training updatedTraining)
         {
-            training.UpdateTraining(tr);
+            if (updatedTraining == null || updatedTraining.Id != id)
+            {
+                return BadRequest("Invalid training data");
+            }
+
+            var existingTraining = training.GetTrainingById(id);
+            if (existingTraining == null)
+            {
+                return NotFound();
+            }
+
+            training.UpdateTraining(updatedTraining);
+
+            return NoContent();
         }
 
 

@@ -23,14 +23,34 @@ namespace TrainingAssistantWebAPI.Controllers
             return user.GetUserById(id);
         }
         [HttpPost("addUser")]
-        public void addUser(User us)
+        public IActionResult AddUser([FromBody] User us)
         {
+            if (us == null)
+            {
+                return BadRequest("Invalid user data");
+            }
+
             user.InsertUser(us);
+
+            return CreatedAtAction("GetUser", new { id = us.Id }, us);
         }
-        [HttpPut("updateUser")]
-        public void updateUser(User us)
+        [HttpPut("updateUser/{id}")]
+        public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
         {
-            user.UpdateUser(us);
+            if (updatedUser == null || updatedUser.Id != id)
+            {
+                return BadRequest("Invalid user data");
+            }
+
+            var existingUser = user.GetUserById(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            user.UpdateUser(updatedUser);
+
+            return NoContent();
         }
 
     }

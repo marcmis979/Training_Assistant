@@ -32,7 +32,9 @@ namespace TraingAssistantDAL.Repositories.Repositories
 
         public void InsertExercise(Exercise exercise)
         {
+
             _context.Exercises.Add(exercise);
+            _context.SaveChanges();
         }
 
         public void DeleteExercise(int id)
@@ -41,9 +43,16 @@ namespace TraingAssistantDAL.Repositories.Repositories
             _context.Exercises.Remove(exercise);
         }
 
-        public void UpdateExercise(Exercise exercise)
+        public void UpdateExercise(Exercise updatedExercise)
         {
-            _context.Entry(exercise).State = EntityState.Modified;
+            var existingExercise = _context.Exercises.Find(updatedExercise.Id);
+
+            if (existingExercise != null)
+            {
+                existingExercise.Name = updatedExercise.Name;
+
+                _context.SaveChanges();
+            }
         }
         public void Save()
         {
