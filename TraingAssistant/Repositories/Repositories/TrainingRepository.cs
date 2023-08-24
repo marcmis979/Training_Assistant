@@ -42,6 +42,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         {
             Training training = context.Trainings.Find(id);
             context.Trainings.Remove(training);
+            context.SaveChanges();
         }
 
         public void UpdateTraining(Training updatedTraining)
@@ -51,6 +52,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
             if (existingTraining != null)
             {
                 existingTraining.Name = updatedTraining.Name;
+                existingTraining.Days = updatedTraining.Days;
 
                 context.SaveChanges();
             }

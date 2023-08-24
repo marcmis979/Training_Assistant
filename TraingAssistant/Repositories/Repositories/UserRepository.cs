@@ -40,6 +40,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         {
             User user = _context.Users.Find(id);
             _context.Users.Remove(user);
+            _context.SaveChanges();
         }
 
         public void UpdateUser(User updatedUser)
@@ -49,6 +50,15 @@ namespace TraingAssistantDAL.Repositories.Repositories
             if (existingUser != null)
             {
                 existingUser.Name = updatedUser.Name;
+                existingUser.Surname = updatedUser.Surname;
+                existingUser.Sex = updatedUser.Sex;
+                existingUser.Age = updatedUser.Age;
+                existingUser.Height = updatedUser.Height;
+                existingUser.Weight = updatedUser.Weight;
+                existingUser.TargetWeight = updatedUser.TargetWeight;
+                existingUser.Tempo = updatedUser.Tempo;
+                existingUser.Password = updatedUser.Password;
+                existingUser.Email = updatedUser.Email;
 
                 _context.SaveChanges();
             }

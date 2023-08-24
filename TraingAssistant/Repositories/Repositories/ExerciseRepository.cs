@@ -41,6 +41,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         {
             Exercise exercise = _context.Exercises.Find(id);
             _context.Exercises.Remove(exercise);
+            _context.SaveChanges();
         }
 
         public void UpdateExercise(Exercise updatedExercise)
@@ -50,6 +51,9 @@ namespace TraingAssistantDAL.Repositories.Repositories
             if (existingExercise != null)
             {
                 existingExercise.Name = updatedExercise.Name;
+                existingExercise.BurnedKcal = updatedExercise.BurnedKcal;
+                existingExercise.Time = updatedExercise.Time;
+                existingExercise.Type = updatedExercise.Type;
 
                 _context.SaveChanges();
             }

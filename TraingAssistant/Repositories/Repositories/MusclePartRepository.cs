@@ -39,6 +39,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         {
             MusclePart musclePart = context.MuscleParts.Find(id);
             context.MuscleParts.Remove(musclePart);
+            context.SaveChanges();
         }
 
         public void UpdateMusclePart(MusclePart updatedMusclePart)

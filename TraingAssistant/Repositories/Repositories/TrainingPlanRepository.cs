@@ -39,6 +39,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
         {
             TrainingPlan trainingPlan = context.TrainingPlans.Find(id);
             context.TrainingPlans.Remove(trainingPlan);
+            context.SaveChanges();
         }
 
         public void UpdateTrainingPlan(TrainingPlan updatedTrainingPlan)
