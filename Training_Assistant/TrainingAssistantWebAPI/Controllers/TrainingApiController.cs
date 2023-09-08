@@ -53,6 +53,19 @@ namespace TrainingAssistantWebAPI.Controllers
 
             return NoContent();
         }
+        [HttpDelete("deleteTraining/{id}")]
+        public IActionResult DeleteTraining(int id)
+        {
+            var existingTraining = training.GetTrainingById(id);
+            if (existingTraining == null)
+            {
+                return NotFound();
+            }
+
+            training.DeleteTraining(id);
+
+            return NoContent();
+        }
 
 
     }

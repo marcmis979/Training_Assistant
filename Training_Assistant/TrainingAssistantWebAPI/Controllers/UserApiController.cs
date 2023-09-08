@@ -52,6 +52,19 @@ namespace TrainingAssistantWebAPI.Controllers
 
             return NoContent();
         }
+        [HttpDelete("deleteUser/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var existingUser = user.GetUserById(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            user.DeleteUser(id);
+
+            return NoContent();
+        }
 
     }
 }

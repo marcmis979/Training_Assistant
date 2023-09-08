@@ -48,5 +48,18 @@ namespace TrainingAssistantWebAPI.Controllers
 
             return NoContent();
         }
+        [HttpDelete("deleteMusclePart/{id}")]
+        public IActionResult DeleteMusclePart(int id)
+        {
+            var existingMusclePart = musclePart.GetMusclePartById(id);
+            if (existingMusclePart == null)
+            {
+                return NotFound();
+            }
+
+            musclePart.DeleteMusclePart(id);
+
+            return NoContent();
+        }
     }
 }
