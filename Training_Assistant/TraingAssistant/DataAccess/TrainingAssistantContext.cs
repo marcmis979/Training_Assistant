@@ -54,7 +54,7 @@ namespace TraingAssistantDAL.DataAccess
                 .HasKey(tp => new { tp.Id });
 
             modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
+                .HasKey(u => new { u.Id });
 
             //Entity relationships configuration
             modelBuilder.Entity<ExerciseMusclePart>()
@@ -84,10 +84,10 @@ namespace TraingAssistantDAL.DataAccess
                 .WithMany(tpt => tpt.TrainingPlanTraings)
                 .HasForeignKey(t => t.TrainingId);
 
-            modelBuilder.Entity<TrainingPlan>()
-                .HasOne(u => u.User)
-                .WithOne(tp => tp.TrainingPlan)
-                .HasForeignKey<User>(u=>u.Id);
+            //modelBuilder.Entity<TrainingPlan>()
+                //.HasOne(u => u.User)
+                //.WithOne(tp => tp.TrainingPlan)
+                //.HasForeignKey<User>(u=>u.Id);
 
             //Adding data to entities
             modelBuilder.Entity<Exercise>().HasData(

@@ -44,7 +44,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("Exercises", (string)null);
 
                     b.HasData(
                         new
@@ -85,7 +85,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasIndex("MusclePartId");
 
-                    b.ToTable("ExerciseMuscleParts");
+                    b.ToTable("ExerciseMuscleParts", (string)null);
 
                     b.HasData(
                         new
@@ -129,7 +129,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MuscleParts");
+                    b.ToTable("MuscleParts", (string)null);
 
                     b.HasData(
                         new
@@ -166,7 +166,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Trainings");
+                    b.ToTable("Trainings", (string)null);
 
                     b.HasData(
                         new
@@ -201,7 +201,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasIndex("ExerciseId");
 
-                    b.ToTable("TrainingExercises");
+                    b.ToTable("TrainingExercises", (string)null);
 
                     b.HasData(
                         new
@@ -248,7 +248,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainingPlans");
+                    b.ToTable("TrainingPlans", (string)null);
 
                     b.HasData(
                         new
@@ -283,7 +283,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasIndex("TrainingId");
 
-                    b.ToTable("TrainingPlanTraings");
+                    b.ToTable("TrainingPlanTraings", (string)null);
 
                     b.HasData(
                         new
@@ -354,7 +354,7 @@ namespace TraingAssistantDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
