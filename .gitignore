@@ -32,6 +32,7 @@ bld/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
+.vs/
 Training_Assistant/.vs/
 Training_Assistant/TraingAssistant/bin
 Training_Assistant/TraingAssistant/obj/
