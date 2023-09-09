@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAssistantBOL", "Tra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAssistantTests", "TrainingAssistantTests\TrainingAssistantTests.csproj", "{1DD89658-2DF2-4969-8F59-FBF26672AF7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAssistantWebAPI", "TrainingAssistantWebAPI\TrainingAssistantWebAPI.csproj", "{BADBDE29-5876-4576-AF6E-AE0F6EB68705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAssistantWebAPI", "TrainingAssistantWebAPI\TrainingAssistantWebAPI.csproj", "{BADBDE29-5876-4576-AF6E-AE0F6EB68705}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
