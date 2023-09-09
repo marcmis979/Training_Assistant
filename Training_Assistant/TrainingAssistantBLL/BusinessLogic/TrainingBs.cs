@@ -18,7 +18,7 @@ namespace TrainingAssistantBLL.BusinessLogic
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Training> GetTrainings()
+        public List<Training> GetTrainings()
         {
             return unitOfWork.TrainingRepository.GetTrainings();
         }

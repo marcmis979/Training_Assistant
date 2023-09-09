@@ -23,6 +23,11 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return training.GetTrainingById(id);
         }
+        [HttpGet("getTrainings")]
+        public List<Training> GetTrainings()
+        {
+            return training.GetTrainings();
+        }
         [HttpPost("addTraining")]
         public IActionResult AddTraining([FromBody] Training tr)
         {

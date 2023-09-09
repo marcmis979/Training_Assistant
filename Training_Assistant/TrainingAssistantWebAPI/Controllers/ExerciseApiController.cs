@@ -23,6 +23,11 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return exercise.GetExerciseById(id);
         }
+        [HttpGet("getExercises")]
+        public List<Exercise> getExercises()
+        {
+            return exercise.GetExercises();
+        }
         [HttpPost("addExercise")]
         public IActionResult addExercise([FromBody] Exercise ex)
         {

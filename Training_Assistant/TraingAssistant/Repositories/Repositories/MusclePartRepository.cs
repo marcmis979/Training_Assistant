@@ -19,7 +19,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
             this.context = context;
         }
 
-        public IEnumerable<MusclePart> GetMuscleParts()
+        public List<MusclePart> GetMuscleParts()
         {
             return context.MuscleParts.ToList();
         }

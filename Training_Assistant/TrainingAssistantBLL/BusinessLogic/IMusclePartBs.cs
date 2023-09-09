@@ -9,7 +9,7 @@ namespace TrainingAssistantBLL.BusinessLogic
 {
     public interface IMusclePartBs
     {
-        public IEnumerable<MusclePart> GetMuscleParts();
+        public List<MusclePart> GetMuscleParts();
         public MusclePart GetMusclePartById(int id);
         public void InsertMusclePart(MusclePart musclePart);
         public void UpdateMusclePart(MusclePart musclePart);

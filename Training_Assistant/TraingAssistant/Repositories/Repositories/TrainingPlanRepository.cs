@@ -19,7 +19,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
             this.context = context;
         }
 
-        public IEnumerable<TrainingPlan> GetTrainingPlans()
+        public List<TrainingPlan> GetTrainingPlans()
         {
             return context.TrainingPlans.ToList();
         }

@@ -9,7 +9,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetUsers();
+        List<User> GetUsers();
         User GetUserById(int id);
         void InsertUser(User user);
         void DeleteUser(int id);

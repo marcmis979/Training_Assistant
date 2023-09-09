@@ -18,6 +18,11 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return musclePart.GetMusclePartById(id);
         }
+        [HttpGet("getMuscleParts")]
+        public List<MusclePart> GetMuscleParts()
+        {
+            return musclePart.GetMuscleParts();
+        }
         [HttpPost("addMusclePart")]
         public IActionResult AddMusclePart([FromBody] MusclePart mp)
         {

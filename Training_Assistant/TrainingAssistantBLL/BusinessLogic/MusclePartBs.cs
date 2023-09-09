@@ -16,14 +16,15 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             this.unitOfWork = unitOfWork;
         }
-        public IEnumerable<MusclePart> GetMuscleParts()
-        {
-            return unitOfWork.MusclePartRepository.GetMuscleParts();
-        }
-
+        
         public MusclePart GetMusclePartById(int id)
         {
             return unitOfWork.MusclePartRepository.GetMusclePartById(id);
+        }
+
+        public List<MusclePart> GetMuscleParts()
+        {
+            return unitOfWork.MusclePartRepository.GetMuscleParts();
         }
 
         public void InsertMusclePart(MusclePart musclePart)

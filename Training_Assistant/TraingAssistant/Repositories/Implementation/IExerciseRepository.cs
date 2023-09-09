@@ -9,7 +9,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
 {
     public interface IExerciseRepository
     {
-        IEnumerable<Exercise> GetExercises();
+        List<Exercise> GetExercises();
         Exercise GetExerciseById(int id);
         void InsertExercise(Exercise exercise);
         void DeleteExercise(int id);

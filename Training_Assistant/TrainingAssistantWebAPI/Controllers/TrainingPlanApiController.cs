@@ -18,6 +18,11 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return trainingPlan.GetTrainingPlanById(id);
         }
+        [HttpGet("getTrainingPlans")]
+        public List<TrainingPlan> GetTrainingPlans()
+        {
+            return trainingPlan.GetTrainingPlans();
+        }
         [HttpPost("addTrainingPlan")]
         public IActionResult AddTrainingPlan([FromBody] TrainingPlan tr)
         {

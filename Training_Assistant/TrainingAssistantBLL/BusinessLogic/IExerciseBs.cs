@@ -9,7 +9,7 @@ namespace TrainingAssistantBLL.BusinessLogic
 {
     public interface IExerciseBs
     {
-        public IEnumerable<Exercise> GetExercises();
+        public List<Exercise> GetExercises();
         public Exercise GetExerciseById(int id);
         public void InsertExercise(Exercise exercise);
         public void UpdateExercise(Exercise exercise);

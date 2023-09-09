@@ -9,7 +9,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
 {
     public interface ITrainingRepository
     {
-        IEnumerable<Training> GetTrainings();
+        List<Training> GetTrainings();
         Training GetTrainingById(int id);
         void InsertTraining(Training training);
         void DeleteTraining(int id);

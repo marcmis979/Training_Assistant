@@ -19,7 +19,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
             _context = context;
         }
 
-        public IEnumerable<User> GetUsers()
+        public List<User> GetUsers()
         {
             return _context.Users.ToList();
         }

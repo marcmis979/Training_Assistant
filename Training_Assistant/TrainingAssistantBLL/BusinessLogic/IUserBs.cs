@@ -9,7 +9,7 @@ namespace TrainingAssistantBLL.BusinessLogic
 {
     public interface IUserBs
     {
-        public IEnumerable<User> GetUsers();
+        public List<User> GetUsers();
         public User GetUserById(int id);
         public void InsertUser(User user);
         public void UpdateUser(User user);

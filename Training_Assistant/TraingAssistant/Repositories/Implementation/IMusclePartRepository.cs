@@ -9,7 +9,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
 {
     public interface IMusclePartRepository
     {
-        IEnumerable<MusclePart> GetMuscleParts();
+        List<MusclePart> GetMuscleParts();
         MusclePart GetMusclePartById(int id);
         void InsertMusclePart(MusclePart musclePart);
         void DeleteMusclePart(int id);

@@ -22,6 +22,11 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return user.GetUserById(id);
         }
+        [HttpGet("getUsers")]
+        public List<User> GetUsers()
+        {
+            return user.GetUsers();
+        }
         [HttpPost("addUser")]
         public IActionResult AddUser([FromBody] User us)
         {

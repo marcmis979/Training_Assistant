@@ -9,7 +9,7 @@ namespace TrainingAssistantBLL.BusinessLogic
 {
     public interface ITrainingPlanBs
     {
-        public IEnumerable<TrainingPlan> GetTrainingPlans();
+        public List<TrainingPlan> GetTrainingPlans();
         public TrainingPlan GetTrainingPlanById(int id);
         public void InsertTrainingPlan(TrainingPlan trainingPlan);
         public void UpdateTrainingPlan(TrainingPlan trainingPlan);
