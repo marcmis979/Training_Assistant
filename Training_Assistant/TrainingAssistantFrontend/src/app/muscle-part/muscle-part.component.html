@@ -1,0 +1,20 @@
+  
+  <div class="container">
+    <h2>Add Muscle Part</h2>
+    <label for="newName">Name:</label>
+    <input class="input-field" type="text" id="newName" [(ngModel)]="musclePartResponse.name">
+    <button class="add-button" (click)="addMusclePart()">Add</button>
+  </div>
+  
+  <div class="container">
+    <h2>Search MusclePart</h2>
+    <label for="searchId">ID:</label>
+    <input class="input-field" type="number" id="searchId" [(ngModel)]="searchId">
+    <button class="search-button" (click)="searchMusclePart()">Search</button>
+  </div>
+  
+  <div *ngIf="musclePart" class="container">
+    <h2>Muscle Part info</h2>
+    <p>ID: {{ musclePart.id }}</p>
+    <p>Name: {{ musclePart.name }}</p>
+  </div>
