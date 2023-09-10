@@ -7,6 +7,7 @@ import { ExerciseResponse } from './exercise/model/exercise-response';
   providedIn: 'root'
 })
 export class ExerciseService {
+  [x: string]: any;
 
   private apiUrl = 'http://localhost:5014/ExerciseApi';
 
@@ -15,10 +16,13 @@ export class ExerciseService {
   getExercise(id: number): Observable<Exercise> {
     return this.http.get<Exercise>(`${this.apiUrl}/getExercise/${id}`);
   }
+  getExercises(): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(`${this.apiUrl}/getExercises`);
+  }
   addExercise(exercise: ExerciseResponse): Observable<Exercise> {
     return this.http.post<Exercise>(`${this.apiUrl}/addExercise`, exercise);
   }
-  updateExercise(id: number, updatedExercise: ExerciseResponse): Observable<void> {
+  updateExercise(id: number, updatedExercise: Exercise): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/updateExercise/${id}`, updatedExercise);
   }
   getBurnedPerHour(id:number): Observable<number>{

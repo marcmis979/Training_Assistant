@@ -1,20 +1,19 @@
-  
-  <div class="container">
-    <h2>Add Muscle Part</h2>
-    <label for="newName">Name:</label>
-    <input class="input-field" type="text" id="newName" [(ngModel)]="musclePartResponse.name">
-    <button class="add-button" (click)="addMusclePart()">Add</button>
+<div class="container">
+  <h2>Add Muscle Part</h2>
+  <label for="newName">Name:</label>
+  <input class="input-field" type="text" id="newName" [(ngModel)]="musclePartResponse.name">
+  <button class="add-button" (click)="addMusclePart()">Add</button>
+</div>
+
+<div class="container">
+  <h2 class="muscle-part-heading">All Muscle Part</h2> <!-- Dodany styl dla tytułu -->
+  <div *ngFor="let musclePart of muscleParts" class="muscle-part-item"> <!-- Dodany styl dla elementów -->
+    <p *ngIf="!editMode || musclePart.id !== editedMusclePartId">Name: {{ musclePart.name }}</p>
+    <input *ngIf="editMode && musclePart.id === editedMusclePartId" [(ngModel)]="musclePart.name">
+    <button *ngIf="!editMode || musclePart.id !== editedMusclePartId" class="edit-button" (click)="startEdit(musclePart.id)">Edit</button>
+    <button *ngIf="editMode && musclePart.id === editedMusclePartId" class="update-button" (click)="updateMusclePart(musclePart.id, musclePart.name)">Update</button>
+    <span class="button-space"></span>
+    <button class="delete-button" (click)="deleteMusclePart(musclePart.id)">Delete</button>
+    <button *ngIf="editMode && musclePart.id === editedMusclePartId" class="cancel-button" (click)="finishEdit()">Cancel</button>
   </div>
-  
-  <div class="container">
-    <h2>Search MusclePart</h2>
-    <label for="searchId">ID:</label>
-    <input class="input-field" type="number" id="searchId" [(ngModel)]="searchId">
-    <button class="search-button" (click)="searchMusclePart()">Search</button>
-  </div>
-  
-  <div *ngIf="musclePart" class="container">
-    <h2>Muscle Part info</h2>
-    <p>ID: {{ musclePart.id }}</p>
-    <p>Name: {{ musclePart.name }}</p>
-  </div>
+</div>

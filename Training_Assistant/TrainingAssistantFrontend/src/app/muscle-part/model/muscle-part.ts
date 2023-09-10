@@ -1,8 +1,8 @@
 export class MusclePart{
     id:number;
-    name:String;
+    name:string;
 
-    constructor(id:number,name:String){
+    constructor(id:number,name:string){
         this.id=id;
         this.name=name;
     }

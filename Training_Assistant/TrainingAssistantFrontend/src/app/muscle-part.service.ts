@@ -16,11 +16,18 @@ export class MusclePartService {
   getMusclePart(id: number): Observable<MusclePart> {
     return this.http.get<MusclePart>(`${this.apiUrl}/getMusclePart/${id}`);
   }
+  getMuscleParts(): Observable<MusclePart[]> {
+    return this.http.get<MusclePart[]>(`${this.apiUrl}/getMuscleParts`);
+  }
   addMusclePart(musclePart: MusclePartResponse): Observable<MusclePartResponse> {
     return this.http.post<MusclePart>(`${this.apiUrl}/addMusclePart`, musclePart);
   }
-
   updateMusclePart(id: number, updatedMusclePart: MusclePartResponse): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/updateMusclePart/${id}`, updatedMusclePart);
   }
+  deleteMusclePart(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/deleteMusclePart/${id}`);
+  }
+  
+  
 }
