@@ -44,5 +44,10 @@ namespace TrainingAssistantTests
         {
             throw new NotImplementedException();
         }
+
+        List<User> IUserRepository.GetUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

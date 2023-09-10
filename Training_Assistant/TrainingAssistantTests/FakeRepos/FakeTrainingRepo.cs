@@ -55,5 +55,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        List<Training> ITrainingRepository.GetTrainings()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

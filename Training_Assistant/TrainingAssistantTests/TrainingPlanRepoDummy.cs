@@ -10,6 +10,11 @@ namespace TrainingAssistantTests
 {
     internal class TrainingPlanRepoDummy : ITrainingPlanRepository
     {
+        public List<TrainingPlan> GetTrainingPlans()
+        {
+            throw new NotImplementedException();
+        }
+
         void ITrainingPlanRepository.DeleteTrainingPlan(int id)
         {
             throw new NotImplementedException();
@@ -25,7 +30,7 @@ namespace TrainingAssistantTests
             throw new NotImplementedException();
         }
 
-        IEnumerable<TrainingPlan> ITrainingPlanRepository.GetTrainingPlans()
+        List<TrainingPlan> ITrainingPlanRepository.GetTrainingPlans()
         {
             throw new NotImplementedException();
         }

@@ -39,5 +39,10 @@ namespace TrainingAssistantTests.ControllersTests
         {
             throw new NotImplementedException();
         }
+
+        List<Training> ITrainingBs.GetTrainings()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -44,5 +44,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        List<MusclePart> IMusclePartRepository.GetMuscleParts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

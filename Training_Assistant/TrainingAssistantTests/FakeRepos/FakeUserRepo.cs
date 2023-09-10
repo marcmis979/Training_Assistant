@@ -54,5 +54,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        List<User> IUserRepository.GetUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

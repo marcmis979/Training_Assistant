@@ -44,5 +44,10 @@ namespace TrainingAssistantTests
         {
             throw new NotImplementedException();
         }
+
+        List<Training> ITrainingRepository.GetTrainings()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
