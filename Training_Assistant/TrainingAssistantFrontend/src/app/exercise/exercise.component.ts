@@ -3,6 +3,7 @@ import { Exercise } from './model/exercise';
 import { ExerciseResponse } from './model/exercise-response';
 import { Type } from './model/type.enum';
 import { ExerciseService } from '../exercise.service';
+import { MusclePart } from '../muscle-part/model/muscle-part';
 
 @Component({
   selector: 'app-exercise',
@@ -11,6 +12,7 @@ import { ExerciseService } from '../exercise.service';
 })
 export class ExerciseComponent implements OnInit {
   exercises: Exercise[] = []; // Tablica przechowująca ćwiczenia
+  selectedMuscleParts: MusclePart[] = [];
   exerciseResponse: ExerciseResponse = {
     name: '',
     burnedKcal: 0,

@@ -51,6 +51,9 @@ button:hover {
     width: 100%;
     font-size: 16px;
   }
+  .button-space {
+    margin-right: 10px; /* Dowolny rozmiar marginesu, który chcesz zastosować */
+  }
   .exercise-heading {
     margin-top: 0;
     margin-bottom: 20px;
