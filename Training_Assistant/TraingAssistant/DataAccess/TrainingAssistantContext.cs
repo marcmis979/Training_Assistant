@@ -57,23 +57,23 @@ namespace TraingAssistantDAL.DataAccess
                 .HasKey(u => new { u.Id });
 
             //Entity relationships configuration
-            modelBuilder.Entity<ExerciseMusclePart>()
-                .HasOne(em => em.Exercise)
-                .WithMany(e => e.ExercisesMuscleParts)
-                .HasForeignKey(em => em.ExerciseId);
-            modelBuilder.Entity<ExerciseMusclePart>()
-                .HasOne(em => em.MusclePart)
-                .WithMany(mp => mp.ExercisesMuscleParts)
-                .HasForeignKey(em => em.MusclePartId);
+            //modelBuilder.Entity<ExerciseMusclePart>()
+            //    .HasOne(em => em.Exercise)
+            //    .WithMany(e => e.ExercisesMuscleParts)
+            //    .HasForeignKey(em => em.ExerciseId);
+            //modelBuilder.Entity<ExerciseMusclePart>()
+            //    .HasOne(em => em.MusclePart)
+            //    .WithMany(mp => mp.ExercisesMuscleParts)
+            //    .HasForeignKey(em => em.MusclePartId);
 
             modelBuilder.Entity<TrainingExercise>()
                 .HasOne(te=>te.Training)
                 .WithMany(e=>e.TrainingExercises)
                 .HasForeignKey(te => te.TrainingId);
-            modelBuilder.Entity<TrainingExercise>()
-                .HasOne(t => t.Exercise)
-                .WithMany(te => te.TrainingExercises)
-                .HasForeignKey(t => t.ExerciseId);
+            //modelBuilder.Entity<TrainingExercise>()
+            //    .HasOne(t => t.Exercise)
+            //    .WithMany(te => te.TrainingExercises)
+            //    .HasForeignKey(t => t.ExerciseId);
 
             modelBuilder.Entity<TrainingPlanTraing>()
                 .HasOne(tpt => tpt.TrainingPlan)

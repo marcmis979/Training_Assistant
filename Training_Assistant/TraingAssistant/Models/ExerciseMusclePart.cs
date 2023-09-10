@@ -10,7 +10,5 @@ namespace TraingAssistantDAL.Models
     {
         public int ExerciseId { get; set; }
         public int MusclePartId { get; set; }
-        public Exercise Exercise { get; set; }
-        public MusclePart MusclePart { get; set; }
     }
 }
