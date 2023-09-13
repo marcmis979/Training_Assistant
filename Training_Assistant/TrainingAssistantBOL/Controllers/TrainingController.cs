@@ -13,15 +13,21 @@ namespace TrainingAssistantBOL.Controllers
             this.training = training;
         }
         // GET: TrainingController
-        public ActionResult Index()
+        public ActionResult GetTrainings()
         {
-            return View();
+            var trainings = training.GetTrainings();
+            return View(trainings);
         }
 
         // GET: TrainingController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult GetTrainingById(int id)
         {
-            return View();
+            var trainingDetails = training.GetTrainingById(id);
+            if (trainingDetails == null)
+            {
+                return NotFound();
+            }
+            return View(trainingDetails);
         }
 
         // GET: TrainingController/Create
@@ -33,58 +39,54 @@ namespace TrainingAssistantBOL.Controllers
         // POST: TrainingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AddTraining(Training trainingToCreate)
         {
-            try
+            if (ModelState.IsValid)
             {
+                training.InsertTraining(trainingToCreate);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(trainingToCreate);
         }
 
         // GET: TrainingController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult UpdateTraining(int id)
         {
-            return View();
+            var trainingToEdit = training.GetTrainingById(id);
+            if (trainingToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(trainingToEdit);
         }
 
         // POST: TrainingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult UpdateTraining(int id, Training updatedTraining)
         {
-            try
+            if (id != updatedTraining.Id)
             {
+                return BadRequest("Invalid training data");
+            }
+
+            if (ModelState.IsValid)
+            {
+                training.UpdateTraining(updatedTraining);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(updatedTraining);
         }
 
         // GET: TrainingController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteTraining(int id)
         {
-            return View();
-        }
-
-        // POST: TrainingController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var trainingToDelete = training.GetTrainingById(id);
+            if (trainingToDelete == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            return View(trainingToDelete);
         }
 
         public IActionResult summaryCalories(int id)
