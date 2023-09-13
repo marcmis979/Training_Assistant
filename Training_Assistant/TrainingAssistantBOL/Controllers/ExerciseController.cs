@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantBOL.Controllers
@@ -12,57 +13,63 @@ namespace TrainingAssistantBOL.Controllers
             this.exercise = exercise;
         }
         // GET: ExerciseController
-        public ActionResult Index()
+        public ActionResult GetExercise()
         {
-            return View();
+            var exercises = exercise.GetExercises();
+            return View(exercises);
         }
 
         // GET: ExerciseController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult GetExerciseById(int id)
         {
-            return View();
-        }
-
-        // GET: ExerciseController/Create
-        public ActionResult Create()
-        {
-            return View();
+            var exerciseDetails = exercise.GetExerciseById(id);
+            if (exerciseDetails == null)
+            {
+                return NotFound();
+            }
+            return View(exerciseDetails);
         }
 
         // POST: ExerciseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AddExercise(Exercise exerciseToCreate)
         {
-            try
+            if (ModelState.IsValid)
             {
+                exercise.InsertExercise(exerciseToCreate);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(exerciseToCreate);
         }
 
         // GET: ExerciseController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult UpdateExercise(int id)
         {
-            return View();
+            var exerciseToEdit = exercise.GetExerciseById(id);
+            if (exerciseToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(exerciseToEdit);
         }
 
         // POST: ExerciseController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult UpdateExercise(int id, Exercise updatedExercise)
         {
-            try
+            if (id != updatedExercise.Id)
             {
+                return BadRequest("Invalid exercise data");
+            }
+
+            if (ModelState.IsValid)
+            {
+                exercise.UpdateExercise(updatedExercise);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(updatedExercise);
         }
         public IActionResult burnedPerHour(int id)
         {
@@ -71,24 +78,14 @@ namespace TrainingAssistantBOL.Controllers
         }
 
         // GET: ExerciseController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteExercise(int id)
         {
-            return View();
-        }
-
-        // POST: ExerciseController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var exerciseToDelete = exercise.GetExerciseById(id);
+            if (exerciseToDelete == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            return View(exerciseToDelete);
         }
 
     }
