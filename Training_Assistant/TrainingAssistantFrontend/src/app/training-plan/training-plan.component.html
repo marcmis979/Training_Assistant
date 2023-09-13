@@ -1,0 +1,20 @@
+<div class="container">
+    <h2>Add Training Plan</h2>
+    <label for="newName">Name:</label>
+    <input class="input-field" type="text" id="newName" [(ngModel)]="trainingPlanResponse.name">
+    <button class="add-button" (click)="addTrainingPlan()">Add</button>
+  </div>
+  
+  <div class="container">
+    <h2 class="exercise-heading">All Training Plans</h2>
+    <div *ngFor="let trainingPlan of trainingPlans" class="exercise-item">
+      <p *ngIf="!editMode || trainingPlan.id !== editedTrainingPlanId">Name: {{ trainingPlan.name }}</p>
+      <input *ngIf="editMode && trainingPlan.id === editedTrainingPlanId" [(ngModel)]="trainingPlan.name">
+      <button *ngIf="!editMode || trainingPlan.id !== editedTrainingPlanId" class="edit-button" (click)="startEdit(trainingPlan.id)">Edit</button>
+      <button *ngIf="editMode && trainingPlan.id === editedTrainingPlanId" class="update-button" (click)="updateTrainingPlan(trainingPlan.id, trainingPlan)">Update</button>
+      <span class="button-space"></span>
+      <button class="delete-button" (click)="deleteTrainingPlan(trainingPlan.id)">Delete</button>
+      <button *ngIf="editMode && trainingPlan.id === editedTrainingPlanId" class="cancel-button" (click)="finishEdit()">Cancel</button>
+    </div>
+  </div>
+  

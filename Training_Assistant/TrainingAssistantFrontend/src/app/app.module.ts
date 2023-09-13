@@ -8,13 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { TrainingComponent } from './training/training.component';
+import { TrainingPlanComponent } from './training-plan/training-plan.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MusclePartComponent,
     ExerciseComponent,
-    TrainingComponent
+    TrainingComponent,
+    TrainingPlanComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,7 @@ label {
 /* Styl dla inputów i select */
 input[type="number"],
 input[type="text"],
+input[type="email"]
 select.input-field {
     width: 100%;
     padding: 1px; 

@@ -1,0 +1,55 @@
+<div class="container">
+    <h2>Add User</h2>
+    <label for="newName">Name:</label>
+    <input class="input-field" type="text" id="newName" [(ngModel)]="userResponse.name">
+    <label for="newSurname">Surname:</label>
+    <input class="input-field" type="text" id="newSurname" [(ngModel)]="userResponse.surname">
+    <label for="newSex">Sex:</label>
+    <input class="input-field" type="number" id="newSex" [(ngModel)]="userResponse.sex">
+    <label for="newAge">Age:</label>
+    <input class="input-field" type="number" id="newAge" [(ngModel)]="userResponse.age">
+    <label for="newHeight">Height:</label>
+    <input class="input-field" type="number" id="newHeight" [(ngModel)]="userResponse.height">
+    <label for="newWeight">Weight:</label>
+    <input class="input-field" type="number" id="newWeight" [(ngModel)]="userResponse.weight">
+    <label for="newTargetWeight">Target weight:</label>
+    <input class="input-field" type="number" id="newTargetWeight" [(ngModel)]="userResponse.targetWeight">
+    <label for="newTempo">Tempo:</label>
+    <input class="input-field" type="number" id="newTempo" [(ngModel)]="userResponse.tempo">
+    <label for="newEmail">Email:</label><br>
+    <input class="input-field" type="email" id="newEmail" [(ngModel)]="userResponse.email"><br><br>
+    <button class="add-button" (click)="addUser()">Add</button>
+  </div>
+  
+  <div class="container">
+    <h2 class="exercise-heading">All Users</h2>
+    <div *ngFor="let user of users" class="exercise-item">
+      <p *ngIf="!editMode || user.id !== editedUserId">Name: {{ user.name }}</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.name">
+      <p *ngIf="!editMode || user.id !== editedUserId">Surname: {{ user.surname }}</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.surname">
+      <p *ngIf="!editMode || user.id !== editedUserId">
+        Sex: {{ user.sex ? 'Woman' : 'Man' }}
+      </p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.sex">
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.sex">
+      <p *ngIf="!editMode || user.id !== editedUserId">Age: {{ user.age }}</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.age">
+      <p *ngIf="!editMode || user.id !== editedUserId">Height: {{ user.height }} cm</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.height">
+      <p *ngIf="!editMode || user.id !== editedUserId">Weight: {{ user.weight }} kg</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.weight">
+      <p *ngIf="!editMode || user.id !== editedUserId">targetWeight: {{ user.targetWeight }} kg</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.targetWeight">
+      <p *ngIf="!editMode || user.id !== editedUserId">Tempo: {{ user.tempo }}</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.tempo">
+      <p *ngIf="!editMode || user.id !== editedUserId">Email: {{ user.email }}</p>
+      <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.email">
+      <button *ngIf="!editMode || user.id !== editedUserId" class="edit-button" (click)="startEdit(user.id)">Edit</button>
+      <button *ngIf="editMode && user.id === editedUserId" class="update-button" (click)="updateUser(user.id, user)">Update</button>
+      <span class="button-space"></span>
+      <button class="delete-button" (click)="deleteUser(user.id)">Delete</button>
+      <button *ngIf="editMode && user.id === editedUserId" class="cancel-button" (click)="finishEdit()">Cancel</button>
+    </div>
+  </div>
+  

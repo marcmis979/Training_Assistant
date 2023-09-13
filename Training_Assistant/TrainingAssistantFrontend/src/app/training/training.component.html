@@ -1,1 +1,25 @@
-<p>training works!</p>
+<div class="container">
+    <h2>Add Training</h2>
+    <label for="newName">Name:</label>
+    <input class="input-field" type="text" id="newName" [(ngModel)]="trainingResponse.name">
+    <label for="newTime">Days:</label>
+    <input class="input-field" type="text" id="newTime" [(ngModel)]="trainingResponse.days">
+    <button class="add-button" (click)="addTraining()">Add</button>
+  </div>
+  
+  <div class="container">
+    <h2 class="exercise-heading">All Trainings</h2>
+    <div *ngFor="let training of trainings" class="exercise-item">
+      <p *ngIf="!editMode || training.id !== editedTrainingId">Name: {{ training.name }}</p>
+      <p *ngIf="!editMode || training.id !== editedTrainingId">Days: {{ training.days }}</p>
+      <input *ngIf="editMode && training.id === editedTrainingId" [(ngModel)]="training.name">
+      <input *ngIf="editMode && training.id === editedTrainingId" [(ngModel)]="training.days">
+      
+      <button *ngIf="!editMode || training.id !== editedTrainingId" class="edit-button" (click)="startEdit(training.id)">Edit</button>
+      <button *ngIf="editMode && training.id === editedTrainingId" class="update-button" (click)="updateTraining(training.id, training)">Update</button>
+      <span class="button-space"></span>
+      <button class="delete-button" (click)="deleteTraining(training.id)">Delete</button>
+      <button *ngIf="editMode && training.id === editedTrainingId" class="cancel-button" (click)="finishEdit()">Cancel</button>
+    </div>
+  </div>
+  

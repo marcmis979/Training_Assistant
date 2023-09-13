@@ -12,22 +12,18 @@ import { MusclePart } from '../muscle-part/model/muscle-part';
 })
 export class ExerciseComponent implements OnInit {
   exercises: Exercise[] = []; // Tablica przechowująca ćwiczenia
-  selectedMuscleParts: MusclePart[] = [];
   exerciseResponse: ExerciseResponse = {
     name: '',
     burnedKcal: 0,
     time: 0,
     type: Type.aerobic
   };
-  exerciseTypes = Object.keys(Type).filter((type) => isNaN(Number(type)));
-  searchId!: number; // Pole do wprowadzania ID do wyszukiwania
   editMode = false; // Tryb edycji
   editedExerciseId: number | null = null; // ID edytowanego ćwiczenia
 
   constructor(private exerciseService: ExerciseService) {}
 
   ngOnInit(): void {
-    this.searchId = 1; // Domyślne ID do wyszukiwania
     this.loadExercises(); // Wywołujemy metodę pobierającą wszystkie ćwiczenia
   }
 
