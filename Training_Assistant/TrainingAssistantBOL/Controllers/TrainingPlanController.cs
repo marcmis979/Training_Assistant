@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantBOL.Controllers
@@ -11,79 +12,69 @@ namespace TrainingAssistantBOL.Controllers
         {
             this.trainingPlan = trainingPlan;
         }
-        // GET: TrainingPlanController
-        public ActionResult Index()
+        public IActionResult GetTrainingPlans()
         {
-            return View();
+            var trainingPlans = trainingPlan.GetTrainingPlans();
+            return View(trainingPlans);
         }
 
-        // GET: TrainingPlanController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult GetTrainingPlanById(int id)
         {
-            return View();
+            var trainingPlanDetails = trainingPlan.GetTrainingPlanById(id);
+            if (trainingPlanDetails == null)
+            {
+                return NotFound();
+            }
+            return View(trainingPlanDetails);
         }
 
-        // GET: TrainingPlanController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TrainingPlanController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AddTrainingPlan(TrainingPlan trainingPlanToCreate)
         {
-            try
+            if (ModelState.IsValid)
             {
+                trainingPlan.InsertTrainingPlan(trainingPlanToCreate);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(trainingPlanToCreate);
         }
 
-        // GET: TrainingPlanController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult UpdateTrainingPlan(int id)
         {
-            return View();
+            var trainingPlanToEdit = trainingPlan.GetTrainingPlanById(id);
+            if (trainingPlanToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(trainingPlanToEdit);
         }
 
-        // POST: TrainingPlanController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult UpdateTrainingPlan(int id, TrainingPlan updatedTrainingPlan)
         {
-            try
+            if (id != updatedTrainingPlan.Id)
             {
+                return BadRequest("Invalid training plan data");
+            }
+
+            if (ModelState.IsValid)
+            {
+                trainingPlan.UpdateTrainingPlan(updatedTrainingPlan);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(updatedTrainingPlan);
         }
 
-        // GET: TrainingPlanController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteTrainingPlan(int id)
         {
-            return View();
-        }
-
-        // POST: TrainingPlanController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var trainingPlanToDelete = trainingPlan.GetTrainingPlanById(id);
+            if (trainingPlanToDelete == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            return View(trainingPlanToDelete);
         }
     }
 }

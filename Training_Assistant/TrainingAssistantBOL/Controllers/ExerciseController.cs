@@ -12,14 +12,12 @@ namespace TrainingAssistantBOL.Controllers
         {
             this.exercise = exercise;
         }
-        // GET: ExerciseController
         public ActionResult GetExercise()
         {
             var exercises = exercise.GetExercises();
             return View(exercises);
         }
 
-        // GET: ExerciseController/Details/5
         public ActionResult GetExerciseById(int id)
         {
             var exerciseDetails = exercise.GetExerciseById(id);
@@ -30,7 +28,6 @@ namespace TrainingAssistantBOL.Controllers
             return View(exerciseDetails);
         }
 
-        // POST: ExerciseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddExercise(Exercise exerciseToCreate)
@@ -43,7 +40,6 @@ namespace TrainingAssistantBOL.Controllers
             return View(exerciseToCreate);
         }
 
-        // GET: ExerciseController/Edit/5
         public ActionResult UpdateExercise(int id)
         {
             var exerciseToEdit = exercise.GetExerciseById(id);
@@ -54,7 +50,6 @@ namespace TrainingAssistantBOL.Controllers
             return View(exerciseToEdit);
         }
 
-        // POST: ExerciseController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UpdateExercise(int id, Exercise updatedExercise)
@@ -71,13 +66,13 @@ namespace TrainingAssistantBOL.Controllers
             }
             return View(updatedExercise);
         }
+        
         public IActionResult burnedPerHour(int id)
         {
             ViewBag.KcalPerHour = exercise.burnedPerHour(id);
             return View();
         }
 
-        // GET: ExerciseController/Delete/5
         public ActionResult DeleteExercise(int id)
         {
             var exerciseToDelete = exercise.GetExerciseById(id);

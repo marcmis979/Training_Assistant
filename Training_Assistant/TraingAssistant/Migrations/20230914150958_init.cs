@@ -7,7 +7,7 @@
 namespace TraingAssistantDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,25 +29,13 @@ namespace TraingAssistantDAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MuscleParts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MuscleParts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TrainingPlans",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,25 +57,48 @@ namespace TraingAssistantDAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExerciseMuscleParts",
+                name: "MuscleParts",
                 columns: table => new
                 {
-                    ExerciseId = table.Column<int>(type: "int", nullable: false),
-                    MusclePartId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExerciseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciseMuscleParts", x => new { x.ExerciseId, x.MusclePartId });
+                    table.PrimaryKey("PK_MuscleParts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExerciseMuscleParts_Exercises_ExerciseId",
+                        name: "FK_MuscleParts_Exercises_ExerciseId",
                         column: x => x.ExerciseId,
                         principalTable: "Exercises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sex = table.Column<bool>(type: "bit", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    Height = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    TargetWeight = table.Column<double>(type: "float", nullable: false),
+                    Tempo = table.Column<double>(type: "float", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExerciseMuscleParts_MuscleParts_MusclePartId",
-                        column: x => x.MusclePartId,
-                        principalTable: "MuscleParts",
+                        name: "FK_Users_TrainingPlans_Id",
+                        column: x => x.Id,
+                        principalTable: "TrainingPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -121,11 +132,11 @@ namespace TraingAssistantDAL.Migrations
                 columns: table => new
                 {
                     TrainingPlanId = table.Column<int>(type: "int", nullable: false),
-                    TrainigId = table.Column<int>(type: "int", nullable: false)
+                    TrainingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainingPlanTraings", x => new { x.TrainingPlanId, x.TrainigId });
+                    table.PrimaryKey("PK_TrainingPlanTraings", x => new { x.TrainingPlanId, x.TrainingId });
                     table.ForeignKey(
                         name: "FK_TrainingPlanTraings_TrainingPlans_TrainingPlanId",
                         column: x => x.TrainingPlanId,
@@ -133,9 +144,33 @@ namespace TraingAssistantDAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TrainingPlanTraings_Trainings_TrainigId",
-                        column: x => x.TrainigId,
+                        name: "FK_TrainingPlanTraings_Trainings_TrainingId",
+                        column: x => x.TrainingId,
                         principalTable: "Trainings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExerciseMuscleParts",
+                columns: table => new
+                {
+                    ExerciseId = table.Column<int>(type: "int", nullable: false),
+                    MusclePartId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseMuscleParts", x => new { x.ExerciseId, x.MusclePartId });
+                    table.ForeignKey(
+                        name: "FK_ExerciseMuscleParts_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExerciseMuscleParts_MuscleParts_MusclePartId",
+                        column: x => x.MusclePartId,
+                        principalTable: "MuscleParts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -145,29 +180,29 @@ namespace TraingAssistantDAL.Migrations
                 columns: new[] { "Id", "BurnedKcal", "Name", "Time", "Type" },
                 values: new object[,]
                 {
-                    { 1, 0.0, "Bench press", 0, 0 },
-                    { 2, 0.0, "Squat", 0, 0 },
-                    { 3, 0.0, "Deadlift", 0, 0 }
+                    { 1, 10.0, "Bench press", 5, 0 },
+                    { 2, 20.0, "Squat", 10, 0 },
+                    { 3, 30.0, "Deadlift", 15, 0 }
                 });
 
             migrationBuilder.InsertData(
                 table: "MuscleParts",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "ExerciseId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Chest" },
-                    { 2, "Legs" },
-                    { 3, "Back" }
+                    { 1, null, "Chest" },
+                    { 2, null, "Legs" },
+                    { 3, null, "Back" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TrainingPlans",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "Name", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Weight loss" },
-                    { 2, "Mass gain" },
-                    { 3, "Ninja warrior" }
+                    { 1, "Weight loss", 0 },
+                    { 2, "Mass gain", 0 },
+                    { 3, "Ninja warrior", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -206,7 +241,7 @@ namespace TraingAssistantDAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "TrainingPlanTraings",
-                columns: new[] { "TrainigId", "TrainingPlanId" },
+                columns: new[] { "TrainingId", "TrainingPlanId" },
                 values: new object[,]
                 {
                     { 1, 1 },
@@ -216,10 +251,25 @@ namespace TraingAssistantDAL.Migrations
                     { 3, 3 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Age", "Email", "Height", "IsAdmin", "Name", "Password", "Sex", "Surname", "TargetWeight", "Tempo", "Weight" },
+                values: new object[,]
+                {
+                    { 1, 22, "xDD", 183, true, "Rafał", "xyz", false, "Hońca", 0.0, 0.0, 65.0 },
+                    { 2, 22, "xDD", 160, true, "Marcin", "xyz", true, "Misiuna", 0.0, 0.0, 100.0 },
+                    { 3, 33, "xDD", 170, false, "Mateusz", "xyz", false, "Bachowski", 0.0, 0.0, 45.0 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseMuscleParts_MusclePartId",
                 table: "ExerciseMuscleParts",
                 column: "MusclePartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MuscleParts_ExerciseId",
+                table: "MuscleParts",
+                column: "ExerciseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrainingExercises_ExerciseId",
@@ -227,9 +277,9 @@ namespace TraingAssistantDAL.Migrations
                 column: "ExerciseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TrainingPlanTraings_TrainigId",
+                name: "IX_TrainingPlanTraings_TrainingId",
                 table: "TrainingPlanTraings",
-                column: "TrainigId");
+                column: "TrainingId");
         }
 
         /// <inheritdoc />
@@ -245,16 +295,19 @@ namespace TraingAssistantDAL.Migrations
                 name: "TrainingPlanTraings");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "MuscleParts");
 
             migrationBuilder.DropTable(
-                name: "Exercises");
+                name: "Trainings");
 
             migrationBuilder.DropTable(
                 name: "TrainingPlans");
 
             migrationBuilder.DropTable(
-                name: "Trainings");
+                name: "Exercises");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantBOL.Controllers
@@ -11,79 +12,69 @@ namespace TrainingAssistantBOL.Controllers
         {
             this.musclePart = musclePart;
         }
-        // GET: MusclePartControllercs
-        public ActionResult Index()
+        public IActionResult GetMuscleParts()
         {
-            return View();
+            var muscleParts = musclePart.GetMuscleParts();
+            return View(muscleParts);
         }
 
-        // GET: MusclePartControllercs/Details/5
-        public ActionResult Details(int id)
+        public IActionResult GetMusclePartById(int id)
         {
-            return View();
+            var musclePartDetails = musclePart.GetMusclePartById(id);
+            if (musclePartDetails == null)
+            {
+                return NotFound();
+            }
+            return View(musclePartDetails);
         }
 
-        // GET: MusclePartControllercs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: MusclePartControllercs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AddMusclePart(MusclePart musclePartToCreate)
         {
-            try
+            if (ModelState.IsValid)
             {
+                musclePart.InsertMusclePart(musclePartToCreate);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(musclePartToCreate);
         }
 
-        // GET: MusclePartControllercs/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult UpdateMusclePart(int id)
         {
-            return View();
+            var musclePartToEdit = musclePart.GetMusclePartById(id);
+            if (musclePartToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(musclePartToEdit);
         }
 
-        // POST: MusclePartControllercs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult UpdateMusclePart(int id, MusclePart updatedMusclePart)
         {
-            try
+            if (id != updatedMusclePart.Id)
             {
+                return BadRequest("Invalid muscle part data");
+            }
+
+            if (ModelState.IsValid)
+            {
+                musclePart.UpdateMusclePart(updatedMusclePart);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(updatedMusclePart);
         }
 
-        // GET: MusclePartControllercs/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteMusclePart(int id)
         {
-            return View();
-        }
-
-        // POST: MusclePartControllercs/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var musclePartToDelete = musclePart.GetMusclePartById(id);
+            if (musclePartToDelete == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            return View(musclePartToDelete);
         }
     }
 }

@@ -12,14 +12,13 @@ namespace TrainingAssistantBOL.Controllers
         {
             this.training = training;
         }
-        // GET: TrainingController
+
         public ActionResult GetTrainings()
         {
             var trainings = training.GetTrainings();
             return View(trainings);
         }
 
-        // GET: TrainingController/Details/5
         public ActionResult GetTrainingById(int id)
         {
             var trainingDetails = training.GetTrainingById(id);
@@ -30,13 +29,11 @@ namespace TrainingAssistantBOL.Controllers
             return View(trainingDetails);
         }
 
-        // GET: TrainingController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TrainingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddTraining(Training trainingToCreate)
@@ -49,7 +46,6 @@ namespace TrainingAssistantBOL.Controllers
             return View(trainingToCreate);
         }
 
-        // GET: TrainingController/Edit/5
         public ActionResult UpdateTraining(int id)
         {
             var trainingToEdit = training.GetTrainingById(id);
@@ -60,7 +56,6 @@ namespace TrainingAssistantBOL.Controllers
             return View(trainingToEdit);
         }
 
-        // POST: TrainingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UpdateTraining(int id, Training updatedTraining)
@@ -78,7 +73,6 @@ namespace TrainingAssistantBOL.Controllers
             return View(updatedTraining);
         }
 
-        // GET: TrainingController/Delete/5
         public ActionResult DeleteTraining(int id)
         {
             var trainingToDelete = training.GetTrainingById(id);

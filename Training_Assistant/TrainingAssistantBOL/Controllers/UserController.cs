@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
 
 namespace TrainingAssistantBOL.Controllers
@@ -11,79 +12,71 @@ namespace TrainingAssistantBOL.Controllers
         {
             this.user = user;
         }
-    // GET: UserController
-    public ActionResult Index()
+
+        public ActionResult GetUsers()
         {
-            return View();
+            var users = user.GetUsers();
+            return View(users);
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
+
+        public ActionResult GetUserById(int id)
         {
-            return View();
+            var userDetails = user.GetUserById(id);
+            if (userDetails == null)
+            {
+                return NotFound();
+            }
+            return View(userDetails);
         }
 
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AddUser(User userToCreate)
         {
-            try
+            if (ModelState.IsValid)
             {
+                user.InsertUser(userToCreate);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(userToCreate);
         }
 
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult UpdateUser(int id)
         {
-            return View();
+            var userToEdit = user.GetUserById(id);
+            if (userToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(userToEdit);
         }
 
-        // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult UpdateUser(int id, User updatedUser)
         {
-            try
+            if (id != updatedUser.Id)
             {
+                return BadRequest("Invalid user data");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.UpdateUser(updatedUser);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(updatedUser);
         }
 
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteUser(int id)
         {
-            return View();
-        }
-
-        // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var userToDelete = user.GetUserById(id);
+            if (userToDelete == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            return View(userToDelete);
         }
     }
 }

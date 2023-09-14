@@ -61,10 +61,15 @@ namespace TraingAssistantDAL.DataAccess
             //    .HasOne(em => em.Exercise)
             //    .WithMany(e => e.ExercisesMuscleParts)
             //    .HasForeignKey(em => em.ExerciseId);
-            //modelBuilder.Entity<ExerciseMusclePart>()
-            //    .HasOne(em => em.MusclePart)
-            //    .WithMany(mp => mp.ExercisesMuscleParts)
-            //    .HasForeignKey(em => em.MusclePartId);
+            modelBuilder.Entity<ExerciseMusclePart>()
+                .HasOne(em => em.MusclePart)
+                .WithMany(mp => mp.ExercisesMuscleParts)
+                .HasForeignKey(em => em.MusclePartId);
+
+            modelBuilder.Entity<Exercise>()
+                .HasMany(e => e.MuscleParts)
+                .WithOne(e => e.Exercise)
+                .HasForeignKey(mp => mp.ExerciseId);
 
             modelBuilder.Entity<TrainingExercise>()
                 .HasOne(te=>te.Training)
@@ -85,11 +90,12 @@ namespace TraingAssistantDAL.DataAccess
                 .HasForeignKey(t => t.TrainingId);
 
             //modelBuilder.Entity<TrainingPlan>()
-                //.HasOne(u => u.User)
-                //.WithOne(tp => tp.TrainingPlan)
-                //.HasForeignKey<User>(u=>u.Id);
+            //    .HasOne(u => u.User)
+            //    .WithOne(tp => tp.TrainingPlan)
+            //    .HasForeignKey<User>(u => u.Id);
 
             //Adding data to entities
+
             modelBuilder.Entity<Exercise>().HasData(
                 new Exercise { Id = 1, Name = "Bench press", BurnedKcal = 10, Time = 5 },
                 new Exercise { Id = 2, Name = "Squat", BurnedKcal = 20, Time = 10 },
@@ -105,17 +111,17 @@ namespace TraingAssistantDAL.DataAccess
                 new Training { Id = 2, Name = "Acrobatic training" },
                 new Training { Id = 3, Name = "Tabata training" }
             );
+
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Name = "Rafał", Surname = "Hońca", Sex = false, Age = 22, Email = "xDD", Password = "xyz", Height = 183, Weight = 65, IsAdmin = true },
+                new User { Id = 2, Name = "Marcin", Surname = "Misiuna", Sex = true, Age = 22, Email = "xDD", Password = "xyz", Height = 160, Weight = 100, IsAdmin = true },
+                new User { Id = 3, Name = "Mateusz", Surname = "Bachowski", Sex = false, Age = 33, Email = "xDD", Password = "xyz", Height = 170, Weight = 45, IsAdmin = false }
+            );
             modelBuilder.Entity<TrainingPlan>().HasData(
                 new TrainingPlan { Id = 1, Name = "Weight loss"},
                 new TrainingPlan { Id = 2, Name = "Mass gain"},
                 new TrainingPlan { Id = 3, Name = "Ninja warrior"}
             );
-
-            modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Rafał", Surname = "Hońca", Sex = false, Age = 22, Email = "xDD", Password = "xyz", Height = 183, Weight = 65 },
-                new User { Id = 2, Name = "Marcin", Surname = "Misiuna", Sex = true, Age = 22, Email = "xDD", Password = "xyz", Height = 160, Weight = 100 },
-                new User { Id = 3, Name = "Mateusz", Surname = "Bachowski", Sex = false, Age = 33, Email = "xDD", Password = "xyz", Height = 170, Weight = 45 }
-            ); ; ;
 
             modelBuilder.Entity<ExerciseMusclePart>().HasData(
                 new ExerciseMusclePart { ExerciseId = 1, MusclePartId = 1 },
