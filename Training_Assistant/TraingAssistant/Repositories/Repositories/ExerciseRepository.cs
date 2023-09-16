@@ -21,12 +21,16 @@ namespace TraingAssistantDAL.Repositories.Repositories
 
         public List<Exercise> GetExercises()
         {
-            return _context.Exercises.ToList();
+            return _context.Exercises
+                .Include(e => e.MuscleParts)
+                .ToList();
         }
 
         public Exercise GetExerciseById(int id)
         {
-            var exercise = _context.Exercises.Find(id);
+            var exercise = _context.Exercises
+                .Include(e => e.MuscleParts)
+                .FirstOrDefault(e => e.Id == id);
             return exercise;
         }
 

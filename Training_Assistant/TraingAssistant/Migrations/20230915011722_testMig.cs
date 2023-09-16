@@ -7,7 +7,7 @@
 namespace TraingAssistantDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class testMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,19 @@ namespace TraingAssistantDAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exercises", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MuscleParts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MuscleParts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,22 +70,27 @@ namespace TraingAssistantDAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MuscleParts",
+                name: "MusclePartExercise",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExerciseId = table.Column<int>(type: "int", nullable: true)
+                    ExercisesId = table.Column<int>(type: "int", nullable: false),
+                    MusclePartsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MuscleParts", x => x.Id);
+                    table.PrimaryKey("PK_MusclePartExercise", x => new { x.ExercisesId, x.MusclePartsId });
                     table.ForeignKey(
-                        name: "FK_MuscleParts_Exercises_ExerciseId",
-                        column: x => x.ExerciseId,
+                        name: "FK_MusclePartExercise_Exercises_ExercisesId",
+                        column: x => x.ExercisesId,
                         principalTable: "Exercises",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MusclePartExercise_MuscleParts_MusclePartsId",
+                        column: x => x.MusclePartsId,
+                        principalTable: "MuscleParts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,30 +169,6 @@ namespace TraingAssistantDAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ExerciseMuscleParts",
-                columns: table => new
-                {
-                    ExerciseId = table.Column<int>(type: "int", nullable: false),
-                    MusclePartId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExerciseMuscleParts", x => new { x.ExerciseId, x.MusclePartId });
-                    table.ForeignKey(
-                        name: "FK_ExerciseMuscleParts_Exercises_ExerciseId",
-                        column: x => x.ExerciseId,
-                        principalTable: "Exercises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ExerciseMuscleParts_MuscleParts_MusclePartId",
-                        column: x => x.MusclePartId,
-                        principalTable: "MuscleParts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Exercises",
                 columns: new[] { "Id", "BurnedKcal", "Name", "Time", "Type" },
@@ -187,12 +181,12 @@ namespace TraingAssistantDAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "MuscleParts",
-                columns: new[] { "Id", "ExerciseId", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, "Chest" },
-                    { 2, null, "Legs" },
-                    { 3, null, "Back" }
+                    { 1, "Chest" },
+                    { 2, "Legs" },
+                    { 3, "Back" }
                 });
 
             migrationBuilder.InsertData(
@@ -213,18 +207,6 @@ namespace TraingAssistantDAL.Migrations
                     { 1, 0, "Endurance training" },
                     { 2, 0, "Acrobatic training" },
                     { 3, 0, "Tabata training" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ExerciseMuscleParts",
-                columns: new[] { "ExerciseId", "MusclePartId" },
-                values: new object[,]
-                {
-                    { 1, 1 },
-                    { 1, 3 },
-                    { 2, 2 },
-                    { 2, 3 },
-                    { 3, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -262,14 +244,9 @@ namespace TraingAssistantDAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciseMuscleParts_MusclePartId",
-                table: "ExerciseMuscleParts",
-                column: "MusclePartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MuscleParts_ExerciseId",
-                table: "MuscleParts",
-                column: "ExerciseId");
+                name: "IX_MusclePartExercise_MusclePartsId",
+                table: "MusclePartExercise",
+                column: "MusclePartsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrainingExercises_ExerciseId",
@@ -286,7 +263,7 @@ namespace TraingAssistantDAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ExerciseMuscleParts");
+                name: "MusclePartExercise");
 
             migrationBuilder.DropTable(
                 name: "TrainingExercises");
@@ -301,13 +278,13 @@ namespace TraingAssistantDAL.Migrations
                 name: "MuscleParts");
 
             migrationBuilder.DropTable(
+                name: "Exercises");
+
+            migrationBuilder.DropTable(
                 name: "Trainings");
 
             migrationBuilder.DropTable(
                 name: "TrainingPlans");
-
-            migrationBuilder.DropTable(
-                name: "Exercises");
         }
     }
 }

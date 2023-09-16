@@ -21,7 +21,7 @@ namespace TraingAssistantDAL.DataAccess
         //Setting database entities
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<MusclePart> MuscleParts { get; set; }
-        public DbSet<ExerciseMusclePart> ExerciseMuscleParts { get; set; }
+        //public DbSet<ExerciseMusclePart> ExerciseMuscleParts { get; set; }
         public DbSet<TrainingExercise> TrainingExercises { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<TrainingPlanTraing> TrainingPlanTraings { get; set; }
@@ -32,14 +32,14 @@ namespace TraingAssistantDAL.DataAccess
         {
             //Configuration of fields 
 
-            modelBuilder.Entity<MusclePart>()
-                .HasKey(mp=> mp.Id);
+            //modelBuilder.Entity<MusclePart>()
+            //    .HasKey(mp=> mp.Id);
 
-            modelBuilder.Entity<ExerciseMusclePart>()
-                .HasKey(em=> new {em.ExerciseId, em.MusclePartId});
+            //modelBuilder.Entity<ExerciseMusclePart>()
+            //    .HasKey(em=> new {em.ExerciseId, em.MusclePartId});
 
-            modelBuilder.Entity<Exercise>()
-                .HasKey(e => e.Id);
+            //modelBuilder.Entity<Exercise>()
+            //    .HasKey(e => e.Id);
 
             modelBuilder.Entity<TrainingExercise>()
                 .HasKey(te => new { te.TrainingId, te.ExerciseId });
@@ -61,15 +61,20 @@ namespace TraingAssistantDAL.DataAccess
             //    .HasOne(em => em.Exercise)
             //    .WithMany(e => e.ExercisesMuscleParts)
             //    .HasForeignKey(em => em.ExerciseId);
-            modelBuilder.Entity<ExerciseMusclePart>()
-                .HasOne(em => em.MusclePart)
-                .WithMany(mp => mp.ExercisesMuscleParts)
-                .HasForeignKey(em => em.MusclePartId);
+            modelBuilder.Entity<MusclePart>()
+                .HasMany(e => e.Exercises)
+                .WithMany(m => m.MuscleParts)
+                .UsingEntity(j => j.ToTable("MusclePartExercise"));
 
-            modelBuilder.Entity<Exercise>()
-                .HasMany(e => e.MuscleParts)
-                .WithOne(e => e.Exercise)
-                .HasForeignKey(mp => mp.ExerciseId);
+            //modelBuilder.Entity<ExerciseMusclePart>()
+            //    .HasOne(em => em.MusclePart)
+            //    .WithMany(mp => mp.ExercisesMuscleParts)
+            //    .HasForeignKey(em => em.MusclePartId);
+
+            //modelBuilder.Entity<Exercise>()
+            //    .HasMany(e => e.MuscleParts)
+            //    .WithOne(e => e.Exercise)
+            //    .HasForeignKey(mp => mp.ExerciseId);
 
             modelBuilder.Entity<TrainingExercise>()
                 .HasOne(te=>te.Training)
@@ -89,10 +94,10 @@ namespace TraingAssistantDAL.DataAccess
                 .WithMany(tpt => tpt.TrainingPlanTraings)
                 .HasForeignKey(t => t.TrainingId);
 
-            //modelBuilder.Entity<TrainingPlan>()
-            //    .HasOne(u => u.User)
-            //    .WithOne(tp => tp.TrainingPlan)
-            //    .HasForeignKey<User>(u => u.Id);
+            modelBuilder.Entity<TrainingPlan>()
+                .HasOne(u => u.User)
+                .WithOne(tp => tp.TrainingPlan)
+                .HasForeignKey<User>(u => u.Id);
 
             //Adding data to entities
 
@@ -123,13 +128,13 @@ namespace TraingAssistantDAL.DataAccess
                 new TrainingPlan { Id = 3, Name = "Ninja warrior"}
             );
 
-            modelBuilder.Entity<ExerciseMusclePart>().HasData(
-                new ExerciseMusclePart { ExerciseId = 1, MusclePartId = 1 },
-                new ExerciseMusclePart { ExerciseId = 1, MusclePartId = 3 },
-                new ExerciseMusclePart { ExerciseId = 2, MusclePartId = 2 },
-                new ExerciseMusclePart { ExerciseId = 2, MusclePartId = 3 },
-                new ExerciseMusclePart { ExerciseId = 3, MusclePartId = 3 }
-            );
+            //modelBuilder.Entity<ExerciseMusclePart>().HasData(
+            //    new ExerciseMusclePart { ExerciseId = 1, MusclePartId = 1 },
+            //    new ExerciseMusclePart { ExerciseId = 1, MusclePartId = 3 },
+            //    new ExerciseMusclePart { ExerciseId = 2, MusclePartId = 2 },
+            //    new ExerciseMusclePart { ExerciseId = 2, MusclePartId = 3 },
+            //    new ExerciseMusclePart { ExerciseId = 3, MusclePartId = 3 }
+            //);
 
             modelBuilder.Entity<TrainingExercise>().HasData(
                 new TrainingExercise { TrainingId = 1, ExerciseId = 1 },

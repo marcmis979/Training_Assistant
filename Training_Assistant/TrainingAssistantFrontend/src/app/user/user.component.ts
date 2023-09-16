@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  users: User[] = []; // Tablica przechowująca ćwiczenia
+  users: User[] = [];
   userResponse: UserResponse = {
     name: '',
     surname:'',
@@ -22,13 +22,13 @@ export class UserComponent {
     email:'',
     password:''
   };
-  editMode = false; // Tryb edycji
-  editedUserId: number | null = null; // ID edytowanego ćwiczenia
+  editMode = false;
+  editedUserId: number | null = null;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.loadUsers(); // Wywołujemy metodę pobierającą wszystkie ćwiczenia
+    this.loadUsers();
   }
 
   private loadUsers(): void {
@@ -38,15 +38,12 @@ export class UserComponent {
   }
 
   searchUser(): void {
-    this.loadUsers(); // Wywołujemy metodę pobierającą wszystkie ćwiczenia
+    this.loadUsers();
   }
 
-  // Metoda do dodawania ćwiczenia
   addUser(): void {
     this.userService.addUser(this.userResponse).subscribe(() => {
-      // Po dodaniu ćwiczenia odśwież listę lub wykonaj inne działania
       this.loadUsers();
-      // Zresetuj dane nowego ćwiczenia
       this.userResponse = {
         name: '',
         surname:'',
@@ -62,31 +59,25 @@ export class UserComponent {
     });
   }
 
-  // Metoda do rozpoczęcia edycji
   startEdit(id: number): void {
     this.editedUserId = id;
     this.editMode = true;
   }
 
-  // Metoda do zakończenia edycji
   finishEdit(): void {
     this.editedUserId = null;
     this.editMode = false;
   }
 
-  // Metoda do aktualizacji ćwiczenia
   updateUser(id: number, updatedUser: User): void {
     this.userService.updateUser(id, updatedUser).subscribe(() => {
-      // Po zaktualizowaniu ćwiczenia odśwież listę lub wykonaj inne działania
       this.loadUsers();
       this.finishEdit();
     });
   }
 
-  // Metoda do usuwania ćwiczenia
   deleteUser(id: number): void {
     this.userService.deleteUser(id).subscribe(() => {
-      // Po usunięciu ćwiczenia odśwież listę lub wykonaj inne działania
       this.loadUsers();
     });
   }

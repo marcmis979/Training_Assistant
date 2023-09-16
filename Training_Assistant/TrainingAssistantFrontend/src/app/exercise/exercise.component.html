@@ -12,9 +12,12 @@
   <div *ngFor="let exercise of exercises" class="exercise-item">
     <p *ngIf="!editMode || exercise.id !== editedExerciseId">Name: {{ exercise.name }}</p>
     <p *ngIf="!editMode || exercise.id !== editedExerciseId">Time: {{ exercise.time }}</p>
+    <p *ngIf="exercise.muscleParts && exercise.muscleParts.length > 0">Muscle Parts:
+      <span *ngFor="let musclePart of exercise.muscleParts">{{ musclePart.name }}, </span>
+    </p>
     <input *ngIf="editMode && exercise.id === editedExerciseId" [(ngModel)]="exercise.name">
     <input *ngIf="editMode && exercise.id === editedExerciseId" [(ngModel)]="exercise.time">
-    
+
     <button *ngIf="!editMode || exercise.id !== editedExerciseId" class="edit-button" (click)="startEdit(exercise.id)">Edit</button>
     <button *ngIf="editMode && exercise.id === editedExerciseId" class="update-button" (click)="updateExercise(exercise.id, exercise)">Update</button>
     <span class="button-space"></span>
