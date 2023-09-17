@@ -40,6 +40,11 @@ namespace TrainingAssistantTests
             throw new NotImplementedException();
         }
 
+        public void RemoveExerciseFromTraining(Training updatedTraining, int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save()
         {
             throw new NotImplementedException();

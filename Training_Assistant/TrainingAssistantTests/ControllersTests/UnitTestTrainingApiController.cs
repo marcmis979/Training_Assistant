@@ -101,5 +101,43 @@ namespace TrainingAssistantTests.ControllersTests
 
             mockTrainingBs.Verify(t => t.DeleteTraining(1), Times.Once);
         }
+
+        [Fact]
+        public void TestAddExerciseToTraining()
+        {
+            Mock<ITrainingBs> mockTrainingBs = new Mock<ITrainingBs>();
+            var trainingToUpdate = new Training { Id = 1, Name = "Training1" };
+            mockTrainingBs
+                .Setup(t => t.AddExerciseToTraining(trainingToUpdate, 2))
+                .Verifiable();
+            mockTrainingBs
+                .Setup(t => t.GetTrainingById(1))
+                .Returns(new Training { Id = 1, Name = "Training1" });
+
+            TrainingApiController trainingApiController = new TrainingApiController(mockTrainingBs.Object);
+
+            trainingApiController.AddExerciseToTraining(trainingToUpdate, 1, 2);
+
+            mockTrainingBs.Verify(t => t.AddExerciseToTraining(trainingToUpdate, 2), Times.Once);
+        }
+
+        [Fact]
+        public void TestRemoveExerciseFromTraining()
+        {
+            Mock<ITrainingBs> mockTrainingBs = new Mock<ITrainingBs>();
+            var trainingToUpdate = new Training { Id = 1, Name = "Training1" };
+            mockTrainingBs
+                .Setup(t => t.RemoveExerciseFromTraining(trainingToUpdate, 2))
+                .Verifiable();
+            mockTrainingBs
+                .Setup(t => t.GetTrainingById(1))
+                .Returns(new Training { Id = 1, Name = "Training1" });
+
+            TrainingApiController trainingApiController = new TrainingApiController(mockTrainingBs.Object);
+
+            trainingApiController.RemoveExerciseFromTraining(trainingToUpdate, 1, 2);
+
+            mockTrainingBs.Verify(t => t.RemoveExerciseFromTraining(trainingToUpdate, 2), Times.Once);
+        }
     }
 }

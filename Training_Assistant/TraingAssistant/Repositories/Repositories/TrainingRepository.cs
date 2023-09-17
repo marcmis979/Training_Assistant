@@ -73,6 +73,18 @@ namespace TraingAssistantDAL.Repositories.Repositories
             }
         }
 
+        public void RemoveExerciseFromTraining(Training updatedTraining, int exerciseId)
+        {
+            var existingTraining = context.Trainings.Find(updatedTraining.Id);
+            var relatedExercise = context.Exercises.Find(exerciseId);
+
+            if (existingTraining != null)
+            {
+                existingTraining.Exercises.Remove(relatedExercise);
+                context.SaveChanges();
+            }
+        }
+
         public void Save()
         {
             context.SaveChanges();

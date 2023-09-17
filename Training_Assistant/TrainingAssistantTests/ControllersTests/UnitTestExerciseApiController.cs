@@ -115,5 +115,43 @@ namespace TrainingAssistantTests.ControllersTests
 
             mockExerciseBs.Verify(e => e.DeleteExercise(1), Times.Once);
         }
+
+        [Fact]
+        public void TestAddMusclePartToExercise()
+        {
+            Mock<IExerciseBs> mockExerciseBs = new Mock<IExerciseBs>();
+            var exerciseToUpdate = new Exercise { Id = 1, Name = "Exercise1" };
+            mockExerciseBs
+                .Setup(e => e.AddMusclePartToExercise(exerciseToUpdate, 2))
+                .Verifiable();
+            mockExerciseBs
+                .Setup(e => e.GetExerciseById(1))
+                .Returns(new Exercise { Id = 1, Name = "Exercise1" });
+
+            ExerciseApiController exerciseApiController = new ExerciseApiController(mockExerciseBs.Object);
+
+            exerciseApiController.AddMusclePartToExercise(exerciseToUpdate, 1, 2);
+
+            mockExerciseBs.Verify(e => e.AddMusclePartToExercise(exerciseToUpdate, 2), Times.Once);
+        }
+
+        [Fact]
+        public void TestRemoveMusclePartFromExercise()
+        {
+            Mock<IExerciseBs> mockExerciseBs = new Mock<IExerciseBs>();
+            var exerciseToUpdate = new Exercise { Id = 1, Name = "Exercise1" };
+            mockExerciseBs
+                .Setup(e => e.RemoveMusclePartFromExercise(exerciseToUpdate, 2))
+                .Verifiable();
+            mockExerciseBs
+                .Setup(e => e.GetExerciseById(1))
+                .Returns(new Exercise { Id = 1, Name = "Exercise1" });
+
+            ExerciseApiController exerciseApiController = new ExerciseApiController(mockExerciseBs.Object);
+
+            exerciseApiController.RemoveMusclePartFromExercise(exerciseToUpdate, 1, 2);
+
+            mockExerciseBs.Verify(e => e.RemoveMusclePartFromExercise(exerciseToUpdate, 2), Times.Once);
+        }
     }
 }

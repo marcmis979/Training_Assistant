@@ -49,5 +49,9 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             unitOfWork.ExerciseRepository.AddMusclePartToExercise(updatedExercise, musclePartId);
         }
+        public void RemoveMusclePartFromExercise(Exercise updatedExercise, int musclePartId)
+        {
+            unitOfWork.ExerciseRepository.RemoveMusclePartFromExercise(updatedExercise, musclePartId);
+        }
     }
 }

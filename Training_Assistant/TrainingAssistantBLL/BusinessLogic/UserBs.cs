@@ -54,5 +54,10 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             unitOfWork.UserRepository.AddTrainingPlanToUser(updatedUser, trainingPlanId);
         }
+
+        public void RemoveTrainingPlanFromUser(User updatedUser, int trainingPlanId)
+        {
+            unitOfWork.UserRepository.RemoveTrainingPlanFromUser(updatedUser, trainingPlanId);
+        }
     }
 }

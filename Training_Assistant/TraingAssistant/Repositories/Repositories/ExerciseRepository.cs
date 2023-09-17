@@ -74,6 +74,19 @@ namespace TraingAssistantDAL.Repositories.Repositories
             }
         }
 
+        public void RemoveMusclePartFromExercise(Exercise updatedExercise, int musclePartId)
+        {
+            var existingExercise = _context.Exercises.Find(updatedExercise.Id);
+            var relatedMusclePart = _context.MuscleParts.Find(musclePartId);
+
+            if (existingExercise != null)
+            {
+                existingExercise.MuscleParts.Remove(relatedMusclePart);
+                _context.SaveChanges();
+            }
+        }
+
+
         public void Save()
         {
             _context.SaveChanges();

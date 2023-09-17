@@ -86,5 +86,24 @@ namespace TrainingAssistantWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("removeExerciseFromTraining/{id}/{exerciseId}")]
+        public IActionResult RemoveExerciseFromTraining(Training updatedTraining, int id, int exerciseId)
+        {
+            if (updatedTraining == null || updatedTraining.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingExercise = training.GetTrainingById(id);
+            if (existingExercise == null)
+            {
+                return NotFound();
+            }
+
+            training.RemoveExerciseFromTraining(updatedTraining, exerciseId);
+
+            return NoContent();
+        }
+
     }
 }

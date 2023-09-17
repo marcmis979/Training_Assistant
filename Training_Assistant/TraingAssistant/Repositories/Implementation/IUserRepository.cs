@@ -16,6 +16,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
         void DeleteUser(int id);
         void UpdateUser(User user);
         public void AddTrainingPlanToUser(User updatedUser, int id);
+        public void RemoveTrainingPlanFromUser(User updatedUser, int id);
         public void Save();
         public void Dispose();
     }

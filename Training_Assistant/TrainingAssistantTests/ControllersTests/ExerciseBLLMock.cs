@@ -40,6 +40,11 @@ namespace TrainingAssistantTests.ControllersTests
             throw new NotImplementedException();
         }
 
+        public void RemoveMusclePartFromExercise(Exercise updatedExercise, int musclePartId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateExercise(Exercise exercise)
         {
             throw new NotImplementedException();

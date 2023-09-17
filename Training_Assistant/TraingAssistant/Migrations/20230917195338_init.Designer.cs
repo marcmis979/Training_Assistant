@@ -12,7 +12,7 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    [Migration("20230917185404_init")]
+    [Migration("20230917195338_init")]
     partial class init
     {
         /// <inheritdoc />

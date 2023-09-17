@@ -45,6 +45,11 @@ namespace TrainingAssistantTests
             throw new NotImplementedException();
         }
 
+        public void RemoveTrainingPlanFromUser(User updatedUser, int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save()
         {
             throw new NotImplementedException();

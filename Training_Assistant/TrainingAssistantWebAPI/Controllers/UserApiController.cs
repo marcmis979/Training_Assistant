@@ -123,5 +123,24 @@ namespace TrainingAssistantWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("removeTrainingPlanFromUser/{id}/{trainingPlanId}")]
+        public IActionResult RemoveTrainingPlanFromUser(User updatedUser, int id, int trainingPlanId)
+        {
+            if (updatedUser == null || updatedUser.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingUser = user.GetUserById(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            user.RemoveTrainingPlanFromUser(updatedUser, trainingPlanId);
+
+            return NoContent();
+        }
+
     }
 }

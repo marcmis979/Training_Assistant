@@ -90,5 +90,24 @@ namespace TrainingAssistantWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("removeMusclePartFromExercise/{id}/{musclePartId}")]
+        public IActionResult RemoveMusclePartFromExercise([FromBody] Exercise updatedExercise, int id, int musclePartId)
+        {
+            if (updatedExercise == null || updatedExercise.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingExercise = exercise.GetExerciseById(id);
+            if (existingExercise == null)
+            {
+                return NotFound();
+            }
+
+            exercise.RemoveMusclePartFromExercise(updatedExercise, musclePartId);
+
+            return NoContent();
+        }
+
     }
 }

@@ -79,5 +79,17 @@ namespace TraingAssistantDAL.Repositories.Repositories
                 context.SaveChanges();
             }
         }
+
+        public void RemoveTrainingFromTrainingPlan(TrainingPlan updatedTrainingPlan, int id)
+        {
+            var existingTrainingPlan = context.TrainingPlans.Find(updatedTrainingPlan.Id);
+            var relatedTraining = context.Trainings.Find(id);
+
+            if (existingTrainingPlan != null)
+            {
+                existingTrainingPlan.Trainings.Remove(relatedTraining);
+                context.SaveChanges();
+            }
+        }
     }
 }

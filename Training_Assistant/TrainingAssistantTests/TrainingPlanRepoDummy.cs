@@ -20,6 +20,11 @@ namespace TrainingAssistantTests
             throw new NotImplementedException();
         }
 
+        public void RemoveTrainingFromTrainingPlan(TrainingPlan updatedTrainingPlan, int id)
+        {
+            throw new NotImplementedException();
+        }
+
         void ITrainingPlanRepository.DeleteTrainingPlan(int id)
         {
             throw new NotImplementedException();

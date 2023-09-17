@@ -65,5 +65,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        public void RemoveTrainingFromTrainingPlan(TrainingPlan updatedTrainingPlan, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -85,6 +85,22 @@ namespace TrainingAssistantTests
         }
 
         [Fact]
+        public void RemoveExerciseFromTrainingTest()
+        {
+            var training = new Training { Id = 1 };
+            var exercise = new Exercise { Id = 2 };
+            training.Exercises.Add(exercise);
+
+            var unitOfWork = new Mock<IUnitOfWork>();
+            var trainingRepository = new Mock<ITrainingRepository>();
+            unitOfWork.Setup(u => u.TrainingRepository.RemoveExerciseFromTraining(training, 2));
+
+            var trainingBs = new TrainingBs(unitOfWork.Object);
+            trainingBs.RemoveExerciseFromTraining(training, 2);
+            unitOfWork.Verify(u => u.TrainingRepository.RemoveExerciseFromTraining(training, 2), Times.Once);
+        }
+
+        [Fact]
         public void DeleteTrainingTest()
         {
             var training = 1;
@@ -154,6 +170,22 @@ namespace TrainingAssistantTests
         }
 
         [Fact]
+        public void RemoveMusclePartFromExerciseTest()
+        {
+            var exercise = new Exercise { Id = 1 };
+            var musclePart = new MusclePart { Id = 2 };
+            exercise.MuscleParts.Add(musclePart);
+
+            var unitOfWork = new Mock<IUnitOfWork>();
+            var exerciseRepository = new Mock<IExerciseRepository>();
+            unitOfWork.Setup(u => u.ExerciseRepository.RemoveMusclePartFromExercise(exercise, 2));
+
+            var exerciseBs = new ExerciseBs(unitOfWork.Object);
+            exerciseBs.RemoveMusclePartFromExercise(exercise, 2);
+            unitOfWork.Verify(u => u.ExerciseRepository.RemoveMusclePartFromExercise(exercise, 2), Times.Once);
+        }
+
+        [Fact]
         public void UpdateExerciseTest()
         {
             var exercise = new Exercise { Id = 1 };
@@ -194,6 +226,8 @@ namespace TrainingAssistantTests
             var burnedPerHour = exerciseBs.burnedPerHour(exerciseId);
             Assert.Equal(600, burnedPerHour);
         }
+
+
 
 
     }

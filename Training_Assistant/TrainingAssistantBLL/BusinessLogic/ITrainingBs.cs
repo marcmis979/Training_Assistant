@@ -15,5 +15,6 @@ namespace TrainingAssistantBLL.BusinessLogic
         public void UpdateTraining(Training training);
         public void DeleteTraining(int id);
         public void AddExerciseToTraining(Training updatedTraining, int exerciseId);
+        public void RemoveExerciseFromTraining(Training updatedTraining, int exerciseId);
     }
 }

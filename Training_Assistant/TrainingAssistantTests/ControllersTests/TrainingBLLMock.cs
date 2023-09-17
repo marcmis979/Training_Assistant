@@ -35,6 +35,11 @@ namespace TrainingAssistantTests.ControllersTests
             throw new NotImplementedException();
         }
 
+        public void RemoveExerciseFromTraining(Training updatedTraining, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
         public double summaryCalories(int id)
         {
             throw new NotImplementedException();

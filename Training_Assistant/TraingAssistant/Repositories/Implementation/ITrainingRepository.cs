@@ -15,6 +15,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
         void DeleteTraining(int id);
         void UpdateTraining(Training training);
         public void AddExerciseToTraining(Training updatedTraining, int id);
+        public void RemoveExerciseFromTraining(Training updatedTraining, int id);
         public void Save();
         public void Dispose();
     }
