@@ -7,7 +7,7 @@
 namespace TraingAssistantDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AnotherRelation : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -103,7 +103,8 @@ namespace TraingAssistantDAL.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sex = table.Column<bool>(type: "bit", nullable: false),
@@ -114,17 +115,17 @@ namespace TraingAssistantDAL.Migrations
                     Tempo = table.Column<double>(type: "float", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    TrainingPlanId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_TrainingPlans_Id",
-                        column: x => x.Id,
+                        name: "FK_Users_TrainingPlans_TrainingPlanId",
+                        column: x => x.TrainingPlanId,
                         principalTable: "TrainingPlans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -193,12 +194,12 @@ namespace TraingAssistantDAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Age", "Email", "Height", "IsAdmin", "Name", "Password", "Sex", "Surname", "TargetWeight", "Tempo", "Weight" },
+                columns: new[] { "Id", "Age", "Email", "Height", "IsAdmin", "Name", "Password", "Sex", "Surname", "TargetWeight", "Tempo", "TrainingPlanId", "Weight" },
                 values: new object[,]
                 {
-                    { 1, 22, "xDD", 183, true, "Rafał", "xyz", false, "Hońca", 0.0, 0.0, 65.0 },
-                    { 2, 22, "xDD", 160, true, "Marcin", "xyz", true, "Misiuna", 0.0, 0.0, 100.0 },
-                    { 3, 33, "xDD", 170, false, "Mateusz", "xyz", false, "Bachowski", 0.0, 0.0, 45.0 }
+                    { 1, 22, "xDD", 183, true, "Rafał", "xyz", false, "Hońca", 0.0, 0.0, null, 65.0 },
+                    { 2, 22, "xDD", 160, true, "Marcin", "xyz", true, "Misiuna", 0.0, 0.0, null, 100.0 },
+                    { 3, 33, "xDD", 170, false, "Mateusz", "xyz", false, "Bachowski", 0.0, 0.0, null, 45.0 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -215,6 +216,13 @@ namespace TraingAssistantDAL.Migrations
                 name: "IX_Trainings_TrainingPlanId",
                 table: "Trainings",
                 column: "TrainingPlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_TrainingPlanId",
+                table: "Users",
+                column: "TrainingPlanId",
+                unique: true,
+                filter: "[TrainingPlanId] IS NOT NULL");
         }
 
         /// <inheritdoc />

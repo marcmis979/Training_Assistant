@@ -226,7 +226,10 @@ namespace TraingAssistantDAL.Migrations
             modelBuilder.Entity("TraingAssistantDAL.Models.User", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -262,10 +265,17 @@ namespace TraingAssistantDAL.Migrations
                     b.Property<double>("Tempo")
                         .HasColumnType("float");
 
+                    b.Property<int?>("TrainingPlanId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TrainingPlanId")
+                        .IsUnique()
+                        .HasFilter("[TrainingPlanId] IS NOT NULL");
 
                     b.ToTable("Users");
 
@@ -360,9 +370,7 @@ namespace TraingAssistantDAL.Migrations
                 {
                     b.HasOne("TraingAssistantDAL.Models.TrainingPlan", "TrainingPlan")
                         .WithOne("User")
-                        .HasForeignKey("TraingAssistantDAL.Models.User", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TraingAssistantDAL.Models.User", "TrainingPlanId");
 
                     b.Navigation("TrainingPlan");
                 });

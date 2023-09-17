@@ -104,5 +104,24 @@ namespace TrainingAssistantWebAPI.Controllers
             return Unauthorized();
         }
 
+        [HttpPut("addTrainingPlanToUser/{id}/{trainingPlanId}")]
+        public IActionResult AddTrainingPlanToUser(User updatedUser, int id, int trainingPlanId)
+        {
+            if (updatedUser == null || updatedUser.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingUser = user.GetUserById(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            user.AddTrainingPlanToUser(updatedUser, trainingPlanId);
+
+            return NoContent();
+        }
+
     }
 }

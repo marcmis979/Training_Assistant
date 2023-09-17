@@ -77,7 +77,7 @@ namespace TraingAssistantDAL.DataAccess
             modelBuilder.Entity<TrainingPlan>()
                 .HasOne(u => u.User)
                 .WithOne(tp => tp.TrainingPlan)
-                .HasForeignKey<User>(u => u.Id);
+                .HasForeignKey<User>(u => u.TrainingPlanId);
 
             //Adding data to entities
 

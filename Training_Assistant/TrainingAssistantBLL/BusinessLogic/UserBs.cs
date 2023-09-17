@@ -49,5 +49,10 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             return unitOfWork.UserRepository.GetUserByEmail(email);
         }
+
+        public void AddTrainingPlanToUser(User updatedUser, int trainingPlanId)
+        {
+            unitOfWork.UserRepository.AddTrainingPlanToUser(updatedUser, trainingPlanId);
+        }
     }
 }

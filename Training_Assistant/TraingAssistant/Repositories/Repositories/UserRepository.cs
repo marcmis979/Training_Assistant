@@ -21,12 +21,17 @@ namespace TraingAssistantDAL.Repositories.Repositories
 
         public List<User> GetUsers()
         {
-            return _context.Users.ToList();
+            var user = _context.Users
+                .Include(t => t.TrainingPlan)
+                .ToList();
+            return user;
         }
 
         public User GetUserById(int id)
         {
-            var user = _context.Users.Find(id);
+            var user = _context.Users
+                .Include(t => t.TrainingPlan)
+                .FirstOrDefault(t => t.Id == id);
             return user;
         }
 
@@ -77,6 +82,20 @@ namespace TraingAssistantDAL.Repositories.Repositories
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
             return user;
+        }
+
+        public void AddTrainingPlanToUser(User updatedUser, int id)
+        {
+            {
+                var existingUser = _context.Users.Find(updatedUser.Id);
+                var relatedTrainingPlan = _context.TrainingPlans.Find(id);
+
+                if (existingUser != null)
+                {
+                    existingUser.TrainingPlan = relatedTrainingPlan;
+                    _context.SaveChanges();
+                }
+            }
         }
     }
 }
