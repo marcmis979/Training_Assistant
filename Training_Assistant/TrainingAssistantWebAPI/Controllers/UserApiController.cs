@@ -48,7 +48,7 @@ namespace TrainingAssistantWebAPI.Controllers
 
             user.InsertUser(us);
 
-            return CreatedAtAction("GetUser", new { id = us.Id }, us);
+            return CreatedAtAction("getUserById", new { id = us.Id }, us);
         }
         [HttpPut("updateUser/{id}")]
         public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
