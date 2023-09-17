@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Training } from './training/model/training';
+import { Training } from '../training/model/training';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TrainingResponse } from './training/model/training-response';
+import { TrainingResponse } from '../training/model/training-response';
 
 @Injectable({
   providedIn: 'root'

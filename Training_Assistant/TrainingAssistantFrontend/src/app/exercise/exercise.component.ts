@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Exercise } from './model/exercise';
 import { ExerciseResponse } from './model/exercise-response';
 import { Type } from './model/type.enum';
-import { ExerciseService } from '../exercise.service';
+import { ExerciseService } from '../services/exercise.service';
 import { MusclePart } from '../muscle-part/model/muscle-part';
-import { MusclePartService } from '../muscle-part.service'; // Dodaj import usługi MusclePartService
+import { MusclePartService } from '../services/muscle-part.service'; // Dodaj import usługi MusclePartService
 
 @Component({
   selector: 'app-exercise',

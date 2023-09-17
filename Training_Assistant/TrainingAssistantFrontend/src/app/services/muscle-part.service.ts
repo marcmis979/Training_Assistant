@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MusclePart } from './muscle-part/model/muscle-part';
-import { MusclePartResponse } from './muscle-part/model/muscle-part-response';
+import { MusclePart } from '../muscle-part/model/muscle-part';
+import { MusclePartResponse } from '../muscle-part/model/muscle-part-response';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,6 @@ export class MusclePartService {
   deleteMusclePart(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteMusclePart/${id}`);
   }
-  
-  
+
+
 }

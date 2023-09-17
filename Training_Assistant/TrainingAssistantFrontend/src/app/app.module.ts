@@ -10,6 +10,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
 import { TrainingComponent } from './training/training.component';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { UserComponent } from './user/user.component';
+import { BanerComponent } from './baner/baner.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserComponent } from './user/user.component';
     ExerciseComponent,
     TrainingComponent,
     TrainingPlanComponent,
-    UserComponent
+    UserComponent,
+    BanerComponent
   ],
   imports: [
     BrowserModule,

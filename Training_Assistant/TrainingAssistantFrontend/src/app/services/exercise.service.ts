@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Exercise } from './exercise/model/exercise';
-import { ExerciseResponse } from './exercise/model/exercise-response';
+import { Exercise } from '../exercise/model/exercise';
+import { ExerciseResponse } from '../exercise/model/exercise-response';
 @Injectable({
   providedIn: 'root'
 })

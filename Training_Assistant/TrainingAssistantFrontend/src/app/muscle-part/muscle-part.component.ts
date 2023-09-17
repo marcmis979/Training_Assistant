@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MusclePartService } from '../muscle-part.service';
+import { MusclePartService } from '../services/muscle-part.service';
 import { MusclePart } from './model/muscle-part';
 import { MusclePartResponse } from './model/muscle-part-response';
 

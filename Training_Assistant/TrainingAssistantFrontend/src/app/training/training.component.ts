@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Training } from './model/training';
 import { TrainingResponse } from './model/training-response';
-import { TrainingService } from '../training.service';
+import { TrainingService } from '../services/training.service';
 
 @Component({
   selector: 'app-training',

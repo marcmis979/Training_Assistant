@@ -9,8 +9,8 @@
   <h2 class="muscle-part-heading">All Muscle Part</h2> <!-- Dodany styl dla tytułu -->
   <div *ngFor="let musclePart of muscleParts" class="muscle-part-item"> <!-- Dodany styl dla elementów -->
     <p *ngIf="!editMode || musclePart.id !== editedMusclePartId">Name: {{ musclePart.name }}</p>
-    <input *ngIf="editMode && musclePart.id === editedMusclePartId" [(ngModel)]="musclePart.name">
-    <button *ngIf="!editMode || musclePart.id !== editedMusclePartId" class="edit-button" (click)="startEdit(musclePart.id)">Edit</button>
+    <input class="form-control" *ngIf="editMode && musclePart.id === editedMusclePartId" [(ngModel)]="musclePart.name">
+    <button type="button" *ngIf="!editMode || musclePart.id !== editedMusclePartId" class="edit-button" (click)="startEdit(musclePart.id)">Edit</button>
     <button *ngIf="editMode && musclePart.id === editedMusclePartId" class="update-button" (click)="updateMusclePart(musclePart.id, musclePart.name)">Update</button>
     <span class="button-space"></span>
     <button class="delete-button" (click)="deleteMusclePart(musclePart.id)">Delete</button>

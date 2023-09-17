@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TrainingPlan } from './training-plan/model/training-plan';
+import { TrainingPlan } from '../training-plan/model/training-plan';
 import { HttpClient } from '@angular/common/http';
-import { TrainingPlanResponse } from './training-plan/model/training-plan-response';
+import { TrainingPlanResponse } from '../training-plan/model/training-plan-response';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from './user/model/user';
+import { User } from '../user/model/user';
 import { Observable } from 'rxjs';
-import { UserResponse } from './user/model/user-response';
+import { UserResponse } from '../user/model/user-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  
+
   [x: string]: any;
 
-  private apiUrl = 'http://localhost:5014/UserApi';
+  private apiUrl = 'http://localhost:14536/UserApi';
 
   constructor(private http: HttpClient) { }
 

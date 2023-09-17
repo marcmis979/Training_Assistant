@@ -1,0 +1,16 @@
+.baner{
+    background-color: rgb(4,48,65);
+}
+.logo{
+    margin-top: 1%;
+    margin-left: 1%;
+
+}
+
+.coolBar {
+    background-image: ng-src("assets/robicon.png");
+    height: 40px;
+}
+.text-right {
+    float: right; /* Wykorzystaj float: right do wyrównania tekstu na prawą stronę */
+}
