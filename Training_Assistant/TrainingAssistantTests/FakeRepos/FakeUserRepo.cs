@@ -64,5 +64,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        public void AddTrainingPlanToUser(User updatedUser, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

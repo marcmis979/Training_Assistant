@@ -15,8 +15,6 @@ namespace TrainingAssistantTests
 {
     public class TrainingAssistantUnitTests
     {
-        
-
         [Fact]
         public void GetTrainingsTest()
         {
@@ -72,6 +70,21 @@ namespace TrainingAssistantTests
         }
 
         [Fact]
+        public void AddExerciseToTrainingTest()
+        {
+            var training = new Training { Id = 1 };
+            var exerciseId = 2;
+
+            var unitOfWork = new Mock<IUnitOfWork>();
+            var trainingRepository = new Mock<ITrainingRepository>();
+            unitOfWork.Setup(u => u.TrainingRepository).Returns(trainingRepository.Object);
+
+            var trainingBs = new TrainingBs(unitOfWork.Object);
+            trainingBs.AddExerciseToTraining(training, exerciseId);
+            trainingRepository.Verify(r => r.AddExerciseToTraining(training, exerciseId), Times.Once);
+        }
+
+        [Fact]
         public void DeleteTrainingTest()
         {
             var training = 1;
@@ -123,6 +136,21 @@ namespace TrainingAssistantTests
             var exerciseBs = new ExerciseBs(unitOfWork.Object);
             exerciseBs.InsertExercise(exercise);
             exerciseRepository.Verify(r => r.InsertExercise(exercise), Times.Once);
+        }
+
+        [Fact]
+        public void AddMusclePartToExerciseTest()
+        {
+            var exercise = new Exercise { Id = 1 };
+            var musclePartId = 2;
+
+            var unitOfWork = new Mock<IUnitOfWork>();
+            var exerciseRepository = new Mock<IExerciseRepository>();
+            unitOfWork.Setup(u => u.ExerciseRepository).Returns(exerciseRepository.Object);
+
+            var exerciseBs = new ExerciseBs(unitOfWork.Object);
+            exerciseBs.AddMusclePartToExercise(exercise, musclePartId);
+            exerciseRepository.Verify(r => r.AddMusclePartToExercise(exercise, musclePartId), Times.Once);
         }
 
         [Fact]

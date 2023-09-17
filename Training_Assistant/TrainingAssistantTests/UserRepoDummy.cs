@@ -10,6 +10,11 @@ namespace TrainingAssistantTests
 {
     internal class UserRepoDummy : IUserRepository
     {
+        public void AddTrainingPlanToUser(User updatedUser, int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteUser(int id)
         {
             throw new NotImplementedException();
