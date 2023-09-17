@@ -21,12 +21,18 @@ namespace TraingAssistantDAL.Repositories.Repositories
 
         public List<TrainingPlan> GetTrainingPlans()
         {
-            return context.TrainingPlans.ToList();
+            var trainingPlan = context.TrainingPlans
+                .Include(t => t.Trainings)
+                .ToList();
+            return trainingPlan;
         }
 
         public TrainingPlan GetTrainingPlanById(int id)
         {
-            return context.TrainingPlans.Find(id);
+            var trainingPlan = context.TrainingPlans
+                .Include(t => t.Trainings)
+                .FirstOrDefault(t => t.Id == id);
+            return trainingPlan;
         }
 
         public void InsertTrainingPlan(TrainingPlan trainingPlan)
@@ -60,6 +66,18 @@ namespace TraingAssistantDAL.Repositories.Repositories
         public void Dispose()
         {
             context.Dispose();
+        }
+
+        public void AddTrainingToTrainingPlan(TrainingPlan updatedTrainingPlan, int id)
+        {
+            var existingTrainingPlan = context.TrainingPlans.Find(updatedTrainingPlan.Id);
+            var relatedTraining = context.Trainings.Find(id);
+
+            if (existingTrainingPlan != null)
+            {
+                existingTrainingPlan.Trainings.Add(relatedTraining);
+                context.SaveChanges();
+            }
         }
     }
 }

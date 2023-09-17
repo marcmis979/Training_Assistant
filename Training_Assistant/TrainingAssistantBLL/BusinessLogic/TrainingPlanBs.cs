@@ -40,5 +40,10 @@ namespace TrainingAssistantBLL.BusinessLogic
             unitOfWork.TrainingPlanRepository.DeleteTrainingPlan(id);
         }
 
+        public void AddTrainingToTrainingPlan(TrainingPlan updatedTrainingPlan, int trainingId)
+        {
+            unitOfWork.TrainingPlanRepository.AddTrainingToTrainingPlan(updatedTrainingPlan, trainingId);
+        }
+
     }
 }

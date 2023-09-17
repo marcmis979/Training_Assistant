@@ -72,7 +72,7 @@ namespace TrainingAssistantWebAPI.Controllers
         }
 
         [HttpPut("addMusclePartToExercise/{id}/{musclePartId}")]
-        public IActionResult AddMusclePartToExercise(Exercise updatedExercise, int id, int musclePartId)
+        public IActionResult AddMusclePartToExercise([FromBody] Exercise updatedExercise, int id, int musclePartId)
         {
             if (updatedExercise == null || updatedExercise.Id != id)
             {

@@ -12,5 +12,7 @@ namespace TraingAssistantDAL.Models
         public String Name { get; set; }
         public int Days { get; set; }
         public ICollection<Exercise>? Exercises { get; set; } = new List<Exercise>();
+        public TrainingPlan? TrainingPlan { get; set; } 
+        public int? TrainingPlanId { get; set; }
     }
 }

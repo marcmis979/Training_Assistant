@@ -59,5 +59,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        public User GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

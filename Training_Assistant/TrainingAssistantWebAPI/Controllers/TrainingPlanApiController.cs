@@ -66,5 +66,24 @@ namespace TrainingAssistantWebAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("addTrainingToTrainingPlan/{id}/{trainingId}")]
+        public IActionResult AddTrainingToTrainingPlan(TrainingPlan updatedTrainingPlan, int id, int trainingId)
+        {
+            if (updatedTrainingPlan == null || updatedTrainingPlan.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingTrainingPlan = trainingPlan.GetTrainingPlanById(id);
+            if (existingTrainingPlan == null)
+            {
+                return NotFound();
+            }
+
+            trainingPlan.AddTrainingToTrainingPlan(updatedTrainingPlan, trainingId);
+
+            return NoContent();
+        }
     }
 }

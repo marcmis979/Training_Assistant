@@ -10,6 +10,11 @@ namespace TrainingAssistantTests
 {
     internal class TrainingPlanRepoDummy : ITrainingPlanRepository
     {
+        public void AddTrainingToTrainingPlan(TrainingPlan updatedTrainingPlan, int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<TrainingPlan> GetTrainingPlans()
         {
             throw new NotImplementedException();

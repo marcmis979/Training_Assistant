@@ -62,20 +62,17 @@ namespace TraingAssistantDAL.DataAccess
                 .WithMany(e => e.Exercises)
                 .UsingEntity(j => j.ToTable("ExerciseTraining"));
 
-            //modelBuilder.Entity<ExerciseMusclePart>()
-            //    .HasOne(em => em.MusclePart)
-            //    .WithMany(mp => mp.ExercisesMuscleParts)
-            //    .HasForeignKey(em => em.MusclePartId);
+            modelBuilder.Entity<Training>()
+                .HasOne(tp => tp.TrainingPlan)
+                .WithMany(t => t.Trainings)
+                .HasForeignKey(tp => tp.TrainingPlanId);
+
 
             //modelBuilder.Entity<Exercise>()
             //    .HasMany(e => e.MuscleParts)
             //    .WithOne(e => e.Exercise)
             //    .HasForeignKey(mp => mp.ExerciseId);
 
-            //modelBuilder.Entity<TrainingExercise>()
-            //    .HasOne(t => t.Exercise)
-            //    .WithMany(te => te.TrainingExercises)
-            //    .HasForeignKey(t => t.ExerciseId);
 
             modelBuilder.Entity<TrainingPlan>()
                 .HasOne(u => u.User)

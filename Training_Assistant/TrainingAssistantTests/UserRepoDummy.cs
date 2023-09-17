@@ -20,6 +20,11 @@ namespace TrainingAssistantTests
             throw new NotImplementedException();
         }
 
+        public User GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         public User GetUserById(int id)
         {
             throw new NotImplementedException();
