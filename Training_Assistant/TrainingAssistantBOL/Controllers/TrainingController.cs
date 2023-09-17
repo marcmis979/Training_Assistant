@@ -83,10 +83,5 @@ namespace TrainingAssistantBOL.Controllers
             return View(trainingToDelete);
         }
 
-        public IActionResult summaryCalories(int id)
-        {
-            ViewBag.SummaryCalories = training.summaryCalories(id);
-            return View();
-        }
     }
 }

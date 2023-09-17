@@ -13,11 +13,6 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             this.training = training;
         }
-        [HttpGet("summary/{id}")]
-        public double summaryCalories(int id)
-        {
-            return training.summaryCalories(id);
-        }
         [HttpGet("getTraining/{id}")]
         public Training getTraining(int id)
         {
@@ -72,6 +67,24 @@ namespace TrainingAssistantWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("addExerciseToTraining/{id}/{exerciseId}")]
+        public IActionResult AddExerciseToTraining(Training updatedTraining, int id, int exerciseId)
+        {
+            if (updatedTraining == null || updatedTraining.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingExercise = training.GetTrainingById(id);
+            if (existingExercise == null)
+            {
+                return NotFound();
+            }
+
+            training.AddExerciseToTraining(updatedTraining, exerciseId);
+
+            return NoContent();
+        }
 
     }
 }

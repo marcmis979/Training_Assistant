@@ -14,6 +14,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
         void InsertExercise(Exercise exercise);
         void DeleteExercise(int id);
         void UpdateExercise(Exercise exercise);
+        public void AddMusclePartToExercise(Exercise updatedExercise, int id);
         public void Save();
         public void Dispose();
     }

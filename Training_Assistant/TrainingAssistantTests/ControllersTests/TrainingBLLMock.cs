@@ -10,6 +10,11 @@ namespace TrainingAssistantTests.ControllersTests
 {
     internal class TrainingBLLMock : ITrainingBs
     {
+        public void AddExerciseToTraining(Training updatedTraining, int exerciseId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteTraining(int id)
         {
             throw new NotImplementedException();

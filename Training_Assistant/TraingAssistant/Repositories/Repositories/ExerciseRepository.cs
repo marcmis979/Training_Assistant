@@ -62,6 +62,18 @@ namespace TraingAssistantDAL.Repositories.Repositories
                 _context.SaveChanges();
             }
         }
+        public void AddMusclePartToExercise(Exercise updatedExercise, int musclePartId)
+        {
+            var existingExercise = _context.Exercises.Find(updatedExercise.Id);
+            var relatedMusclePart = _context.MuscleParts.Find(musclePartId);
+
+            if (existingExercise != null)
+            {
+                existingExercise.MuscleParts.Add(relatedMusclePart);
+                _context.SaveChanges();
+            }
+        }
+
         public void Save()
         {
             _context.SaveChanges();

@@ -11,8 +11,8 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    [Migration("20230915011722_testMig")]
-    partial class testMig
+    [Migration("20230917105738_ExerciseTrainingRelation")]
+    partial class ExerciseTrainingRelation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,21 @@ namespace TraingAssistantDAL.Migrations
                     b.HasIndex("MusclePartsId");
 
                     b.ToTable("MusclePartExercise", (string)null);
+                });
+
+            modelBuilder.Entity("ExerciseTraining", b =>
+                {
+                    b.Property<int>("ExercisesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainingsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExercisesId", "TrainingsId");
+
+                    b.HasIndex("TrainingsId");
+
+                    b.ToTable("ExerciseTraining", (string)null);
                 });
 
             modelBuilder.Entity("TraingAssistantDAL.Models.Exercise", b =>
@@ -165,48 +180,6 @@ namespace TraingAssistantDAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TraingAssistantDAL.Models.TrainingExercise", b =>
-                {
-                    b.Property<int>("TrainingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TrainingId", "ExerciseId");
-
-                    b.HasIndex("ExerciseId");
-
-                    b.ToTable("TrainingExercises");
-
-                    b.HasData(
-                        new
-                        {
-                            TrainingId = 1,
-                            ExerciseId = 1
-                        },
-                        new
-                        {
-                            TrainingId = 1,
-                            ExerciseId = 3
-                        },
-                        new
-                        {
-                            TrainingId = 2,
-                            ExerciseId = 2
-                        },
-                        new
-                        {
-                            TrainingId = 2,
-                            ExerciseId = 3
-                        },
-                        new
-                        {
-                            TrainingId = 3,
-                            ExerciseId = 3
-                        });
-                });
-
             modelBuilder.Entity("TraingAssistantDAL.Models.TrainingPlan", b =>
                 {
                     b.Property<int>("Id")
@@ -244,48 +217,6 @@ namespace TraingAssistantDAL.Migrations
                             Id = 3,
                             Name = "Ninja warrior",
                             UserId = 0
-                        });
-                });
-
-            modelBuilder.Entity("TraingAssistantDAL.Models.TrainingPlanTraing", b =>
-                {
-                    b.Property<int>("TrainingPlanId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrainingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TrainingPlanId", "TrainingId");
-
-                    b.HasIndex("TrainingId");
-
-                    b.ToTable("TrainingPlanTraings");
-
-                    b.HasData(
-                        new
-                        {
-                            TrainingPlanId = 1,
-                            TrainingId = 1
-                        },
-                        new
-                        {
-                            TrainingPlanId = 1,
-                            TrainingId = 3
-                        },
-                        new
-                        {
-                            TrainingPlanId = 2,
-                            TrainingId = 2
-                        },
-                        new
-                        {
-                            TrainingPlanId = 2,
-                            TrainingId = 3
-                        },
-                        new
-                        {
-                            TrainingPlanId = 3,
-                            TrainingId = 3
                         });
                 });
 
@@ -398,42 +329,19 @@ namespace TraingAssistantDAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TraingAssistantDAL.Models.TrainingExercise", b =>
+            modelBuilder.Entity("ExerciseTraining", b =>
                 {
-                    b.HasOne("TraingAssistantDAL.Models.Exercise", "Exercise")
+                    b.HasOne("TraingAssistantDAL.Models.Exercise", null)
                         .WithMany()
-                        .HasForeignKey("ExerciseId")
+                        .HasForeignKey("ExercisesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TraingAssistantDAL.Models.Training", "Training")
-                        .WithMany("TrainingExercises")
-                        .HasForeignKey("TrainingId")
+                    b.HasOne("TraingAssistantDAL.Models.Training", null)
+                        .WithMany()
+                        .HasForeignKey("TrainingsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exercise");
-
-                    b.Navigation("Training");
-                });
-
-            modelBuilder.Entity("TraingAssistantDAL.Models.TrainingPlanTraing", b =>
-                {
-                    b.HasOne("TraingAssistantDAL.Models.Training", "Training")
-                        .WithMany("TrainingPlanTraings")
-                        .HasForeignKey("TrainingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TraingAssistantDAL.Models.TrainingPlan", "TrainingPlan")
-                        .WithMany("TrainingPlanTraings")
-                        .HasForeignKey("TrainingPlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Training");
-
-                    b.Navigation("TrainingPlan");
                 });
 
             modelBuilder.Entity("TraingAssistantDAL.Models.User", b =>
@@ -447,17 +355,8 @@ namespace TraingAssistantDAL.Migrations
                     b.Navigation("TrainingPlan");
                 });
 
-            modelBuilder.Entity("TraingAssistantDAL.Models.Training", b =>
-                {
-                    b.Navigation("TrainingExercises");
-
-                    b.Navigation("TrainingPlanTraings");
-                });
-
             modelBuilder.Entity("TraingAssistantDAL.Models.TrainingPlan", b =>
                 {
-                    b.Navigation("TrainingPlanTraings");
-
                     b.Navigation("User");
                 });
 #pragma warning restore 612, 618

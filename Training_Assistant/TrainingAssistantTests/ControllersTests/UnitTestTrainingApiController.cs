@@ -12,18 +12,6 @@ namespace TrainingAssistantTests.ControllersTests
 {
     public class UnitTestTrainingAPIController
     {
-        [Fact]
-        public void TestSummaryCalories()
-        {
-            Mock<ITrainingBs> mockTrainingBs = new Mock<ITrainingBs>();
-            mockTrainingBs
-                .Setup(t => t.summaryCalories(1))
-                .Returns(2000);
-
-            TrainingApiController trainingApiController = new TrainingApiController(mockTrainingBs.Object);
-
-            Assert.Equal(2000.0, trainingApiController.summaryCalories(1));
-        }
 
         [Fact]
         public void TestGetTrainings()

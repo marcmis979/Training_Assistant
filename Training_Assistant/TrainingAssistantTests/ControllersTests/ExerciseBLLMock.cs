@@ -10,6 +10,11 @@ namespace TrainingAssistantTests.ControllersTests
 {
     internal class ExerciseBLLMock : IExerciseBs
     {
+        public void AddMusclePartToExercise(Exercise updatedExercise, int musclePartId)
+        {
+            throw new NotImplementedException();
+        }
+
         public double burnedPerHour(int id)
         {
             throw new NotImplementedException();

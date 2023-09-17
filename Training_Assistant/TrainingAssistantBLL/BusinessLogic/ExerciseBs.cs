@@ -44,5 +44,10 @@ namespace TrainingAssistantBLL.BusinessLogic
         {
             return 3600 / unitOfWork.ExerciseRepository.GetExerciseById(id).Time * unitOfWork.ExerciseRepository.GetExerciseById(id).BurnedKcal;
         }
+
+        public void AddMusclePartToExercise(Exercise updatedExercise, int musclePartId)
+        {
+            unitOfWork.ExerciseRepository.AddMusclePartToExercise(updatedExercise, musclePartId);
+        }
     }
 }

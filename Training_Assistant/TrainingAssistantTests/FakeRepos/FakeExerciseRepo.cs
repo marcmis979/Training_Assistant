@@ -59,5 +59,10 @@ namespace TrainingAssistantTests.FakeRepos
         {
             throw new NotImplementedException();
         }
+
+        public void AddMusclePartToExercise(Exercise updatedExercise, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

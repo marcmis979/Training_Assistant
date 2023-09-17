@@ -24,8 +24,7 @@ namespace TraingAssistantDAL.Models
         public TypeEnum Type { get; set; }
 
         public ICollection<MusclePart> MuscleParts { get; set; } = new List<MusclePart>();
-        //public List<MusclePart>? MuscleParts { get; set; }
-        //public List<ExerciseMusclePart>? ExercisesMuscleParts { get; set; }
-        //public List<TrainingExercise>? TrainingExercises { get; set; }
+
+        public ICollection<Training> Trainings { get; set; } = new List<Training>();
     }
 }

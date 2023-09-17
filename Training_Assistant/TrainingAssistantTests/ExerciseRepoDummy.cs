@@ -10,6 +10,11 @@ namespace TrainingAssistantTests
 {
     internal class ExerciseRepoDummy : IExerciseRepository
     {
+        public void AddMusclePartToExercise(Exercise updatedExercise, int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteExercise(int id)
         {
             throw new NotImplementedException();

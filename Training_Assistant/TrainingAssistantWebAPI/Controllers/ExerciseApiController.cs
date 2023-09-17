@@ -71,5 +71,24 @@ namespace TrainingAssistantWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("addMusclePartToExercise/{id}/{musclePartId}")]
+        public IActionResult AddMusclePartToExercise(Exercise updatedExercise, int id, int musclePartId)
+        {
+            if (updatedExercise == null || updatedExercise.Id != id)
+            {
+                return BadRequest("Invalid exercise data");
+            }
+
+            var existingExercise = exercise.GetExerciseById(id);
+            if (existingExercise == null)
+            {
+                return NotFound();
+            }
+
+            exercise.AddMusclePartToExercise(updatedExercise, musclePartId);
+
+            return NoContent();
+        }
+
     }
 }
