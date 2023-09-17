@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MusclePartComponent } from './muscle-part/muscle-part.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { TrainingComponent } from './training/training.component';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { UserComponent } from './user/user.component';
 import { BanerComponent } from './baner/baner.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,15 @@ import { BanerComponent } from './baner/baner.component';
     TrainingComponent,
     TrainingPlanComponent,
     UserComponent,
-    BanerComponent
+    BanerComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
