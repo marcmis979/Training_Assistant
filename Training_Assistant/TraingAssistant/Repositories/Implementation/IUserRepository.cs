@@ -11,6 +11,7 @@ namespace TraingAssistantDAL.Repositories.Implementation
     {
         List<User> GetUsers();
         User GetUserById(int id);
+        User GetUserByEmail(string email);
         void InsertUser(User user);
         void DeleteUser(int id);
         void UpdateUser(User user);

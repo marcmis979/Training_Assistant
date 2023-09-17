@@ -7,7 +7,7 @@
 namespace TraingAssistantDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class ExerciseTrainingRelation : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

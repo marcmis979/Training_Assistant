@@ -11,6 +11,7 @@ namespace TrainingAssistantBLL.BusinessLogic
     {
         public List<User> GetUsers();
         public User GetUserById(int id);
+        public User GetUserByEmail(string email);
         public void InsertUser(User user);
         public void UpdateUser(User user);
         public void DeleteUser(int id);

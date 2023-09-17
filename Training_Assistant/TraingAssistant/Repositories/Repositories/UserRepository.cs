@@ -59,6 +59,7 @@ namespace TraingAssistantDAL.Repositories.Repositories
                 existingUser.Tempo = updatedUser.Tempo;
                 existingUser.Password = updatedUser.Password;
                 existingUser.Email = updatedUser.Email;
+                existingUser.IsAdmin = updatedUser.IsAdmin;
 
                 _context.SaveChanges();
             }
@@ -70,6 +71,12 @@ namespace TraingAssistantDAL.Repositories.Repositories
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            return user;
         }
     }
 }

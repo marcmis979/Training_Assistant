@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
+using static TraingAssistantDAL.Models.Login;
 
 namespace TrainingAssistantBOL.Controllers
 {
@@ -19,6 +24,15 @@ namespace TrainingAssistantBOL.Controllers
             return View(users);
         }
 
+        public ActionResult GetByEmail(string email)
+        {
+            var userDetails = user.GetUserByEmail(email);
+            if (userDetails == null)
+            {
+                return NotFound();
+            }
+            return View(userDetails);
+        }
 
         public ActionResult GetUserById(int id)
         {
@@ -78,5 +92,7 @@ namespace TrainingAssistantBOL.Controllers
             }
             return View(userToDelete);
         }
+
     }
 }
+

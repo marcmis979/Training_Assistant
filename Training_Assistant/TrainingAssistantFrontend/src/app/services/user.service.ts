@@ -8,10 +8,6 @@ import { UserResponse } from '../user/model/user-response';
   providedIn: 'root'
 })
 export class UserService {
-
-
-  [x: string]: any;
-
   private apiUrl = 'http://localhost:14536/UserApi';
   loggedUser?: UserResponse;
   isLoggedIn = false;
@@ -31,14 +27,16 @@ export class UserService {
     return this.loggedUser;
   }
 
-  login(login: string, password: string): Observable<User> {
+  login(login: string, password: string): Observable<UserResponse> {
     const loginRequest = { Login: login, Password: password };
-    //return this.httpClient.post<User>(`${this.baseUrl}/login`, loginRequest);
-    return this.http.get<User>(`${this.apiUrl}/getUser/${1}`);
+    return this.http.post<UserResponse>(`${this.apiUrl}/login`, loginRequest);
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/getUser/${id}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/GetUserById/${id}`);
+  }
+  getByEmail(email: string): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/GetUserByEmail/${email}`);
   }
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/getUsers`);
@@ -55,4 +53,5 @@ export class UserService {
   getBMI(id:number): Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/BMI/${id}`);
   }
+
 }

@@ -45,5 +45,9 @@ namespace TrainingAssistantBLL.BusinessLogic
             return GetUserById(id).Weight / (heightInMeters * heightInMeters);
         }
 
+        public User GetUserByEmail(string email)
+        {
+            return unitOfWork.UserRepository.GetUserByEmail(email);
+        }
     }
 }

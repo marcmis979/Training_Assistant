@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   wrongInputs: boolean = false;
 
+
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private router: Router) {}
@@ -24,34 +25,34 @@ export class LoginComponent implements OnInit{
     });
   }
   onLoginClick(login: string, password: string) {
-    // this.userService.login(login, password).subscribe(
-    //   response => {
-    //     console.log('Zalogowano:', response);
-    //     this.userService.getByEmail(login).subscribe(
-    //       userResponse => {
-    //         this.userService.setLoggedInUser(userResponse);
-    //         this.userService.isLoggedIn = true;
-    //         console.log("userResponse below" );
-    //         console.log(userResponse);
-    //         console.log("User's activateAccount:", userResponse.activeAccount);
-    //         if (userResponse.activeAccount) {
-    //           this.router.navigate(['/user']);
-    //         } else {
-    //           this.router.navigate(['/inactive-account']);
-    //         }
-    //       },
-    //       error => {
-    //         console.error('Błąd pobierania użytkownika:', error);
-    //       }
-    //     );
-    //   },
-    //   error => {
-    //     console.error('Błąd logowania:', error);
-    //     this.wrongInputs = true;
-    //     setTimeout(() => {
-    //       this.wrongInputs = false;
-    //     }, 3000);
-    //   }
-    // );
+    this.userService.login(login, password).subscribe(
+      response => {
+        console.log('Zalogowano:', response);
+        this.userService.getByEmail(login).subscribe(
+          userResponse => {
+            this.userService.setLoggedInUser(userResponse);
+            this.userService.isLoggedIn = true;
+            console.log("userResponse below" );
+            console.log(userResponse);
+            console.log(userResponse.isAdmin);
+            if (userResponse.isAdmin) {
+              this.router.navigate(['/user']);
+            } else {
+              this.router.navigate(['/trainingPlan']);
+            }
+          },
+          error => {
+            console.error('Błąd pobierania użytkownika:', error);
+          }
+        );
+      },
+      error => {
+        console.error('Błąd logowania:', error);
+        this.wrongInputs = true;
+        setTimeout(() => {
+          this.wrongInputs = false;
+        }, 3000);
+      }
+    );
   }
 }

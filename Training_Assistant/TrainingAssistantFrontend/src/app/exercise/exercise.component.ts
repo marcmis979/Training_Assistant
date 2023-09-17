@@ -31,7 +31,7 @@ export class ExerciseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadExercises();
-    this.loadMuscleParts(); // Ładuj dostępne muscle party przy inicjalizacji komponentu
+    this.loadMuscleParts();
   }
 
   private loadExercises(): void {

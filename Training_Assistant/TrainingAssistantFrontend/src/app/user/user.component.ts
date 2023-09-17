@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserResponse } from './model/user-response';
 import { User } from './model/user';
 import { UserService } from '../services/user.service';
+import { TrainingPlan } from '../training-plan/model/training-plan';
 
 @Component({
   selector: 'app-user',
@@ -11,6 +12,7 @@ import { UserService } from '../services/user.service';
 export class UserComponent {
   users: User[] = [];
   userResponse: UserResponse = {
+    id: 0,
     name: '',
     surname:'',
     sex:false,
@@ -19,8 +21,9 @@ export class UserComponent {
     weight:0,
     targetWeight:0,
     tempo:0,
+    password:'',
     email:'',
-    password:''
+    isAdmin:false
   };
   editMode = false;
   editedUserId: number | null = null;
@@ -45,6 +48,7 @@ export class UserComponent {
     this.userService.addUser(this.userResponse).subscribe(() => {
       this.loadUsers();
       this.userResponse = {
+        id: 0,
         name: '',
         surname:'',
         sex:false,
@@ -53,8 +57,9 @@ export class UserComponent {
         weight:0,
         targetWeight:0,
         tempo:0,
+        password:'',
         email:'',
-        password:''
+        isAdmin:false
       };
     });
   }

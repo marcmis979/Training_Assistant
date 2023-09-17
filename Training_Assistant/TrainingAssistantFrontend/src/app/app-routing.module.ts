@@ -9,13 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guard/auth.guard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
+
+  {path:'login', component: LoginComponent},
   {path:'muscle-part',component: MusclePartComponent, canActivate: [AuthGuard]},
   {path:'exercise',component: ExerciseComponent, canActivate: [AuthGuard]},
   {path:'training',component: TrainingComponent, canActivate: [AuthGuard]},
   {path:'trainingPlan',component: TrainingPlanComponent, canActivate: [AuthGuard]},
   {path:'user',component: UserComponent, canActivate: [AuthGuard]},
+  {path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

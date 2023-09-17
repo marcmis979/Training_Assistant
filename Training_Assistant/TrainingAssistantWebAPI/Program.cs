@@ -44,6 +44,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
+app.UseAuthentication();
+
 app.MapControllers();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());

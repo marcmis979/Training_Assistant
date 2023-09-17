@@ -11,8 +11,8 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    [Migration("20230917105738_ExerciseTrainingRelation")]
-    partial class ExerciseTrainingRelation
+    [Migration("20230917114821_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

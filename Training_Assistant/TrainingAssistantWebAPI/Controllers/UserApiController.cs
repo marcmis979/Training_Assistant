@@ -1,6 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using TraingAssistantDAL.Models;
 using TrainingAssistantBLL.BusinessLogic;
+using static TraingAssistantDAL.Models.Login;
+
 namespace TrainingAssistantWebAPI.Controllers
 {
     [ApiController]
@@ -17,10 +23,15 @@ namespace TrainingAssistantWebAPI.Controllers
         {
             return user.getUserBMI(id);
         }
-        [HttpGet("getUser/{id}")]
-        public User getUser(int id)
+        [HttpGet("getUserById/{id}")]
+        public User getUserById(int id)
         {
             return user.GetUserById(id);
+        }
+        [HttpGet("getUserByEmail/{email}")]
+        public User getUserByEmail(string email)
+        {
+            return user.GetUserByEmail(email);
         }
         [HttpGet("getUsers")]
         public List<User> GetUsers()
@@ -69,6 +80,28 @@ namespace TrainingAssistantWebAPI.Controllers
             user.DeleteUser(id);
 
             return NoContent();
+        }
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest request)
+        {
+
+            var user = getUserByEmail(request.Login);
+            if (user != null && user.Password == request.Password)
+            {
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superTajneHasłoooooo"));
+                var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var tokenOptions = new JwtSecurityToken(
+                    issuer: "http://localhost:5100",
+                    audience: "http://localhost:4200",
+                    claims: new List<Claim>(),
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: credentials
+                );
+                var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                return Ok(new LoginResponse(token));
+            }
+
+            return Unauthorized();
         }
 
     }
