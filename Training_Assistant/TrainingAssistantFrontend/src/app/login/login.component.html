@@ -1,0 +1,19 @@
+<div class="option-panel">
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginClick(loginForm.controls['address'].value, loginForm.controls['password'].value)">
+
+        <div>
+            <label for="address">Adres Email</label><br/>
+            <input id="address" type="text" formControlName="address" placeholder="Wprowadź Email">
+        </div>
+
+        <div>
+            <label for="password">Hasło</label><br/>
+            <input id="password" type="password" formControlName="password" placeholder="Wprowadź Hasło">
+        </div>
+
+        <button type="submit" class="btn btn-info custom-button">Login</button>
+    </form>
+    <div *ngIf="this.wrongInputs" class="alert alert-danger">
+        Nieprawidłowy Email lub Hasło
+      </div>
+</div>

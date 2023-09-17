@@ -5,13 +5,17 @@ import { ExerciseComponent } from './exercise/exercise.component';
 import { TrainingComponent } from './training/training.component';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guard/auth.guard.component';
 
 const routes: Routes = [
-  {path:'muscle-part',component: MusclePartComponent},
-  {path:'exercise',component: ExerciseComponent},
-  {path:'training',component: TrainingComponent},
-  {path:'trainingPlan',component: TrainingPlanComponent},
-  {path:'user',component: UserComponent}
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent},
+  {path:'muscle-part',component: MusclePartComponent, canActivate: [AuthGuard]},
+  {path:'exercise',component: ExerciseComponent, canActivate: [AuthGuard]},
+  {path:'training',component: TrainingComponent, canActivate: [AuthGuard]},
+  {path:'trainingPlan',component: TrainingPlanComponent, canActivate: [AuthGuard]},
+  {path:'user',component: UserComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
