@@ -12,7 +12,7 @@
     <div *ngFor="let training of trainings" class="exercise-item">
       <p *ngIf="!editMode || training.id !== editedTrainingId">Name: {{ training.name }}</p>
       <p *ngIf="!editMode || training.id !== editedTrainingId">Days: {{ training.days }}</p>
-      <p *ngIf="training.exercises && training.exercises.length > 0">Muscle Parts:
+      <p *ngIf="training.exercises && training.exercises.length > 0">Exercises:
         <span *ngFor="let exercise of training.exercises">{{ exercise.name }}, </span>
       </p>
       <input *ngIf="editMode && training.id === editedTrainingId" [(ngModel)]="training.name">

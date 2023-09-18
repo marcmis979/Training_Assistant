@@ -10,10 +10,10 @@
     <div *ngFor="let trainingPlan of trainingPlans" class="exercise-item">
       <p *ngIf="!editMode || trainingPlan.id !== editedTrainingPlanId">Name: {{ trainingPlan.name }}</p>
       <input *ngIf="editMode && trainingPlan.id === editedTrainingPlanId" [(ngModel)]="trainingPlan.name">
-      <p *ngIf="trainingPlan.trainings && trainingPlan.trainings.length > 0">Muscle Parts:
+      <p *ngIf="trainingPlan.trainings && trainingPlan.trainings.length > 0">Trainings:
         <span *ngFor="let training of trainingPlan.trainings">{{ training.name }}, </span>
       </p>
-      <button *ngIf="!editMode && !assignMode" class="update-button" (click)="assignTraining(trainingPlan.id)">Edit Exercises</button>
+      <button *ngIf="!editMode && !assignMode" class="update-button" (click)="assignTraining(trainingPlan.id)">Edit Trainings</button>
       <div *ngIf="assignMode && selectedTrainingPlan === trainingPlan">
         <label for="musclePartSelect">Available Trainings:</label>
         <select id="musclePartSelect" [(ngModel)]="selectedTraining">

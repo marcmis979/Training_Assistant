@@ -46,7 +46,7 @@
       <p *ngIf="!editMode || user.id !== editedUserId">Email: {{ user.email }}</p>
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.email">
       <p *ngIf="!editMode && user.trainingPlan!=null">Training Plan: {{ user.trainingPlan.name }}</p>
-      <button *ngIf="!editMode && !assignMode" class="update-button" (click)="assignTrainingPlan(user.id)">Edit Exercises</button>
+      <button *ngIf="!editMode && !assignMode" class="update-button" (click)="assignTrainingPlan(user.id)">Edit Training Plan</button>
       <div *ngIf="assignMode && selectedUser === user">
         <label  *ngIf="selectedUser.trainingPlan==null" for="musclePartSelect">Available Training Plans:</label>
 <select *ngIf="selectedUser.trainingPlan==null" id="musclePartSelect" [(ngModel)]="selectedTrainingPlan">
