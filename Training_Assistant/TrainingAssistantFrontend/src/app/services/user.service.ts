@@ -82,5 +82,11 @@ export class UserService {
   getBMI(id:number): Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/BMI/${id}`);
   }
-
+  addTrainingPlanToUser(updatedUser:User, userId: number,trainingPlanId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/addTrainingPlanToUser/${userId}/${trainingPlanId}`, updatedUser);
+  }
+  removeTrainingPlanFromUser(updatedUser:User, userId: number,trainingPlanId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/removeTrainingPlanFromUser/${userId}/${trainingPlanId}`, updatedUser);
+  }
 }
+

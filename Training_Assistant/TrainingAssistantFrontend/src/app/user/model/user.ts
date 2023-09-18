@@ -1,3 +1,5 @@
+import { TrainingPlan } from "src/app/training-plan/model/training-plan";
+
 export class User{
         id: number;
         name: string;
@@ -11,9 +13,10 @@ export class User{
         password: string;
         email: string;
         isAdmin: boolean;
+        trainingPlan:TrainingPlan;
 
     constructor(id:number, name:string,surname:string,sex:boolean,age:number,height:number,weight:number,
-        targetWeight:number,tempo:number, password: string,email:string, isAdmin: boolean)
+        targetWeight:number,tempo:number, password: string,email:string, isAdmin: boolean,trainingPlan:TrainingPlan)
         {
             this.id=id;
             this.name=name;
@@ -27,5 +30,6 @@ export class User{
             this.password=password;
             this.email=email;
             this.isAdmin=isAdmin;
+            this.trainingPlan=trainingPlan;
         }
 }

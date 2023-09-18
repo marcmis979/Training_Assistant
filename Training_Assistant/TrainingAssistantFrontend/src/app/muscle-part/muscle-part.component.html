@@ -13,7 +13,8 @@
     <button type="button" *ngIf="!editMode || musclePart.id !== editedMusclePartId" class="edit-button" (click)="startEdit(musclePart.id)">Edit</button>
     <button *ngIf="editMode && musclePart.id === editedMusclePartId" class="update-button" (click)="updateMusclePart(musclePart.id, musclePart.name)">Update</button>
     <span class="button-space"></span>
-    <button class="delete-button" (click)="deleteMusclePart(musclePart.id)">Delete</button>
+    <button *ngIf="editMode" class="delete-button" (click)="deleteMusclePart(musclePart.id)">Delete</button>
+    <span class="button-space"></span>
     <button *ngIf="editMode && musclePart.id === editedMusclePartId" class="cancel-button" (click)="finishEdit()">Cancel</button>
   </div>
 </div>

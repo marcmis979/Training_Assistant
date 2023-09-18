@@ -30,4 +30,10 @@ export class TrainingPlanService {
   deleteTrainingPlan(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteTrainingPlan/${id}`);
   }
+  addTrainingToTrainingPlan(updatedTrainingPlan:TrainingPlan, TrainingPlanId: number,exerciseId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/addTrainingToTrainingPlan/${TrainingPlanId}/${exerciseId}`, updatedTrainingPlan);
+  }
+  removeTrainingFromTrainingPlan(updatedTrainingPlan:TrainingPlan, TrainingPlanId: number,exerciseId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/removeTrainingFromTrainingPlan/${TrainingPlanId}/${exerciseId}`, updatedTrainingPlan);
+  }
 }

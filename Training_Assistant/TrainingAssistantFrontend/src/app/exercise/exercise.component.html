@@ -23,18 +23,22 @@
       <select id="musclePartSelect" [(ngModel)]="selectedMusclePart">
         <option *ngFor="let musclePart of availableMuscleParts" [ngValue]="musclePart">{{ musclePart.name }}</option>
       </select>
-      <button *ngIf="selectedExercise && availableMuscleParts.length > 0" class="update-button" (click)="assignSelectedMusclePart()">Assign</button>
+      <span class="button-space"></span>
+      <button *ngIf="selectedMusclePart" class="update-button" (click)="assignSelectedMusclePart()">Assign</button>
       <label for="musclePartSelectRemove">Assigned Muscle Parts:</label>
       <select id="musclePartSelectRemove" [(ngModel)]="selectedMusclePartToRemove">
         <option *ngFor="let musclePart of exercise.muscleParts" [ngValue]="musclePart">{{ musclePart.name }}</option>
       </select>
-      <button *ngIf="selectedExercise" class="update-button" (click)="removeSelectedMusclePart()">Remove</button>
+      <span class="button-space"></span>
+      <button *ngIf="selectedMusclePartToRemove" class="update-button" (click)="removeSelectedMusclePart()">Remove</button>
     </div>
     <span class="button-space"></span>
     <button *ngIf="!editMode && !assignMode" class="edit-button" (click)="startEdit(exercise.id)">Edit</button>
     <span class="button-space"></span>
     <button *ngIf="editMode && exercise.id === editedExerciseId" class="update-button" (click)="updateExercise(exercise.id, exercise)">Update</button>
-    <button *ngIf="!assignMode" class="delete-button" (click)="deleteExercise(exercise.id)">Delete</button>
+    <span class="button-space"></span>
+    <button *ngIf="!assignMode && editMode" class="delete-button" (click)="deleteExercise(exercise.id)">Delete</button>
+    <span class="button-space"></span>
     <button *ngIf="editMode && exercise.id === editedExerciseId" class="cancel-button" (click)="finishEdit()">Cancel</button>
     <button *ngIf="assignMode" class="update-button" (click)="cancelAssignMode()">Cancel</button>
   </div>

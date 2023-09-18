@@ -30,4 +30,10 @@ export class TrainingService {
   deleteTraining(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteTraining/${id}`);
   }
+  addExerciseToTraining(updatedExercise:Training, trainingId: number,exerciseId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/addExerciseToTraining/${trainingId}/${exerciseId}`, updatedExercise);
+  }
+  removeExerciseFromTraining(updatedExercise:Training, trainingId: number,exerciseId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/removeExerciseFromTraining/${trainingId}/${exerciseId}`, updatedExercise);
+  }
 }

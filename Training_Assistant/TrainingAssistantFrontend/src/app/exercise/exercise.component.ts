@@ -113,7 +113,7 @@ export class ExerciseComponent implements OnInit {
   }
   removeSelectedMusclePart(): void {
     if (this.selectedExercise && this.selectedMusclePartToRemove) {
-    this.exerciseService.removeMusclePartToExercise(this.selectedExercise, this.selectedExercise.id,this.selectedMusclePartToRemove.id).subscribe(() => {
+    this.exerciseService.removeMusclePartFromExercise(this.selectedExercise, this.selectedExercise.id,this.selectedMusclePartToRemove.id).subscribe(() => {
     });
   }
   this.loadMuscleParts();

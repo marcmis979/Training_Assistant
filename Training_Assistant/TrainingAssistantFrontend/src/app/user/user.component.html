@@ -45,11 +45,25 @@
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.tempo">
       <p *ngIf="!editMode || user.id !== editedUserId">Email: {{ user.email }}</p>
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.email">
-      <button *ngIf="!editMode || user.id !== editedUserId" class="edit-button" (click)="startEdit(user.id)">Edit</button>
+      <p *ngIf="!editMode && user.trainingPlan!=null">Training Plan: {{ user.trainingPlan.name }}</p>
+      <button *ngIf="!editMode && !assignMode" class="update-button" (click)="assignTrainingPlan(user.id)">Edit Exercises</button>
+      <div *ngIf="assignMode && selectedUser === user">
+        <label  *ngIf="selectedUser.trainingPlan==null" for="musclePartSelect">Available Training Plans:</label>
+<select *ngIf="selectedUser.trainingPlan==null" id="musclePartSelect" [(ngModel)]="selectedTrainingPlan">
+  <option *ngFor="let trainingPlan of availableTrainingPlans" [ngValue]="trainingPlan">{{ trainingPlan.name }}</option>
+</select>
+<span class="button-space"></span>
+<button *ngIf="selectedTrainingPlan && availableTrainingPlans.length > 0" class="update-button" (click)="assignSelectedTrainingPlan()">Assign</button>
+<span class="button-space"></span>        
+<button *ngIf="user.trainingPlan!=null" class="update-button" (click)="removeSelectedTrainingPlan()">Remove training plan</button>
+      </div>
+      <span class="button-space"></span>
+      <button *ngIf="!editMode && !assignMode" class="edit-button" (click)="startEdit(user.id)">Edit</button>
       <button *ngIf="editMode && user.id === editedUserId" class="update-button" (click)="updateUser(user.id, user)">Update</button>
       <span class="button-space"></span>
-      <button class="delete-button" (click)="deleteUser(user.id)">Delete</button>
+      <button *ngIf="editMode" class="delete-button" (click)="deleteUser(user.id)">Delete</button>
       <button *ngIf="editMode && user.id === editedUserId" class="cancel-button" (click)="finishEdit()">Cancel</button>
+      <button *ngIf="assignMode" class="update-button" (click)="cancelAssignMode()">Cancel</button>
     </div>
   </div>
   

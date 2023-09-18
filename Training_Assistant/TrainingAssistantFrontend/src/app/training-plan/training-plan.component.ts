@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TrainingPlanResponse } from './model/training-plan-response';
 import { TrainingPlan } from './model/training-plan';
 import { TrainingPlanService } from '../services/training-plan.service';
+import { Training } from '../training/model/training';
+import { TrainingService } from '../services/training.service';
 
 @Component({
   selector: 'app-training-plan',
@@ -9,67 +11,108 @@ import { TrainingPlanService } from '../services/training-plan.service';
   styleUrls: ['./training-plan.component.css']
 })
 export class TrainingPlanComponent {
-  trainingPlans: TrainingPlan[] = []; // Tablica przechowująca ćwiczenia
+  trainingPlans: TrainingPlan[] = [];
   trainingPlanResponse: TrainingPlanResponse = {
     name: '',
   };
-  editMode = false; // Tryb edycji
-  editedTrainingPlanId: number | null = null; // ID edytowanego ćwiczenia
+  editMode = false;
+  editedTrainingPlanId: number | null = null;
+  assignMode = false;
+  selectedTrainingPlan: TrainingPlan | null = null;
+  selectedTraining: Training | null = null;
+  selectedTrainingToRemove: Training | null = null;
+  availableTrainings: Training[] = [];
+  trainings: Training[] = [];
 
-  constructor(private trainingPlanService: TrainingPlanService) {}
+  constructor(
+    private trainingService: TrainingService,
+    private trainingPlanService: TrainingPlanService 
+  ) {}
 
   ngOnInit(): void {
-    this.loadTrainingPlanss(); // Wywołujemy metodę pobierającą wszystkie ćwiczenia
+    this.loadTrainingPlans();
+    this.loadTrainings();
   }
 
-  private loadTrainingPlanss(): void {
+  private loadTrainingPlans(): void {
     this.trainingPlanService.getTrainingPlans().subscribe((data) => {
       this.trainingPlans = data;
     });
   }
-
-  searchTrainingPlan(): void {
-    this.loadTrainingPlanss(); // Wywołujemy metodę pobierającą wszystkie ćwiczenia
+  private loadTrainings(): void {
+    this.trainingService.getTrainings().subscribe((data) => {
+      this.trainings = data;
+    });
   }
 
-  // Metoda do dodawania ćwiczenia
   addTrainingPlan(): void {
     this.trainingPlanService.addTrainingPlan(this.trainingPlanResponse).subscribe(() => {
-      // Po dodaniu ćwiczenia odśwież listę lub wykonaj inne działania
-      this.loadTrainingPlanss();
-      // Zresetuj dane nowego ćwiczenia
+      this.loadTrainingPlans();
       this.trainingPlanResponse = {
         name: '',
       };
     });
   }
 
-  // Metoda do rozpoczęcia edycji
   startEdit(id: number): void {
     this.editedTrainingPlanId = id;
     this.editMode = true;
   }
 
-  // Metoda do zakończenia edycji
   finishEdit(): void {
     this.editedTrainingPlanId = null;
     this.editMode = false;
   }
 
-  // Metoda do aktualizacji ćwiczenia
   updateTrainingPlan(id: number, updatedTrainingPlan: TrainingPlan): void {
     this.trainingPlanService.updateTrainingPlan(id, updatedTrainingPlan).subscribe(() => {
-      // Po zaktualizowaniu ćwiczenia odśwież listę lub wykonaj inne działania
-      this.loadTrainingPlanss();
+      this.loadTrainingPlans();
       this.finishEdit();
     });
   }
 
-  // Metoda do usuwania ćwiczenia
   deleteTrainingPlan(id: number): void {
     this.trainingPlanService.deleteTrainingPlan(id).subscribe(() => {
-      // Po usunięciu ćwiczenia odśwież listę lub wykonaj inne działania
-      this.loadTrainingPlanss();
+      this.loadTrainingPlans();
     });
+  }
+  assignTraining(trainingPlanId: number): void {
+    const selectedTrainingPlan = this.trainingPlans.find((trainingPlan) => trainingPlan.id === trainingPlanId);
+
+    if (selectedTrainingPlan) {
+      this.availableTrainings = this.trainings.filter((training) => {
+        return !selectedTrainingPlan.trainings.some((assignedTraining) => assignedTraining.id === training.id);
+      });
+      this.selectedTrainingPlan = selectedTrainingPlan;
+      this.assignMode = true;
+    } else {
+      this.selectedTraining = null;
+      this.availableTrainings = [];
+      this.assignMode = false;
+    }
+  }
+
+  assignSelectedTraining(): void {
+    if (this.selectedTraining && this.selectedTrainingPlan) {
+      this.trainingPlanService.addTrainingToTrainingPlan(this.selectedTrainingPlan, this.selectedTrainingPlan.id, this.selectedTraining.id).subscribe(() => {
+        this.loadTrainingPlans();
+        this.assignMode = false;
+      });
+    }
+  }
+
+  removeSelectedTraining(): void {
+    if (this.selectedTrainingToRemove && this.selectedTrainingPlan) {
+      this.trainingPlanService.removeTrainingFromTrainingPlan(this.selectedTrainingPlan, this.selectedTrainingPlan.id, this.selectedTrainingToRemove.id).subscribe(() => {
+        this.loadTrainingPlans();
+        this.assignMode = false;
+      });
+    }
+  }
+
+  cancelAssignMode(): void {
+    this.assignMode = false;
+    this.selectedTraining = null;
+    this.availableTrainings = [];
   }
 }

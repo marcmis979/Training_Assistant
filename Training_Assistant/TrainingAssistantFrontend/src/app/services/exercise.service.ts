@@ -38,7 +38,7 @@ export class ExerciseService {
   addMusclePartToExercise(updatedExercise:Exercise, exerciseId: number,musclePartId: number): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/addMusclePartToExercise/${exerciseId}/${musclePartId}`, updatedExercise);
   }
-  removeMusclePartToExercise(updatedExercise:Exercise, exerciseId: number,musclePartId: number): Observable<void> {
+  removeMusclePartFromExercise(updatedExercise:Exercise, exerciseId: number,musclePartId: number): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/removeMusclePartFromExercise/${exerciseId}/${musclePartId}`, updatedExercise);
   }
 }
