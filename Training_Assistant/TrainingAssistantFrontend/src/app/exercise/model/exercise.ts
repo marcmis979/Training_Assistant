@@ -1,5 +1,5 @@
+import { MusclePart } from "src/app/muscle-part/model/muscle-part";
 import { Type } from "./type.enum";
-import { MusclePartResponse } from "src/app/muscle-part/model/muscle-part-response";
 
 export class Exercise {
     id: number;
@@ -7,9 +7,9 @@ export class Exercise {
     burnedKcal: number;
     time: number;
     type: Type;
-    muscleParts: MusclePartResponse[];
+    muscleParts: MusclePart[];
   
-    constructor(id: number, name: string, burnedKcal: number, time: number, type: Type, muscleParts: MusclePartResponse[]) {
+    constructor(id: number, name: string, burnedKcal: number, time: number, type: Type, muscleParts: MusclePart[]) {
       this.id = id;
       this.name = name;
       this.burnedKcal = burnedKcal;

@@ -4,7 +4,7 @@ import { ExerciseResponse } from './model/exercise-response';
 import { Type } from './model/type.enum';
 import { ExerciseService } from '../services/exercise.service';
 import { MusclePart } from '../muscle-part/model/muscle-part';
-import { MusclePartService } from '../services/muscle-part.service'; // Dodaj import usługi MusclePartService
+import { MusclePartService } from '../services/muscle-part.service';
 
 @Component({
   selector: 'app-exercise',
@@ -12,6 +12,11 @@ import { MusclePartService } from '../services/muscle-part.service'; // Dodaj im
   styleUrls: ['./exercise.component.css']
 })
 export class ExerciseComponent implements OnInit {
+  assignMode = false;
+  selectedExercise: Exercise | null = null;
+  selectedMusclePart: MusclePart | null = null;
+  selectedMusclePartToRemove: MusclePart| null = null;
+  availableMuscleParts: MusclePart[] = [];
   exercises: Exercise[] = [];
   exerciseResponse: ExerciseResponse = {
     name: '',
@@ -22,11 +27,11 @@ export class ExerciseComponent implements OnInit {
   };
   editMode = false;
   editedExerciseId: number | null = null;
-  muscleParts: MusclePart[] = []; // Dodaj listę dostępnych muscle party
+  muscleParts: MusclePart[] = [];
 
   constructor(
     private exerciseService: ExerciseService,
-    private musclePartService: MusclePartService // Wstrzyknij MusclePartService
+    private musclePartService: MusclePartService
   ) {}
 
   ngOnInit(): void {
@@ -44,10 +49,6 @@ export class ExerciseComponent implements OnInit {
     this.musclePartService.getMuscleParts().subscribe((data) => {
       this.muscleParts = data;
     });
-  }
-
-  searchExercise(): void {
-    this.loadExercises();
   }
 
   addExercise(): void {
@@ -86,18 +87,41 @@ export class ExerciseComponent implements OnInit {
     });
   }
 
-  // Dodaj funkcję do przypisywania muscle party do ćwiczenia
-  assignMusclePart(musclePart: MusclePart): void {
-    if (this.exerciseResponse.muscleParts.indexOf(musclePart) === -1) {
-      this.exerciseResponse.muscleParts.push(musclePart);
+  assignMusclePart(exerciseId:number): void {
+    const selectedExercise = this.exercises.find(exercise => exercise.id === exerciseId);
+
+    if (selectedExercise) {
+
+      this.availableMuscleParts = this.muscleParts.filter(musclePart => {
+        return !selectedExercise.muscleParts.some(selectedMusclePart => selectedMusclePart.id === musclePart.id);
+      });
+      this.selectedExercise = selectedExercise;
+      this.assignMode = true;
+    } else {
+      this.selectedExercise = null;
+      this.availableMuscleParts = [];
+      this.assignMode=false;
     }
   }
-
-  // Dodaj funkcję do usuwania przypisanego muscle party z ćwiczenia
-  removeMusclePart(musclePart: MusclePart): void {
-    const index = this.exerciseResponse.muscleParts.indexOf(musclePart);
-    if (index !== -1) {
-      this.exerciseResponse.muscleParts.splice(index, 1);
+  assignSelectedMusclePart(): void {
+    if (this.selectedExercise && this.selectedMusclePart) {
+      this.exerciseService.addMusclePartToExercise(this.selectedExercise, this.selectedExercise.id,this.selectedMusclePart.id).subscribe(() => {
+      });
+      this.loadMuscleParts();
+      this.assignMode=false;
     }
+  }
+  removeSelectedMusclePart(): void {
+    if (this.selectedExercise && this.selectedMusclePartToRemove) {
+    this.exerciseService.removeMusclePartToExercise(this.selectedExercise, this.selectedExercise.id,this.selectedMusclePartToRemove.id).subscribe(() => {
+    });
+  }
+  this.loadMuscleParts();
+  this.assignMode=false;
+    }
+  cancelAssignMode(): void{
+    this.assignMode=false;
+    this.selectedExercise = null;
+    this.availableMuscleParts = [];
   }
 }

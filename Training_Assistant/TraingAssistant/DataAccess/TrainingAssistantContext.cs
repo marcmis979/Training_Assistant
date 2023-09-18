@@ -83,9 +83,8 @@ namespace TraingAssistantDAL.DataAccess
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Rafał", Surname = "Hońca", Sex = false, Age = 22, Email = "xDD", Password = "xyz", Height = 183, Weight = 65, IsAdmin = true },
-                new User { Id = 2, Name = "Marcin", Surname = "Misiuna", Sex = true, Age = 22, Email = "xDD", Password = "xyz", Height = 160, Weight = 100, IsAdmin = true },
-                new User { Id = 3, Name = "Mateusz", Surname = "Bachowski", Sex = false, Age = 33, Email = "xDD", Password = "xyz", Height = 170, Weight = 45, IsAdmin = false }
+                new User { Id = 1, Name = "Bożena", Surname = "Hońca", Sex = false, Age = 22, Email = "admin@gmail.com", Password = "admin", Height = 183, Weight = 65, IsAdmin = true },
+                new User { Id = 3, Name = "Mateusz", Surname = "Bachowski", Sex = false, Age = 33, Email = "user@gmail.com", Password = "user", Height = 170, Weight = 45, IsAdmin = false }
             );
             modelBuilder.Entity<TrainingPlan>().HasData(
                 new TrainingPlan { Id = 1, Name = "Weight loss"},

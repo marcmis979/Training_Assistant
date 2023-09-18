@@ -12,8 +12,8 @@ using TraingAssistantDAL.DataAccess;
 namespace TraingAssistantDAL.Migrations
 {
     [DbContext(typeof(TrainingAssistantContext))]
-    [Migration("20230917195338_init")]
-    partial class init
+    [Migration("20230918172817_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -287,11 +287,11 @@ namespace TraingAssistantDAL.Migrations
                         {
                             Id = 1,
                             Age = 22,
-                            Email = "xDD",
+                            Email = "admin@gmail.com",
                             Height = 183,
                             IsAdmin = true,
-                            Name = "Rafał",
-                            Password = "xyz",
+                            Name = "Bożena",
+                            Password = "admin",
                             Sex = false,
                             Surname = "Hońca",
                             TargetWeight = 0.0,
@@ -300,28 +300,13 @@ namespace TraingAssistantDAL.Migrations
                         },
                         new
                         {
-                            Id = 2,
-                            Age = 22,
-                            Email = "xDD",
-                            Height = 160,
-                            IsAdmin = true,
-                            Name = "Marcin",
-                            Password = "xyz",
-                            Sex = true,
-                            Surname = "Misiuna",
-                            TargetWeight = 0.0,
-                            Tempo = 0.0,
-                            Weight = 100.0
-                        },
-                        new
-                        {
                             Id = 3,
                             Age = 33,
-                            Email = "xDD",
+                            Email = "user@gmail.com",
                             Height = 170,
                             IsAdmin = false,
                             Name = "Mateusz",
-                            Password = "xyz",
+                            Password = "user",
                             Sex = false,
                             Surname = "Bachowski",
                             TargetWeight = 0.0,

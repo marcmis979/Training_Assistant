@@ -7,7 +7,7 @@
 namespace TraingAssistantDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -197,9 +197,8 @@ namespace TraingAssistantDAL.Migrations
                 columns: new[] { "Id", "Age", "Email", "Height", "IsAdmin", "Name", "Password", "Sex", "Surname", "TargetWeight", "Tempo", "TrainingPlanId", "Weight" },
                 values: new object[,]
                 {
-                    { 1, 22, "xDD", 183, true, "Rafał", "xyz", false, "Hońca", 0.0, 0.0, null, 65.0 },
-                    { 2, 22, "xDD", 160, true, "Marcin", "xyz", true, "Misiuna", 0.0, 0.0, null, 100.0 },
-                    { 3, 33, "xDD", 170, false, "Mateusz", "xyz", false, "Bachowski", 0.0, 0.0, null, 45.0 }
+                    { 1, 22, "admin@gmail.com", 183, true, "Bożena", "admin", false, "Hońca", 0.0, 0.0, null, 65.0 },
+                    { 3, 33, "user@gmail.com", 170, false, "Mateusz", "user", false, "Bachowski", 0.0, 0.0, null, 45.0 }
                 });
 
             migrationBuilder.CreateIndex(
