@@ -1,36 +1,72 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../user/model/user';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { UserResponse } from '../user/model/user-response';
+import { User } from '../user/model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:14536/UserApi';
-  loggedUser?: UserResponse;
-  isLoggedIn = false;
+  private apiUrl = 'http://localhost:5014/UserApi';
   private loggedInUserSubject = new BehaviorSubject<UserResponse | undefined>(undefined);
   loggedInUser = this.loggedInUserSubject.asObservable();
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // Jeśli istnieje token w pamięci podręcznej przeglądarki, oznacz użytkownika jako zalogowanego
+      this.setLoggedInUserFromToken(token);
+    }
+  }
 
   setLoggedInUser(user: UserResponse) {
-    this.loggedUser = user;
-    this.isLoggedIn = true;
     this.loggedInUserSubject.next(user);
   }
-  getLoggedInUserObservable(): Observable<UserResponse | undefined> {
-    return this.loggedInUser;
-  }
-  getLoggedInUser() {
-    return this.loggedUser;
+
+  setLoggedInUserFromToken(token: string) {
+    // Rozkładanie tokenu JWT i uzyskiwanie informacji o użytkowniku
+    const user = this.decodeJwtToken(token);
+    if (user) {
+      this.setLoggedInUser(user);
+    }
   }
 
-  login(login: string, password: string): Observable<UserResponse> {
-    const loginRequest = { Login: login, Password: password };
-    return this.http.post<UserResponse>(`${this.apiUrl}/login`, loginRequest);
+  // Dodaj funkcję do dekodowania tokenu JWT, aby uzyskać informacje o użytkowniku
+  decodeJwtToken(token: string): UserResponse | null {
+    // Tutaj dekoduj token JWT i uzyskaj dane użytkownika
+    // Przykład:
+    // const decodedToken = jwt_decode(token);
+    // return {
+    //   id: decodedToken.id,
+    //   name: decodedToken.name,
+    //   // inne właściwości użytkownika
+    // };
+    return null; // Zwróć null w przypadku błędu
   }
+
+  login(login: string, password: string): Observable<{ token: string, user: UserResponse }> {
+    const loginRequest = { Login: login, Password: password };
+    return this.http.post<{ token: string, user: UserResponse }>(`${this.apiUrl}/login`, loginRequest).pipe(
+      tap(response => {
+        this.setLoggedInUser(response.user);
+        localStorage.setItem('authToken', response.token);
+      })
+    );
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    this.loggedInUserSubject.next(undefined);
+  }
+  
+  // Pozostałe metody usługi...
+
+  // Przykład:
+  // getLoggedInUser(): UserResponse | undefined {
+  //   return this.loggedInUserSubject.value;
+  // }
 
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/GetUserById/${id}`);

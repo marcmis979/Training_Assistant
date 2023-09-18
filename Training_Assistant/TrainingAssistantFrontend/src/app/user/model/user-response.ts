@@ -2,6 +2,7 @@ import { TrainingPlan } from "src/app/training-plan/model/training-plan";
 
 export interface UserResponse
     {
+        token: string;
         id: number;
         name: string;
         surname: string;

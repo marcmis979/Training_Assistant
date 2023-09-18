@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 @Injectable({
@@ -15,12 +14,16 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return of(this.userService.isLoggedIn).pipe(
-      tap(isLoggedIn => {
-        if (!isLoggedIn) {
-          this.router.navigate(['login']);
-        }
-      })
-    );
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      // Jeśli istnieje token JWT, użytkownik jest zalogowany
+      this.userService.setLoggedInUserFromToken(token); // Aktualizuj stan zalogowania na podstawie tokena
+      return true;
+    } else {
+      // Jeśli nie ma tokenu JWT, przekieruj na stronę logowania
+      this.router.navigate(['login']);
+      return false;
+    }
   }
 }

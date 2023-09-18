@@ -23,7 +23,8 @@ export class UserComponent {
     tempo:0,
     password:'',
     email:'',
-    isAdmin:false
+    isAdmin:false,
+    token:''
   };
   editMode = false;
   editedUserId: number | null = null;
@@ -59,7 +60,8 @@ export class UserComponent {
         tempo:0,
         password:'',
         email:'',
-        isAdmin:false
+        isAdmin:false,
+        token:''
       };
     });
   }
