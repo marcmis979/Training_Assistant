@@ -60,13 +60,6 @@ export class UserService {
     localStorage.removeItem('authToken');
     this.loggedInUserSubject.next(undefined);
   }
-  
-  // Pozostałe metody usługi...
-
-  // Przykład:
-  // getLoggedInUser(): UserResponse | undefined {
-  //   return this.loggedInUserSubject.value;
-  // }
 
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/GetUserById/${id}`);
