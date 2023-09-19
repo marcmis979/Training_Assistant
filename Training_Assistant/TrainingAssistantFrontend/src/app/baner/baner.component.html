@@ -19,7 +19,7 @@
         <a style="color:rgb(144,212,236); font-weight: bold;" class="nav-link" href="/trainingPlan">Trainings Plans</a>
       </li>
       <li class="nav-item">
-        <a style="color:rgb(144,212,236); font-weight: bold;" class="nav-link" href="/user">Users</a>
+        <a style="color:rgb(144,212,236); font-weight: bold;" class="nav-link" href="/user" *ngIf="this.user?.isAdmin">Users</a>
       </li>
       <li class="nav-item">
         <a style="color:rgb(144,212,236); font-weight: bold;" class="nav-link" (click)="logout()">Logout</a>

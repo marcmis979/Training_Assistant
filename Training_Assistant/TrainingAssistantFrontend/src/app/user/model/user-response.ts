@@ -15,4 +15,5 @@ export interface UserResponse
         password: string;
         email: string;
         isAdmin: boolean;
+        trainingPlan?: TrainingPlan;
     }

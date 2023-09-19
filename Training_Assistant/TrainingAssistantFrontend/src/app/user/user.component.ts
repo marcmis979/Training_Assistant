@@ -25,7 +25,8 @@ export class UserComponent {
     password: '',
     email: '',
     isAdmin: false,
-    token: ''
+    token: '',
+    trainingPlan: undefined 
   };
   editMode = false;
   editedUserId: number | null = null;
@@ -35,7 +36,6 @@ export class UserComponent {
   selectedTrainingPlanToRemove: TrainingPlan | null = null;
   trainingPlans: TrainingPlan[] = [];
   availableTrainingPlans: TrainingPlan[] = [];
-
   constructor(
     private userService: UserService,
     private trainingPlanService: TrainingPlanService 
@@ -44,6 +44,7 @@ export class UserComponent {
   ngOnInit(): void {
     this.loadUsers();
     this.loadTrainingPlans();
+    
   }
 
   private loadUsers(): void {

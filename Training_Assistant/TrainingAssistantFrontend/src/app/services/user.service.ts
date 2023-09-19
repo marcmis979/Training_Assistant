@@ -12,38 +12,34 @@ export class UserService {
   private apiUrl = 'http://localhost:5014/UserApi';
   private loggedInUserSubject = new BehaviorSubject<UserResponse | undefined>(undefined);
   loggedInUser = this.loggedInUserSubject.asObservable();
+  isLoggedIn = false;
+  
+  private userUpdatedSubject = new BehaviorSubject<boolean>(false);
+  userUpdated = this.userUpdatedSubject.asObservable();
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('authToken');
     if (token) {
-      // Jeśli istnieje token w pamięci podręcznej przeglądarki, oznacz użytkownika jako zalogowanego
       this.setLoggedInUserFromToken(token);
     }
   }
-
+  notifyUserUpdated() {
+    this.userUpdatedSubject.next(true);
+  }
   setLoggedInUser(user: UserResponse) {
     this.loggedInUserSubject.next(user);
+    this.isLoggedIn = true;
   }
 
   setLoggedInUserFromToken(token: string) {
-    // Rozkładanie tokenu JWT i uzyskiwanie informacji o użytkowniku
     const user = this.decodeJwtToken(token);
     if (user) {
       this.setLoggedInUser(user);
     }
   }
 
-  // Dodaj funkcję do dekodowania tokenu JWT, aby uzyskać informacje o użytkowniku
   decodeJwtToken(token: string): UserResponse | null {
-    // Tutaj dekoduj token JWT i uzyskaj dane użytkownika
-    // Przykład:
-    // const decodedToken = jwt_decode(token);
-    // return {
-    //   id: decodedToken.id,
-    //   name: decodedToken.name,
-    //   // inne właściwości użytkownika
-    // };
-    return null; // Zwróć null w przypadku błędu
+    return null; 
   }
 
   login(login: string, password: string): Observable<{ token: string, user: UserResponse }> {

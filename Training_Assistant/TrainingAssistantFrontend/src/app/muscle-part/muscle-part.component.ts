@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MusclePartService } from '../services/muscle-part.service';
 import { MusclePart } from './model/muscle-part';
 import { MusclePartResponse } from './model/muscle-part-response';
+import { UserResponse } from '../user/model/user-response';
+import { UserService } from '../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-muscle-part',
@@ -13,15 +16,29 @@ export class MusclePartComponent implements OnInit {
   musclePartResponse: MusclePartResponse = {
     name: ''
   };
-  searchId!: number;
   editMode = false;
   editedMusclePartId: number | null = null;
 
-  constructor(private musclePartService: MusclePartService) {}
+  private loggedInUserSubscription: Subscription;
+  user?: UserResponse;
+  isLoggedIn: boolean = this.userService.isLoggedIn;
+  router: any;
+
+  constructor(private musclePartService: MusclePartService, private userService: UserService) {
+    this.loggedInUserSubscription = this.userService.loggedInUser.subscribe(user => {
+      this.user = user;
+      this.isLoggedIn = !!user;
+    });
+  }
 
   ngOnInit(): void {
-    this.searchId = 1;
     this.loadMuscleParts();
+    console.log(this.user);
+    this.userService.loggedInUser.subscribe(user => {
+      this.user = user!; 
+      this.userService.userUpdated.subscribe();
+    });
+    
   }
 
   private loadMuscleParts(): void {

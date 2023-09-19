@@ -4,6 +4,9 @@ import { TrainingResponse } from './model/training-response';
 import { TrainingService } from '../services/training.service';
 import { Exercise } from '../exercise/model/exercise';
 import { ExerciseService } from '../services/exercise.service';
+import { UserResponse } from '../user/model/user-response';
+import { UserService } from '../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-training',
@@ -11,6 +14,10 @@ import { ExerciseService } from '../services/exercise.service';
   styleUrls: ['./training.component.css']
 })
 export class TrainingComponent {
+  private loggedInUserSubscription: Subscription;
+  user?: UserResponse;
+  isLoggedIn: boolean = this.userService.isLoggedIn;
+
   trainings: Training[] = [];
   trainingResponse: TrainingResponse = {
     name: '',
@@ -28,8 +35,14 @@ export class TrainingComponent {
 
   constructor(
     private trainingService: TrainingService,
-    private exerciseService: ExerciseService 
-  ) {}
+    private exerciseService: ExerciseService,
+    private userService: UserService
+  ) {
+    this.loggedInUserSubscription = this.userService.loggedInUser.subscribe(user => {
+      this.user = user;
+      this.isLoggedIn = !!user;
+    });
+  }
 
   ngOnInit(): void {
     this.loadTrainings();

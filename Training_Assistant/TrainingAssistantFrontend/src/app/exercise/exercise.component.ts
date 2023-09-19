@@ -5,6 +5,9 @@ import { Type } from './model/type.enum';
 import { ExerciseService } from '../services/exercise.service';
 import { MusclePart } from '../muscle-part/model/muscle-part';
 import { MusclePartService } from '../services/muscle-part.service';
+import { Subscription } from 'rxjs';
+import { UserResponse } from '../user/model/user-response';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-exercise',
@@ -12,6 +15,10 @@ import { MusclePartService } from '../services/muscle-part.service';
   styleUrls: ['./exercise.component.css']
 })
 export class ExerciseComponent implements OnInit {
+  private loggedInUserSubscription: Subscription;
+  user?: UserResponse;
+  isLoggedIn: boolean = this.userService.isLoggedIn;
+
   assignMode = false;
   selectedExercise: Exercise | null = null;
   selectedMusclePart: MusclePart | null = null;
@@ -31,8 +38,14 @@ export class ExerciseComponent implements OnInit {
 
   constructor(
     private exerciseService: ExerciseService,
-    private musclePartService: MusclePartService
-  ) {}
+    private musclePartService: MusclePartService,
+    private userService: UserService
+  ) {
+    this.loggedInUserSubscription = this.userService.loggedInUser.subscribe(user => {
+      this.user = user;
+      this.isLoggedIn = !!user;
+    });
+  }
 
   ngOnInit(): void {
     this.loadExercises();

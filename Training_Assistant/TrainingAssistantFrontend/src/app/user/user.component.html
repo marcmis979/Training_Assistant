@@ -39,7 +39,7 @@
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.height">
       <p *ngIf="!editMode || user.id !== editedUserId">Weight: {{ user.weight }} kg</p>
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.weight">
-      <p *ngIf="!editMode || user.id !== editedUserId">targetWeight: {{ user.targetWeight }} kg</p>
+      <p *ngIf="!editMode || user.id !== editedUserId">Target weight: {{ user.targetWeight }} kg</p>
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.targetWeight">
       <p *ngIf="!editMode || user.id !== editedUserId">Tempo: {{ user.tempo }}</p>
       <input *ngIf="editMode && user.id === editedUserId" [(ngModel)]="user.tempo">

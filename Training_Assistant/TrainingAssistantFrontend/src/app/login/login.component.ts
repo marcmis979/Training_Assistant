@@ -29,8 +29,22 @@ export class LoginComponent implements OnInit {
     this.userService.login(login, password).subscribe(
       response => {
         console.log('Zalogowano:', response);
-        this.userService.setLoggedInUser(response.user);
-        this.router.navigate(['/training']); // Przekieruj na odpowiedni widok po zalogowaniu
+        this.userService.getByEmail(login).subscribe(
+          userResponse => {
+            this.userService.setLoggedInUser(userResponse);
+            this.userService.isLoggedIn = true;
+            console.log("userResponse below" );
+            console.log(userResponse);
+            if (userResponse.isAdmin) {
+              this.router.navigate(['/user']);
+            } else {
+              this.router.navigate(['/muscle-part']);
+            }
+          },
+          error => {
+            console.error('Błąd pobierania użytkownika:', error);
+          }
+        );
       },
       error => {
         console.error('Błąd logowania:', error);
